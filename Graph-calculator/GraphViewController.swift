@@ -37,14 +37,6 @@ class GraphViewController: UIViewController {
 }
 
 
-
-//        if let drawDragViewController = destinationViewController as? DrawDragViewController {
-//            if segue.identifier == "graph" {
-//                
-////                let functionToGraph = CalculatorBrain().description
-//
-//                drawDragViewController.navigationItem.title = "test" //functionToGraph //(sender as? UIButton)?.currentTitle
-//            }
     
 
 
