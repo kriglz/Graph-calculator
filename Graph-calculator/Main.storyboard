@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,40 +23,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ay-gQl">
-                                <rect key="frame" x="16" y="65" width="343" height="594"/>
+                                <rect key="frame" x="16" y="66" width="343" height="593"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="VGb-ie-zCA">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="74"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="74" id="Sed-WB-Iz7"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="LcS-ja-tWF">
-                                        <rect key="frame" x="0.0" y="75" width="343" height="56"/>
+                                        <rect key="frame" x="0.0" y="75" width="343" height="55"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="OVj-l2-GWc"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="41"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-fu-N18">
-                                        <rect key="frame" x="0.0" y="132" width="343" height="22"/>
+                                        <rect key="frame" x="0.0" y="131" width="343" height="22"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="22" id="Nj7-Kz-J5P"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="I4F-VW-YZT">
-                                        <rect key="frame" x="0.0" y="155" width="343" height="439"/>
+                                        <rect key="frame" x="0.0" y="154" width="343" height="439"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-vO-N7N">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="54"/>
@@ -278,12 +267,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="Azx-8n-GIh" firstAttribute="baseline" secondItem="Es5-Zg-R5r" secondAttribute="firstBaseline" id="AqJ-EF-iPN"/>
-                                                    <constraint firstItem="Azx-8n-GIh" firstAttribute="baseline" secondItem="Es5-Zg-R5r" secondAttribute="baseline" id="GpF-Kj-wxi"/>
-                                                    <constraint firstItem="Es5-Zg-R5r" firstAttribute="baseline" secondItem="5ng-sZ-m9f" secondAttribute="baseline" id="Rj2-KK-tKh"/>
-                                                    <constraint firstItem="Es5-Zg-R5r" firstAttribute="baseline" secondItem="5ng-sZ-m9f" secondAttribute="firstBaseline" id="mFz-fM-7Ma"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="mrc-Ey-VgR">
                                                 <rect key="frame" x="0.0" y="165" width="343" height="54"/>
@@ -656,7 +639,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gsg-ay-gQl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="7U7-jh-OsC"/>
-                            <constraint firstItem="Gsg-ay-gQl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="1" id="abb-v0-Ck6"/>
+                            <constraint firstItem="Gsg-ay-gQl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="2" id="abb-v0-Ck6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gsg-ay-gQl" secondAttribute="bottom" constant="8" symbolic="YES" id="eb9-Vw-Kie"/>
                             <constraint firstItem="Gsg-ay-gQl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ep0-AC-kUM"/>
                         </constraints>
@@ -697,9 +680,7 @@
                             <constraint firstItem="Cy2-XN-bml" firstAttribute="top" secondItem="ogf-ZS-Bam" secondAttribute="bottom" constant="8" symbolic="YES" id="rlP-i5-3No"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Iso-ZS-ykA">
-                        <barButtonItem key="backBarButtonItem" id="gaj-HO-UZb"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Iso-ZS-ykA"/>
                     <connections>
                         <outlet property="drawView" destination="Cy2-XN-bml" id="DtH-qa-KVT"/>
                     </connections>
@@ -759,6 +740,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mK5-ES-KTP"/>
+        <segue reference="ZqD-9z-eVx"/>
     </inferredMetricsTieBreakers>
 </document>

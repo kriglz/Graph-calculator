@@ -9,7 +9,16 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.setNavigationBarHidden(true, animated: false)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var descriptionDisplay: UILabel!
     @IBOutlet weak var memoryDisplay: UILabel!
@@ -151,6 +160,12 @@ class CalculatorViewController: UIViewController {
                 if !brain.description.isEmpty {
                     graphViewControler.functionToGraph = "sin"
                 }
+            }
+        }
+        
+        if let graphViewControler = destinationViewController as? GraphViewController {
+            if segue.identifier == "graph" {
+            graphViewControler.navigationItem.title = brain.description //(sender as? UIButton)?.currentTitle
             }
         }
     }
