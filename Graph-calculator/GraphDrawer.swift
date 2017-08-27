@@ -18,7 +18,7 @@ struct GraphDrawer {
         self.contentScaleFactor = contentScaleFactor
     }
 
-    func drawGraph(in rect: CGRect, origin: CGPoint, pointsPerUnit: CGFloat)
+    func drawGraph(of function: String, in rect: CGRect, origin: CGPoint, pointsPerUnit: CGFloat)
     {
         UIGraphicsGetCurrentContext()?.saveGState()
         color.set()
@@ -34,10 +34,14 @@ struct GraphDrawer {
         let start = Int(rect.minX)
         let end = Int(rect.maxX)
         
+        
         for x in start...end {
             let scaledX = Double(x)/Double(pointsPerUnit)
             
-            y = (tan(scaledX) ) * Double(pointsPerUnit)
+            if function == "sin" {
+                y = sin(scaledX) * Double(pointsPerUnit)
+
+            }
 //            y = (1 / (scaledX)) * Double(pointsPerUnit)
             
             newY = CGFloat(y)

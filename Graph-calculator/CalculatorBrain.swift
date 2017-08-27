@@ -31,6 +31,7 @@ struct CalculatorBrain {
         "√": Operation.unaryOperation(sqrt),
         "cos": Operation.unaryOperation(cos),
         "sin": Operation.unaryOperation(sin),
+        "tan": Operation.unaryOperation(tan),
         "exp": Operation.unaryOperation(exp),
         "x⁻¹": Operation.unaryOperation({ 1 / $0 }),
         "ln": Operation.unaryOperation(log),

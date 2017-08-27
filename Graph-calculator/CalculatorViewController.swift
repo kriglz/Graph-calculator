@@ -140,5 +140,19 @@ class CalculatorViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var destinationViewController = segue.destination
+        
+        if let navigationController = destinationViewController as? UINavigationController {
+            destinationViewController = navigationController.visibleViewController ?? destinationViewController
+            
+            if let graphViewControler = destinationViewController as? GraphViewController {
+                if !brain.description.isEmpty {
+                    graphViewControler.functionToGraph = "sin"
+                }
+            }
+        }
+    }
 }
 

@@ -1,5 +1,5 @@
 //
-//  DrawView.swift
+//  Graph.swift
 //  Draw-axes
 //
 //  Created by Kristina Gelzinyte on 8/23/17.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-class DrawView: UIView {
+class Graph: UIView {
 
     let scaleConstant = 30  //use 40 pixels to make 1 unit
-    
+    var function: String = "cos"
+
     override func draw(_ rect: CGRect) {
         let axes: AxesDrawer =  AxesDrawer.init(color: UIColor.blue, contentScaleFactor: CGFloat(1))
         
@@ -40,12 +41,11 @@ class DrawView: UIView {
                       pointsPerUnit: CGFloat(scaleConstant))
         
         
-        
         //draw function
         let graph: GraphDrawer = GraphDrawer.init(color: UIColor.red, contentScaleFactor: CGFloat(1))
         
-        graph.drawGraph(in: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY),
-                                  size: CGSize(width: -2*bounds.midX, height: -2*bounds.midY)),
+        graph.drawGraph(of: function,
+                        in: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY),size: CGSize(width: -2*bounds.midX, height: -2*bounds.midY)),
                        origin: CGPoint(x: bounds.midX, y: bounds.midY),
                        pointsPerUnit: CGFloat(scaleConstant))
         
