@@ -652,6 +652,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0X-bA-JkT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Cy2-XN-bml" customClass="Graph" customModule="Graph_calculator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="72" width="335" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -662,22 +665,27 @@
                             <constraint firstItem="Cy2-XN-bml" firstAttribute="leading" secondItem="c8n-m3-4eB" secondAttribute="leadingMargin" constant="4" id="5HM-B6-eDz"/>
                             <constraint firstItem="ehf-iP-vnW" firstAttribute="top" secondItem="Cy2-XN-bml" secondAttribute="bottom" constant="8" symbolic="YES" id="7BN-Zn-bD9"/>
                             <constraint firstItem="Cy2-XN-bml" firstAttribute="centerX" secondItem="c8n-m3-4eB" secondAttribute="centerX" id="A2z-vj-JcP"/>
+                            <constraint firstItem="J0X-bA-JkT" firstAttribute="leading" secondItem="c8n-m3-4eB" secondAttribute="leading" id="Dx6-2A-SAq"/>
+                            <constraint firstAttribute="trailing" secondItem="J0X-bA-JkT" secondAttribute="trailing" id="HB4-eI-iyd"/>
+                            <constraint firstItem="J0X-bA-JkT" firstAttribute="top" secondItem="c8n-m3-4eB" secondAttribute="top" id="k8N-aa-uXV"/>
+                            <constraint firstItem="ehf-iP-vnW" firstAttribute="top" secondItem="J0X-bA-JkT" secondAttribute="bottom" id="rEX-CU-oQx"/>
                             <constraint firstItem="Cy2-XN-bml" firstAttribute="top" secondItem="ogf-ZS-Bam" secondAttribute="bottom" constant="8" symbolic="YES" id="rlP-i5-3No"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Iso-ZS-ykA"/>
                     <connections>
-                        <outlet property="drawView" destination="Cy2-XN-bml" id="DtH-qa-KVT"/>
+                        <outlet property="graphView" destination="Cy2-XN-bml" id="Z5L-AQ-dYT"/>
+                        <outlet property="scrollView" destination="J0X-bA-JkT" id="zET-mK-78b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZJt-4V-aKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="518"/>
+            <point key="canvasLocation" x="1396" y="517.6911544227886"/>
         </scene>
-        <!--Main Split View Controller-->
+        <!--Split View Controller-->
         <scene sceneID="iDe-L2-LKD">
             <objects>
-                <splitViewController id="aLF-Bd-vOr" customClass="MainSplitViewController" customModule="Graph_calculator" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="aLF-Bd-vOr" sceneMemberID="viewController">
                     <connections>
                         <segue destination="fcT-r0-ZLg" kind="relationship" relationship="masterViewController" id="8ks-5a-slC"/>
                         <segue destination="a0x-eX-8Hk" kind="relationship" relationship="detailViewController" id="mK5-ES-KTP"/>
@@ -725,6 +733,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZqD-9z-eVx"/>
+        <segue reference="mK5-ES-KTP"/>
     </inferredMetricsTieBreakers>
 </document>

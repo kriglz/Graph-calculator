@@ -13,12 +13,16 @@ struct GraphDrawer {
     var color: UIColor
     var contentScaleFactor: CGFloat             // set this from UIView's contentScaleFactor to position axes with maximum accuracy
     
+    var memory = [String: Double]()
+    var brain = CalculatorBrain()
+    var arrayToCalculate = [String]()
+    
     init(color: UIColor = UIColor.red, contentScaleFactor: CGFloat = 1) {
         self.color = color
         self.contentScaleFactor = contentScaleFactor
     }
 
-    func drawGraph(of function: String, in rect: CGRect, origin: CGPoint, pointsPerUnit: CGFloat)
+    mutating func drawGraph(point: (Double, Double), in rect: CGRect, origin: CGPoint, pointsPerUnit: CGFloat)
     {
         UIGraphicsGetCurrentContext()?.saveGState()
         color.set()
@@ -34,15 +38,17 @@ struct GraphDrawer {
         let start = Int(rect.minX)
         let end = Int(rect.maxX)
         
+
         
         for x in start...end {
             let scaledX = Double(x)/Double(pointsPerUnit)
+            memory = ["M": scaledX]
             
-            if function == "sin" {
-                y = sin(scaledX) * Double(pointsPerUnit)
-
+            if let result = brain.evaluate(using: memory).result {
+                y = result * Double(pointsPerUnit)
             }
-//            y = (1 / (scaledX)) * Double(pointsPerUnit)
+            
+//            y = sin(scaledX) * Double(pointsPerUnit)
             
             newY = CGFloat(y)
             newX = CGFloat(x)

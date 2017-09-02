@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+class CalculatorViewController: UIViewController, UISplitViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,7 +93,7 @@ class CalculatorViewController: UIViewController {
 //setting/getting memory
 //
     
-    private var memory = CalculatorMemory()
+    var memory = CalculatorMemory()
     @IBAction func setMemory(_ sender: UIButton) {
         memory.storage = ["M": displayValue]
         memoryDisplay.text! = "M → " + String(displayValue)
@@ -116,7 +116,7 @@ class CalculatorViewController: UIViewController {
 //using/doing operartion
 //
     
-    private var brain = CalculatorBrain()
+    var brain = CalculatorBrain()
     @IBAction func mathematicalSymbol(_ sender: UIButton) {
         //set operand
         if userIsInTheMiddleOfTyping {
@@ -150,24 +150,56 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationViewController = segue.destination
-        
-        if let navigationController = destinationViewController as? UINavigationController {
-            destinationViewController = navigationController.visibleViewController ?? destinationViewController
-            
-            if let graphViewControler = destinationViewController as? GraphViewController {
-                if !brain.description.isEmpty {
-                    graphViewControler.functionToGraph = "sin"
+        if let destinationViewController = (segue.destination.contents as? GraphViewController) {
+            if !brain.description.isEmpty {
+                destinationViewController.navigationItem.title = brain.description
+                
+                destinationViewController.yResult = { (xArgument: Double) -> Double in
+                    self.memory.storage = ["M": xArgument]
+                    let yResult = self.brain.evaluate(using: self.memory.storage).result!
+                    return yResult
                 }
             }
+            
+//            let something   = { (xArgument: Double) -> Double in
+//                
+//                self.memory.storage = ["M": xArgument]
+//                let yResult = self.brain.evaluate(using: self.memory.storage).result!
+//                print(yResult)
+//                
+//                return yResult
+//            }
         }
         
-        if let graphViewControler = destinationViewController as? GraphViewController {
-            if segue.identifier == "graph" {
-            graphViewControler.navigationItem.title = brain.description //(sender as? UIButton)?.currentTitle
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.splitViewController?.delegate = self
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        if primaryViewController.contents == self {
+            if let gvc = secondaryViewController.contents as? GraphViewController, gvc.graphView == nil {
+                return true
             }
+        }
+        return false
+    }
+
+}
+
+extension UIViewController
+{
+    var contents: UIViewController {
+        if let navcon = self as? UINavigationController {
+            return navcon.visibleViewController ?? self
+        } else {
+            return self
         }
     }
 }
-
