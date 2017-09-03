@@ -10,27 +10,16 @@ import UIKit
 
 class GraphViewController: UIViewController {
     
-//    override func viewDidLoad() {
-//    }
-    
-    
-    @IBOutlet weak var graphView: Graph! {
-        didSet {
-            graphView.y = yResult!(0.0)
-//            print(y, "gvc")
-        }
-   
-    }
-    
-    @IBOutlet weak var scrollView: UIScrollView!
     
     var yResult: ((_ xArgument: Double) -> Double)?
     
-//    var y = Graph().y //Double?
+    @IBOutlet weak var graphView: GraphView! {
+        didSet {
+            graphView.functionY = yResult
+        }
+    }
     
-    
-//    var memory: [String: Double]?
-//    var brain: CalculatorBrain?
+    @IBOutlet weak var scrollView: UIScrollView!
     
 
 

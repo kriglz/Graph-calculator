@@ -655,7 +655,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0X-bA-JkT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
-                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Cy2-XN-bml" customClass="Graph" customModule="Graph_calculator" customModuleProvider="target">
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Cy2-XN-bml" customClass="GraphView" customModule="Graph_calculator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="72" width="335" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

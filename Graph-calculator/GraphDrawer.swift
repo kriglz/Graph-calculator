@@ -11,63 +11,58 @@ import UIKit
 struct GraphDrawer {
 
     var color: UIColor
-    var contentScaleFactor: CGFloat             // set this from UIView's contentScaleFactor to position axes with maximum accuracy
-    
-    var memory = [String: Double]()
-    var brain = CalculatorBrain()
-    var arrayToCalculate = [String]()
+    var contentScaleFactor: CGFloat          // set this from UIView's contentScaleFactor to position axes with maximum accuracy
     
     init(color: UIColor = UIColor.red, contentScaleFactor: CGFloat = 1) {
         self.color = color
         self.contentScaleFactor = contentScaleFactor
     }
-
-    mutating func drawGraph(point: (Double, Double), in rect: CGRect, origin: CGPoint, pointsPerUnit: CGFloat)
+    
+    
+    func drawGraph(from: (x: CGFloat?, y: CGFloat?),
+                   to: (x: CGFloat, y: CGFloat),
+                   in rect: CGRect,
+                   origin: CGPoint,
+                   pointsPerUnit: CGFloat)
     {
         UIGraphicsGetCurrentContext()?.saveGState()
         color.set()
-        
-        var y = 0.0
-        var newX: CGFloat?
-        var newY: CGFloat?
-        var oldY: CGFloat?
-        var oldX: CGFloat?
-        
         let path = UIBezierPath()
-        
-        let start = Int(rect.minX)
-        let end = Int(rect.maxX)
-        
+
+//        let newX = to.x
+//        let newY = to.y
+        let newX = origin.x + to.x
+        let newY = origin.y - to.y
+        var oldX: CGFloat?
+        var oldY: CGFloat?
 
         
-        for x in start...end {
-            let scaledX = Double(x)/Double(pointsPerUnit)
-            memory = ["M": scaledX]
-            
-            if let result = brain.evaluate(using: memory).result {
-                y = result * Double(pointsPerUnit)
-            }
-            
-//            y = sin(scaledX) * Double(pointsPerUnit)
-            
-            newY = CGFloat(y)
-            newX = CGFloat(x)
-            
-            if ((newY!.isNormal) || (newY!.isZero)) && !(newY!.isNaN) {
-                if oldX == nil && oldY == nil || (abs(newY!-oldY!) > 3000) {
-                    path.move(to: CGPoint(x: origin.x + newX!, y: origin.y - newY!).aligned(usingScaleFactor: contentScaleFactor)!)
-                } else if ((oldY!.isNormal) || (oldY!.isZero)) && (oldY!.isFinite){
-                    path.move(to: CGPoint(x: origin.x + oldX!, y: origin.y - oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
-                    path.addLine(to: CGPoint(x: origin.x + newX!, y: origin.y - newY!).aligned(usingScaleFactor: contentScaleFactor)!)
-                    path.stroke()
-                }
-            }
-
-            oldY = newY
-            oldX = newX
+        if from.x != nil && from.y !=  nil {
+            oldX = origin.x + from.x!
+            oldY = origin.y - from.y!
         }
+        
+        
+//        print(origin.x, origin.y)
+//        print(newX, newY, "new")
+//        print(fromPoint.oldX, fromPoint.oldY, "old")
+
+        
+        if ((newY.isNormal) || (newY.isZero)) && !(newY.isNaN) {
+            if oldX == nil && oldY == nil || (abs(newY-oldY!) > 3000) {
+                
+                path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+            } else if ((oldY!.isNormal) || (oldY!.isZero)) && (oldY!.isFinite){
+                
+                path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
+                path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+                path.stroke()
+            }
+        }
+        
         UIGraphicsGetCurrentContext()?.restoreGState()
     }
-
-
 }
+
+
+
