@@ -21,7 +21,7 @@
 
 /* Begin PBXFileReference section */
 		89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		89998E1A1F4C238700B3A58D /* Graph-calculator.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Graph-calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89998E1A1F4C238700B3A58D /* Graph-calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graph-calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89998E1D1F4C238700B3A58D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89998E241F4C238700B3A58D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89998E271F4C238700B3A58D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -289,6 +289,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "KG.Graph-calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,6 +303,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "KG.Graph-calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

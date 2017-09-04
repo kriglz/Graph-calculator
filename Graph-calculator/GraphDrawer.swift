@@ -18,8 +18,7 @@ struct GraphDrawer {
         self.contentScaleFactor = contentScaleFactor
     }
     
-    
-    func drawGraph(from: (x: CGFloat?, y: CGFloat?),
+    func drawALine(from: (x: CGFloat?, y: CGFloat?),
                    to: (x: CGFloat, y: CGFloat),
                    in rect: CGRect,
                    origin: CGPoint,
@@ -29,24 +28,15 @@ struct GraphDrawer {
         color.set()
         let path = UIBezierPath()
 
-//        let newX = to.x
-//        let newY = to.y
         let newX = origin.x + to.x
         let newY = origin.y - to.y
         var oldX: CGFloat?
         var oldY: CGFloat?
-
         
         if from.x != nil && from.y !=  nil {
             oldX = origin.x + from.x!
             oldY = origin.y - from.y!
         }
-        
-        
-//        print(origin.x, origin.y)
-//        print(newX, newY, "new")
-//        print(fromPoint.oldX, fromPoint.oldY, "old")
-
         
         if ((newY.isNormal) || (newY.isZero)) && !(newY.isNaN) {
             if oldX == nil && oldY == nil || (abs(newY-oldY!) > 3000) {

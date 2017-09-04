@@ -14,29 +14,29 @@ class GraphView: UIView {
 
     
     override func draw(_ rect: CGRect) {
-        let axes: AxesDrawer =  AxesDrawer.init(color: UIColor.blue, contentScaleFactor: CGFloat(1))
+        let axe = AxesDrawer.init(color: UIColor.blue, contentScaleFactor: CGFloat(1))
         let centerCoordinate = CGPoint(x: bounds.midX, y: bounds.midY)
 
         //top right
-        axes.drawAxes(in: CGRect(origin: centerCoordinate,
+        axe.drawAxes(in: CGRect(origin: centerCoordinate,
                                  size: CGSize(width: bounds.midX, height: -bounds.midY)),
                       origin: centerCoordinate,
                       pointsPerUnit: CGFloat(scaleConstant))
         
         //bottom right
-        axes.drawAxes(in: CGRect(origin: centerCoordinate,
+        axe.drawAxes(in: CGRect(origin: centerCoordinate,
                                  size: CGSize(width: bounds.midX, height: bounds.midY)),
                       origin: centerCoordinate,
                       pointsPerUnit: CGFloat(scaleConstant))
         
         //top left
-        axes.drawAxes(in: CGRect(origin: centerCoordinate,
+        axe.drawAxes(in: CGRect(origin: centerCoordinate,
                                  size: CGSize(width: -bounds.midX, height: -bounds.midY)),
                       origin: centerCoordinate,
                       pointsPerUnit: CGFloat(scaleConstant))
 
         //botton left
-        axes.drawAxes(in: CGRect(origin: centerCoordinate,
+        axe.drawAxes(in: CGRect(origin: centerCoordinate,
                                  size: CGSize(width: -bounds.midX, height: bounds.midY)),
                       origin: centerCoordinate,
                       pointsPerUnit: CGFloat(scaleConstant))
@@ -44,42 +44,33 @@ class GraphView: UIView {
         
         
         //draw function
-        let graph: GraphDrawer = GraphDrawer.init(color: UIColor.red, contentScaleFactor: CGFloat(1))
+        let functionGraph = GraphDrawer.init(color: UIColor.red, contentScaleFactor: CGFloat(1))
         
         let start = Int(-rect.maxX/2)
         let end = Int(rect.maxX/2)
         
-        print(start, end)
-        print(rect.origin.x, rect.origin.y)
-        
-        var scaledX: Double?
-        var y: Double?
+        var scaledNewX: Double?
+        var newY: Double?
         var oldX: CGFloat?
         var oldY: CGFloat?
         
-        for x in start...end {
-            scaledX = Double(x)/Double(scaleConstant)
-            y = functionY!(scaledX!) * Double(scaleConstant)
-
-            graph.drawGraph(from: (oldX, oldY),
-                            to: (CGFloat(x), CGFloat(y!)),
-                            in: rect,
-
-//                            in: CGRect(origin: CGPoint(x: bounds.midX, y: bounds.midY),
-//                                       size: CGSize(width: -2*bounds.midX,
-//                                                    height: -2*bounds.midY)),
-                            origin: centerCoordinate,
-                            pointsPerUnit: CGFloat(scaleConstant))
-
-            oldX = CGFloat(x)
-            oldY = CGFloat(y!)
+        for newX in start...end {
+            scaledNewX = Double(newX)/Double(scaleConstant)
             
+            if let function = functionY {
+                newY = function(scaledNewX!) * Double(scaleConstant)
+                
+                functionGraph.drawALine(from: (oldX, oldY),
+                                        to: (CGFloat(newX), CGFloat(newY!)),
+                                        in: rect,
+                                        origin: centerCoordinate,
+                                        pointsPerUnit: CGFloat(scaleConstant))
+                
+                oldX = CGFloat(newX)
+                oldY = CGFloat(newY!)
+            }
         }
-
-        
-        
     }
-
 }
 
 

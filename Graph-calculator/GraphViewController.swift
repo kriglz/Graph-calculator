@@ -10,7 +10,6 @@ import UIKit
 
 class GraphViewController: UIViewController {
     
-    
     var yResult: ((_ xArgument: Double) -> Double)?
     
     @IBOutlet weak var graphView: GraphView! {
@@ -21,8 +20,6 @@ class GraphViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-
-
 
 }
 

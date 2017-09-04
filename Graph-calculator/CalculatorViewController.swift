@@ -149,9 +149,7 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
             }
         }
     }
-    
-    
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = (segue.destination.contents as? GraphViewController) {
@@ -164,17 +162,7 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
                     return yResult
                 }
             }
-            
-//            let something   = { (xArgument: Double) -> Double in
-//                
-//                self.memory.storage = ["M": xArgument]
-//                let yResult = self.brain.evaluate(using: self.memory.storage).result!
-//                print(yResult)
-//                
-//                return yResult
-//            }
         }
-        
     }
     
     override func awakeFromNib() {
@@ -190,7 +178,6 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         }
         return false
     }
-
 }
 
 extension UIViewController

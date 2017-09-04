@@ -78,7 +78,6 @@ struct CalculatorBrain {
             }
         }
 
-//        print(evaluateResult, descriptionArray)
         evaluateResult = performOperation(ifMemorySet: evaluateResult, with: descriptionArray).result
 
         let resultIsPendingResult = performOperation(ifMemorySet: evaluateResult, with: descriptionArray).isPending
@@ -88,7 +87,6 @@ struct CalculatorBrain {
     
     //performOperations using array elements
     func performOperation(ifMemorySet withValue: Double? = nil, with array: [String]) -> (result: Double?, isPending: Bool) {
-//        print(array)
         var accumulation: Double?
         var resultIsPending = false
         
@@ -144,7 +142,6 @@ struct CalculatorBrain {
                     
                     case .unaryOperation (let function):
                         accumulation = function(accumulation ?? 0)
-//                        print("unary operation", accumulation)
                         if pendingBindingOperation != nil {
                             resultIsPending = true
                         } else {
