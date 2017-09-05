@@ -7,9 +7,12 @@
 
 import UIKit
 
+@IBDesignable
 class GraphView: UIView {
 
-    let scaleConstant = 30  //use 40 pixels to make 1 unit
+    @IBInspectable
+    var scaleConstant: Int = 30 { didSet { setNeedsDisplay()}} //use 30 pixels to make 1 unit
+    
     var functionY: ((_ xArgument: Double) -> Double)?
 
     

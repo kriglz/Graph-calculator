@@ -152,14 +152,16 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = (segue.destination.contents as? GraphViewController) {
-            if !brain.description.isEmpty {
-                destinationViewController.navigationItem.title = brain.description
-                
-                destinationViewController.yResult = { (xArgument: Double) -> Double in
-                    self.memory.storage = ["M": xArgument]
-                    let yResult = self.brain.evaluate(using: self.memory.storage).result!
-                    return yResult
+        if !brain.evaluate().isPending {
+            if let destinationViewController = (segue.destination.contents as? GraphViewController) {
+                if !brain.description.isEmpty {
+                    destinationViewController.navigationItem.title = brain.description
+                    
+                    destinationViewController.yResult = { (xArgument: Double) -> Double in
+                        self.memory.storage = ["M": xArgument]
+                        let yResult = self.brain.evaluate(using: self.memory.storage).result!
+                        return yResult
+                    }
                 }
             }
         }
@@ -178,6 +180,12 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         }
         return false
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        
+//    }
+
+    
 }
 
 extension UIViewController

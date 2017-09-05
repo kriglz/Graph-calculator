@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class GraphViewController: UIViewController {
     
     var yResult: ((_ xArgument: Double) -> Double)?
