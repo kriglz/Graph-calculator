@@ -16,10 +16,21 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var graphView: GraphView! {
         didSet {
             graphView.functionY = yResult
+            
+            let scaleHandler = #selector(GraphView.changeScale(byReactingTo:))
+            let pinchRecognizer = UIPinchGestureRecognizer(target: graphView, action: scaleHandler)
+            graphView.addGestureRecognizer(pinchRecognizer)
+            
+            let panHandler = #selector(GraphView.changePosition(byReactingTo:))
+            let panRecognizer = UIPanGestureRecognizer(target: graphView, action: panHandler)
+            panRecognizer.maximumNumberOfTouches = 1
+            graphView.addGestureRecognizer(panRecognizer)
+            
+            
         }
     }
     
-    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var scrollView: UIScrollView!
     
 
 }
