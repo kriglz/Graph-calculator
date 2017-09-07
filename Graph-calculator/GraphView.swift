@@ -15,75 +15,54 @@ class GraphView: UIView {
     
     var translationCoordinate: CGPoint? { didSet { setNeedsDisplay()}}
     var functionY: ((_ xArgument: Double) -> Double)?
-
+    
+    var sumOfTransitions: CGPoint = CGPoint(x: 0.0, y: 0.0) { didSet { setNeedsDisplay()}}
+    
     
     override func draw(_ rect: CGRect) {
         let axe = AxesDrawer.init(color: UIColor.blue, contentScaleFactor: CGFloat(1))
-        var centerCoordinate = CGPoint(x: bounds.midX, y: bounds.midY)
-        
-        if let translationCoordinates = translationCoordinate {
-            centerCoordinate.x += translationCoordinates.x
-            centerCoordinate.y += translationCoordinates.y
-        }
+        var centerCoordinate: CGPoint = CGPoint(x: bounds.maxX/2, y: bounds.maxY/2)
+       
 
-//        print(rect.minX, rect.minY)
-//        print(centerCoordinate.x, centerCoordinate.y)
+        if let translationCoordinates = translationCoordinate {
+            sumOfTransitions.x += translationCoordinates.x
+            sumOfTransitions.y += translationCoordinates.y
+            
+            centerCoordinate.x += sumOfTransitions.x
+            centerCoordinate.y += sumOfTransitions.y
+        }
         
         //top right
-//        axe.drawAxes(in: CGRect(origin: centerCoordinate,
-//                                 size: CGSize(width: bounds.midX, height: -bounds.midY)),
-//                      origin: centerCoordinate,
-//                      pointsPerUnit: CGFloat(scaleConstant))
         axe.drawAxes(in: CGRect(origin: centerCoordinate,
-                                size: CGSize(width: rect.maxX - centerCoordinate.x, height: centerCoordinate.y)),
+                                size: CGSize(width: rect.maxX - centerCoordinate.x, height: -centerCoordinate.y)),
                      origin: centerCoordinate,
                      pointsPerUnit: CGFloat(scaleConstant))
         
         //bottom right
-//        axe.drawAxes(in: CGRect(origin: centerCoordinate,
-//                                 size: CGSize(width: bounds.midX, height: bounds.midY)),
-//                      origin: centerCoordinate,
-//                      pointsPerUnit: CGFloat(scaleConstant))
         axe.drawAxes(in: CGRect(origin: centerCoordinate,
-                                size: CGSize(width: rect.minX - centerCoordinate.x, height: rect.maxY - centerCoordinate.y)),
+                                size: CGSize(width: rect.maxX - centerCoordinate.x, height: rect.maxY - centerCoordinate.y)),
                      origin: centerCoordinate,
                      pointsPerUnit: CGFloat(scaleConstant))
         
         //top left
-//        axe.drawAxes(in: CGRect(origin: centerCoordinate,
-//                                 size: CGSize(width: -bounds.midX, height: -bounds.midY)),
-//                      origin: centerCoordinate,
-//                      pointsPerUnit: CGFloat(scaleConstant))
         axe.drawAxes(in: CGRect(origin: centerCoordinate,
-                                size: CGSize(width: rect.minX + centerCoordinate.x, height: -centerCoordinate.y)),
+                                size: CGSize(width: -centerCoordinate.x, height: -centerCoordinate.y)),
                      origin: centerCoordinate,
                      pointsPerUnit: CGFloat(scaleConstant))
 
 
         //botton left
-//        axe.drawAxes(in: CGRect(origin: centerCoordinate,
-//                                 size: CGSize(width: -bounds.midX, height: bounds.midY)),
-//                      origin: centerCoordinate,
-//                      pointsPerUnit: CGFloat(scaleConstant))
         axe.drawAxes(in: CGRect(origin: centerCoordinate,
-                                size: CGSize(width: rect.minX + centerCoordinate.x, height: rect.maxY - centerCoordinate.y)),
+                                size: CGSize(width: -centerCoordinate.x, height: rect.maxY - centerCoordinate.y)),
                      origin: centerCoordinate,
                      pointsPerUnit: CGFloat(scaleConstant))
-
-        
         
         
         //draw function
         let functionGraph = GraphDrawer.init(color: UIColor.red, contentScaleFactor: CGFloat(1))
         
-        var start = Int(-rect.maxX/2)
-        var end = Int(rect.maxX/2)
-        
-        if let translationCordinates = translationCoordinate {
-            start -= Int(translationCordinates.x)
-            end -= Int(translationCordinates.x)
-        }
-        
+        let start = Int(-rect.maxX/2) - Int(sumOfTransitions.x)
+        let end = Int(rect.maxX/2) - Int(sumOfTransitions.x)
         
         var scaledNewX: Double?
         var newY: Double?
@@ -108,9 +87,8 @@ class GraphView: UIView {
         }
     }
     
-    // handler
-    func changeScale (byReactingTo pinchRecognizer: UIPinchGestureRecognizer)
-    {
+    // handlers
+    func changeScale (byReactingTo pinchRecognizer: UIPinchGestureRecognizer){
         switch pinchRecognizer.state {
         case .changed, .ended:
             scaleConstant *= Double(pinchRecognizer.scale)
@@ -120,13 +98,20 @@ class GraphView: UIView {
         }
     }
     
-    func changePosition (byReactingTo panRecognizer: UIPanGestureRecognizer)
-    {        
+    func changePosition (byReactingTo panRecognizer: UIPanGestureRecognizer){
         switch panRecognizer.state {
-        case .changed:
+        case .changed, .ended:
             translationCoordinate = panRecognizer.translation(in: self)
-        case  .ended:
             panRecognizer.setTranslation(CGPoint.zero, in: self)
+        default:
+            break
+        }
+    }
+    
+    func resetTheCenterCoordinate (byReactingTo tapRecognizer: UITapGestureRecognizer) {
+        switch tapRecognizer.state {
+        case .changed, .ended:
+            sumOfTransitions = CGPoint(x: 0.0, y: 0.0)
         default:
             break
         }

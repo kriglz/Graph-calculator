@@ -17,16 +17,21 @@ class GraphViewController: UIViewController {
         didSet {
             graphView.functionY = yResult
             
-            let scaleHandler = #selector(GraphView.changeScale(byReactingTo:))
+            let scaleHandler = #selector(graphView.changeScale(byReactingTo:))
             let pinchRecognizer = UIPinchGestureRecognizer(target: graphView, action: scaleHandler)
             graphView.addGestureRecognizer(pinchRecognizer)
             
-            let panHandler = #selector(GraphView.changePosition(byReactingTo:))
+            let panHandler = #selector(graphView.changePosition(byReactingTo:))
             let panRecognizer = UIPanGestureRecognizer(target: graphView, action: panHandler)
             panRecognizer.maximumNumberOfTouches = 1
+            panRecognizer.minimumNumberOfTouches = 1
             graphView.addGestureRecognizer(panRecognizer)
             
-            
+            let doubleTapHandler = #selector(graphView.resetTheCenterCoordinate(byReactingTo:))
+            let doubleTapRecognizer = UITapGestureRecognizer(target: graphView, action: doubleTapHandler)
+            doubleTapRecognizer.numberOfTapsRequired = 2
+            doubleTapRecognizer.numberOfTouchesRequired = 1
+            graphView.addGestureRecognizer(doubleTapRecognizer)
         }
     }
     
