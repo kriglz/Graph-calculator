@@ -95,18 +95,15 @@ class GraphView: UIView {
                                             in: rect,
                                             origin: centerCoordinate,
                                             pointsPerUnit: CGFloat(scaleConstant))
-                    
                 }
-                
             }
-            
             
             oldX = CGFloat(newX)
             oldY = CGFloat(newY!)
         }
-        
+
     }
-    
+
     // handlers
     func changeScale (byReactingTo pinchRecognizer: UIPinchGestureRecognizer){
         switch pinchRecognizer.state {

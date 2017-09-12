@@ -39,7 +39,7 @@ struct GraphDrawer {
         }
         
         if oldX == nil || oldY == nil {
-            path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+//            path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
             
         } else {
             path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)

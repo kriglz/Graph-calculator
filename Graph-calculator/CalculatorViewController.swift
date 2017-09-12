@@ -10,6 +10,10 @@ import UIKit
 
 class CalculatorViewController: UIViewController, UISplitViewControllerDelegate {
     
+    override func viewDidLoad() {
+        graphButton.isEnabled = false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(true, animated: false)
@@ -61,6 +65,16 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
 
     var userIsInTheMiddleOfTyping = false
 
+    @IBOutlet weak var graphButton: UIButton!
+    
+    private func changeGraphButtonStatusToReady() {
+        graphButton.isEnabled = true
+    }
+    private func changeGraphButtonStatusToNotReady() {
+        graphButton.isEnabled = false
+    }
+    
+    
     
 //
 //typing numbers
@@ -140,12 +154,16 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
     func displayDescription() {
         if brain.evaluate().isPending {
             descriptionDisplay.text! = brain.description + "..."
+            changeGraphButtonStatusToNotReady()
         } else {
             if !brain.description.isEmpty {
                 descriptionDisplay.text! = brain.description + "="
+                changeGraphButtonStatusToReady()
+                
             } else {
                 displayValue = 0
                 descriptionDisplay.text! = "0"
+                changeGraphButtonStatusToNotReady()
             }
         }
     }
