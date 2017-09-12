@@ -68,6 +68,7 @@ class GraphView: UIView {
         var newY: Double?
         var oldX: CGFloat?
         var oldY: CGFloat?
+        var wasInfinite = false
         
         for newX in start...end {
             scaledNewX = Double(newX)/Double(scaleConstant)
@@ -75,16 +76,35 @@ class GraphView: UIView {
             if let function = functionY {
                 newY = function(scaledNewX!) * Double(scaleConstant)
                 
-                functionGraph.drawALine(from: (oldX, oldY),
-                                        to: (CGFloat(newX), CGFloat(newY!)),
-                                        in: rect,
-                                        origin: centerCoordinate,
-                                        pointsPerUnit: CGFloat(scaleConstant))
+                if let oldY = oldY, newY!.isInfinite {
+                    newY = Double(oldY) * 1000000000.0
+                    functionGraph.drawALine(from: (oldX, oldY),
+                                            to: (oldX!, CGFloat(newY!)),
+                                            in: rect,
+                                            origin: centerCoordinate,
+                                            pointsPerUnit: CGFloat(scaleConstant))
+                    wasInfinite = true
+                    
+                } else if wasInfinite {
+                    newY = newY! * 1000000000.0
+                    wasInfinite = false
+                    
+                } else {
+                    functionGraph.drawALine(from: (oldX, oldY),
+                                            to: (CGFloat(newX), CGFloat(newY!)),
+                                            in: rect,
+                                            origin: centerCoordinate,
+                                            pointsPerUnit: CGFloat(scaleConstant))
+                    
+                }
                 
-                oldX = CGFloat(newX)
-                oldY = CGFloat(newY!)
             }
+            
+            
+            oldX = CGFloat(newX)
+            oldY = CGFloat(newY!)
         }
+        
     }
     
     // handlers

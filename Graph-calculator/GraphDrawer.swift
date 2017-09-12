@@ -38,55 +38,14 @@ struct GraphDrawer {
             oldY = origin.y - from.y!
         }
         
-        if ((newY.isNormal) || (newY.isZero)) && !(newY.isNaN) {
-            if oldX == nil && oldY == nil || oldY!.isNaN || oldY!.isInfinite || newY.isNaN || newY.isInfinite {
-                path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-                
-            } else if (abs(newY / oldY!) > 300) {
-                if newY > 0 && oldY! > 0 || newY < 0 && oldY! < 0 {
-                    
-                    
-                    
-                    path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
-                    path.addLine(to: CGPoint(x: oldX!, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-                    path.stroke()
-                    
-                } else {
-                    path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-                    
-                }
-                
-            } else if ((oldY!.isNormal) || (oldY!.isZero)) && (oldY!.isFinite){
-                path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
-                path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-                path.stroke()
-            }
+        if oldX == nil || oldY == nil {
+            path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+            
+        } else {
+            path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
+            path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+            path.stroke()
         }
-//        if ((newY.isNormal) || (newY.isZero)) && !(newY.isNaN) {
-//            if oldX == nil && oldY == nil || oldY!.isNaN || oldY!.isInfinite || newY.isNaN || newY.isInfinite {
-//                path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-//                
-//            } else if (abs(newY / oldY!) > pointsPerUnit) {
-//                if newY > 0 && oldY! > 0 || newY < 0 && oldY! < 0 {
-//                    
-//
-//                    
-//                    path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
-//                    path.addLine(to: CGPoint(x: oldX!, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-//                    path.stroke()
-//                    
-//                } else {
-//
-//                    path.move(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-//
-//                }
-//                
-//            } else if ((oldY!.isNormal) || (oldY!.isZero)) && (oldY!.isFinite){
-//                path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
-//                path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
-//                path.stroke()
-//            }
-//        }
         
         UIGraphicsGetCurrentContext()?.restoreGState()
     }
