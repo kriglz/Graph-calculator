@@ -27,7 +27,7 @@ struct CalculatorBrain {
 
     private var operations: Dictionary<String, Operation> = [
         "π": Operation.constant(Double.pi),
-        "e": Operation.constant(M_E),
+//        "e": Operation.constant(M_E),
         "√": Operation.unaryOperation(sqrt),
         "cos": Operation.unaryOperation(cos),
         "sin": Operation.unaryOperation(sin),
@@ -64,29 +64,34 @@ struct CalculatorBrain {
     
     //calculating CalculatorBrain result by substituting values for those variables found in a supplied Dictionary
     func evaluate(using variables: Dictionary<String,Double>? = nil)
-        -> (result: Double?, isPending: Bool)//, description: String)
+        -> (result: Double?, isPending: Bool)
     {
         var evaluateResult: Double?
+        var evaluateResultM: Double?
+        var evaluateResultX: Double?
+
         if let dictionaryVariables = variables {
             for k in dictionaryVariables.keys {
                 switch k {
                 case "M":
-                    evaluateResult = variables!["M"]
+                    evaluateResultM = variables!["M"]
+                case "x":
+                    evaluateResultX = variables!["x"]
                 default:
                     break
                 }
             }
         }
 
-        evaluateResult = performOperation(ifMemorySet: evaluateResult, with: descriptionArray).result
+        evaluateResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray).result
 
-        let resultIsPendingResult = performOperation(ifMemorySet: evaluateResult, with: descriptionArray).isPending
-        return (result: evaluateResult, isPending: resultIsPendingResult) //, description: description)
+        let resultIsPendingResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray).isPending
+        return (result: evaluateResult, isPending: resultIsPendingResult)
     }
     
     
     //performOperations using array elements
-    func performOperation(ifMemorySet withValue: Double? = nil, with array: [String]) -> (result: Double?, isPending: Bool) {
+    func performOperation(ifMemorySet withValue: Double? = nil, ifXSet withXValue: Double? = nil, with array: [String]) -> (result: Double?, isPending: Bool) {
         var accumulation: Double?
         var resultIsPending = false
         
@@ -131,6 +136,20 @@ struct CalculatorBrain {
                     }
                     resultIsPending = false
                 }
+                if element == "x" {
+                    if let value = withXValue {
+                        accumulation = value
+                    }
+                    else {
+                        accumulation = 0
+                    }
+                    if pendingBindingOperation != nil {
+                        performPendingBinaryOperation()
+                        pendingBindingOperation = nil
+                    }
+                    resultIsPending = false
+                }
+
                 if let operation = operations[element]{
                     switch operation {
                         
@@ -188,7 +207,7 @@ struct CalculatorBrain {
                 let lastElement = descriptionArray[lastElementIndex]
                 let oldOperation = getOperationName(of: lastElement)
                 
-                if Double(lastElement) != nil ||  oldOperation == "unaryOperation" || oldOperation == "constant" || oldOperation == "equals" || lastElement == "M" {
+                if Double(lastElement) != nil ||  oldOperation == "unaryOperation" || oldOperation == "constant" || oldOperation == "equals" || lastElement == "M" || lastElement == "x" {
 
                     descriptionArray.removeAll()
                 }
@@ -218,7 +237,7 @@ struct CalculatorBrain {
                 let oldOperation = getOperationName(of: lastElement)
                 
                 
-                if newOperation == "constant" && (Double(lastElement) != nil || oldOperation == "constant" || oldOperation == "unaryOperation" || lastElement == "M" || oldOperation == "equals" ) {
+                if newOperation == "constant" && (Double(lastElement) != nil || oldOperation == "constant" || oldOperation == "unaryOperation" || lastElement == "M" || lastElement == "x" || oldOperation == "equals" ) {
                     descriptionArray.removeAll()
                 }
                 if (newOperation == "unaryOperation" || newOperation == "binaryOperation") && oldOperation == "binaryOperation" {
@@ -229,12 +248,12 @@ struct CalculatorBrain {
                     let index = descriptionArray.endIndex
                     descriptionArray.insert(element, at: index)
                 }
-                if (oldOperation == "equals" || oldOperation == "unaryOperation" || oldOperation == "constant") && symbol == "M" {
+                if (oldOperation == "equals" || oldOperation == "unaryOperation" || oldOperation == "constant") && (symbol == "M" || symbol == "x") {
                     descriptionArray.removeAll()
                 }
                 
                 
-                if (symbol == "M" && lastElement == "M") || (newOperation == "equals" && oldOperation == "equals") {
+                if ((symbol == "M" || symbol == "x")  && (lastElement == "M" || lastElement == "x")) || (newOperation == "equals" && oldOperation == "equals") {
                     descriptionArray.removeLast()
                 }
                 if symbol == "±" && lastElement == "±" {
@@ -243,7 +262,7 @@ struct CalculatorBrain {
                 }
             } else {
                 let newOperation = getOperationName(of: symbol)
-                if !(newOperation == "constant" || symbol == "M") {
+                if !(newOperation == "constant" || symbol == "M" || symbol == "x") {
                     descriptionArray.append("0.0")
                 }
             }
@@ -297,6 +316,7 @@ struct CalculatorBrain {
             for element in descriptionArray {
                 partialArray.append(element)
                 
+                
                 //element is a number
                 if Double(element) != nil {
                     displayArray.append(element)
@@ -307,6 +327,9 @@ struct CalculatorBrain {
                     switch element {
                     
                     case "M":
+                        displayArray.append(element)
+                        
+                    case "x":
                         displayArray.append(element)
                         
                     case "=":

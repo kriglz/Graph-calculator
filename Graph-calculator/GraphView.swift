@@ -10,6 +10,7 @@ import UIKit
 @IBDesignable
 class GraphView: UIView {
 
+    
     @IBInspectable
     var scaleConstant: Double = 30.0 { didSet { setNeedsDisplay()}} //use 30 pixels to make 1 unit
     

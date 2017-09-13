@@ -123,6 +123,10 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         displayValue = memory.storage?["M"] ?? 0
     }
     
+    @IBAction func setVarX(_ sender: UIButton) {
+        brain.setOperand(variable: "x")
+        displayDescription()
+    }
     
     
     
@@ -173,13 +177,23 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         if !brain.evaluate().isPending {
             if let destinationViewController = (segue.destination.contents as? GraphViewController) {
                 if !brain.description.isEmpty {
-                    destinationViewController.navigationItem.title = brain.description
+                    destinationViewController.navigationItem.title = "f(x) = " + brain.description
+                    
+                    destinationViewController.calculatorVC = self
                     
                     destinationViewController.yResult = { (xArgument: Double) -> Double in
-                        self.memory.storage = ["M": xArgument]
+                        
+                        if self.memory.storage != nil {
+                            self.memory.storage!["x"] = xArgument
+                        } else {
+                            self.memory.storage = ["x": xArgument]
+                        }
+                        
                         let yResult = self.brain.evaluate(using: self.memory.storage).result!
                         return yResult
                     }
+                    
+                    
                 }
             }
         }
@@ -199,10 +213,6 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         return false
     }
     
-//    override func viewWillLayoutSubviews() {
-//        
-//    }
-
     
 }
 

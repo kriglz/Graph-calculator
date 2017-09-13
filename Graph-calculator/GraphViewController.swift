@@ -13,6 +13,8 @@ class GraphViewController: UIViewController {
     
     var yResult: ((_ xArgument: Double) -> Double)?
     
+    weak var calculatorVC: CalculatorViewController? = nil
+    
     @IBOutlet weak var graphView: GraphView! {
         didSet {
             graphView.functionY = yResult
@@ -35,32 +37,14 @@ class GraphViewController: UIViewController {
         }
     }
     
-//    @IBOutlet weak var scrollView: UIScrollView!
-    
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let calculatorVC = calculatorVC {
+            calculatorVC.memory.storage?.removeValue(forKey: "x")
+        }
+    }
 }
 
-//    @IBOutlet weak var scrollView: UIScrollView! {
-//        didSet {
-//            scrollView.delegate = self
-//            scrollView.minimumZoomScale = 0.5
-//            scrollView.maximumZoomScale = 1.5
-//            scrollView.contentSize = graphView.frame.size
-//            scrollView.addSubview(graphView)
-//        }
-//    }
-
-//extension GraphViewController: UIScrollViewDelegate {
-//    
-//    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-//        let offsetX = max((scrollView.bounds.width - scrollView.contentSize.width) * 0.5, 0)
-//        let offsetY = max((scrollView.bounds.height - scrollView.contentSize.height) * 0.5, 0)
-//        
-//        self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, 0, 0)
-//        
-//        return graphView
-//    }
-//}
 
 
 
