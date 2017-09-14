@@ -92,10 +92,6 @@ class GraphView: UIView {
                     
                 } else {
                     if let oldY = oldY {
-                        
-                        
-                        print(Double(oldY), newY!)
-                        
                         if abs(Double(oldY) - newY!) < 1*scaleConstant {
                             functionGraph.drawALine(from: (oldX, oldY),
                                                     to: (CGFloat(newX), CGFloat(newY!)),
