@@ -11,17 +11,23 @@ import UIKit
 class CalculatorViewController: UIViewController, UISplitViewControllerDelegate {
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         graphButton.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(true, animated: false)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.unknown)
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all, andRotateTo: UIInterfaceOrientation.unknown)
+
     }
+    
     
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var descriptionDisplay: UILabel!
