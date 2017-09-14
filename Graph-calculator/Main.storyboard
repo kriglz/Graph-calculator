@@ -657,7 +657,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Cy2-XN-bml" customClass="GraphView" customModule="Graph_calculator" customModuleProvider="target">
-                                <rect key="frame" x="24" y="72" width="366" height="656"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="scaleConstant">
@@ -668,10 +668,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Cy2-XN-bml" firstAttribute="leading" secondItem="c8n-m3-4eB" secondAttribute="leadingMargin" constant="4" id="5HM-B6-eDz"/>
-                            <constraint firstItem="ehf-iP-vnW" firstAttribute="top" secondItem="Cy2-XN-bml" secondAttribute="bottom" constant="8" symbolic="YES" id="7BN-Zn-bD9"/>
+                            <constraint firstItem="Cy2-XN-bml" firstAttribute="leading" secondItem="c8n-m3-4eB" secondAttribute="leadingMargin" constant="-20" id="5HM-B6-eDz"/>
+                            <constraint firstItem="ehf-iP-vnW" firstAttribute="top" secondItem="Cy2-XN-bml" secondAttribute="bottom" id="7BN-Zn-bD9"/>
                             <constraint firstItem="Cy2-XN-bml" firstAttribute="centerX" secondItem="c8n-m3-4eB" secondAttribute="centerX" id="A2z-vj-JcP"/>
-                            <constraint firstItem="Cy2-XN-bml" firstAttribute="top" secondItem="ogf-ZS-Bam" secondAttribute="bottom" constant="8" symbolic="YES" id="rlP-i5-3No"/>
+                            <constraint firstItem="Cy2-XN-bml" firstAttribute="top" secondItem="ogf-ZS-Bam" secondAttribute="bottom" id="rlP-i5-3No"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Iso-ZS-ykA"/>

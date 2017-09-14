@@ -28,7 +28,7 @@ class GraphViewController: UIViewController {
             panRecognizer.maximumNumberOfTouches = 1
             panRecognizer.minimumNumberOfTouches = 1
             graphView.addGestureRecognizer(panRecognizer)
-            
+                        
             let doubleTapHandler = #selector(graphView.resetTheCenterCoordinate(byReactingTo:))
             let doubleTapRecognizer = UITapGestureRecognizer(target: graphView, action: doubleTapHandler)
             doubleTapRecognizer.numberOfTapsRequired = 2

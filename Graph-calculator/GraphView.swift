@@ -71,6 +71,7 @@ class GraphView: UIView {
         var oldY: CGFloat?
         var wasInfinite = false
         
+        
         for newX in start...end {
             scaledNewX = Double(newX)/Double(scaleConstant)
             
@@ -118,15 +119,14 @@ class GraphView: UIView {
                         }
                     }
                 }
-            
-            
-            oldX = CGFloat(newX)
-            oldY = CGFloat(newY!)
+                
+                oldX = CGFloat(newX)
+                oldY = CGFloat(newY!)
+            }
         }
-        }
-
+        
     }
-
+    
     // handlers
     func changeScale (byReactingTo pinchRecognizer: UIPinchGestureRecognizer){
         switch pinchRecognizer.state {
@@ -141,8 +141,12 @@ class GraphView: UIView {
     func changePosition (byReactingTo panRecognizer: UIPanGestureRecognizer){
         switch panRecognizer.state {
         case .changed, .ended:
+            
             translationCoordinate = panRecognizer.translation(in: self)
             panRecognizer.setTranslation(CGPoint.zero, in: self)
+            
+            
+            
         default:
             break
         }
