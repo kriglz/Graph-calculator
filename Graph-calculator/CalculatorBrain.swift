@@ -310,8 +310,6 @@ struct CalculatorBrain {
             var lastOperationName = ""
             var newOperationName = ""
 
-            print(descriptionArray, "description")
-
             
             for element in descriptionArray {
                 partialArray.append(element)
@@ -399,32 +397,7 @@ struct CalculatorBrain {
                         }
                     }
                     
-                    
-//                        if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
-//                            displayArray.append(element)
-//                        } else if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
-//                            displayArray.insert("(", at: displayArray.startIndex)
-//                            displayArray.append(")" + element)
-//                        } else if lastOperationName == "equals" {
-//                            
-//                            displayArray.insert(element + "(", at: displayArray.startIndex)
-//                                displayArray.append(")")
-//                            
-//                            
-//                            } else {
-//                                if lastOperationName == "unaryOperation" {
-//                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
-//                                    repetetiveNumber += 1
-//                                } else {
-//                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex))
-//                                }
-//                                displayArray.append(")")
-//                            }
-//                    }
                     lastOperationName = newOperationName
-                    print(displayArray, "display")
-                    print(repetetiveNumber)
-
                 }
             }
             

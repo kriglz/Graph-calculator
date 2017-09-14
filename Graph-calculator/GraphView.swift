@@ -118,10 +118,11 @@ class GraphView: UIView {
                         }
                     }
                 }
-            }
+            
             
             oldX = CGFloat(newX)
             oldY = CGFloat(newY!)
+        }
         }
 
     }

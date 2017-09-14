@@ -647,7 +647,7 @@
         <!--Graph View Controller-->
         <scene sceneID="O4b-2L-lwB">
             <objects>
-                <viewController id="d8Z-Jv-xK3" customClass="GraphViewController" customModule="Graph_calculator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="d8Z-Jv-xK3" customClass="GraphViewController" customModule="Graph_calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ogf-ZS-Bam"/>
                         <viewControllerLayoutGuide type="bottom" id="ehf-iP-vnW"/>
