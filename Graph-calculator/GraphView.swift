@@ -91,11 +91,36 @@ class GraphView: UIView {
                     wasInfinite = false
                     
                 } else {
-                    functionGraph.drawALine(from: (oldX, oldY),
-                                            to: (CGFloat(newX), CGFloat(newY!)),
-                                            in: rect,
-                                            origin: centerCoordinate,
-                                            pointsPerUnit: CGFloat(scaleConstant))
+                    if let oldY = oldY {
+                        
+                        
+                        print(Double(oldY), newY!)
+                        
+                        if abs(Double(oldY) - newY!) < 1*scaleConstant {
+                            functionGraph.drawALine(from: (oldX, oldY),
+                                                    to: (CGFloat(newX), CGFloat(newY!)),
+                                                    in: rect,
+                                                    origin: centerCoordinate,
+                                                    pointsPerUnit: CGFloat(scaleConstant))
+                        } else {
+                            if (Double(oldY) > 0 && newY! < 0) || (Double(oldY) < 0 && newY! > 0) {
+                                
+                                let newYTemp = Double(oldY) * 1000000000.0
+                                functionGraph.drawALine(from: (oldX, oldY),
+                                                        to: (oldX!, CGFloat(newYTemp)),
+                                                        in: rect,
+                                                        origin: centerCoordinate,
+                                                        pointsPerUnit: CGFloat(scaleConstant))
+                                wasInfinite = true
+                            } else {
+                                functionGraph.drawALine(from: (oldX, oldY),
+                                                        to: (CGFloat(newX), CGFloat(newY!)),
+                                                        in: rect,
+                                                        origin: centerCoordinate,
+                                                        pointsPerUnit: CGFloat(scaleConstant))
+                            }
+                        }
+                    }
                 }
             }
             
