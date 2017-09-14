@@ -308,7 +308,6 @@ struct CalculatorBrain {
             var displayArray = [String]()
             var partialArray = [String]()
             var repetetiveNumber = 1
-            var beforeTheLastWasEqual = false
             var lastOperationName = ""
             var newOperationName = ""
             
@@ -336,10 +335,10 @@ struct CalculatorBrain {
                         break
                         
                     case "x⁻¹":
-                        if lastOperationName == "equals" || beforeTheLastWasEqual{
+                        if lastOperationName == "equals" {
                             displayArray.insert("(", at: displayArray.startIndex)
                             displayArray.append(")" + "⁻¹")
-                            beforeTheLastWasEqual = true
+                            
                         } else {
                             if lastOperationName == "unaryOperation" {
                                 displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
@@ -349,6 +348,7 @@ struct CalculatorBrain {
                             }
                             displayArray.append(")" + "⁻¹")
                         }
+
                         
                     case "±":
                         if performOperation(with: partialArray).result! < 0 {
@@ -375,15 +375,19 @@ struct CalculatorBrain {
                         }
                         
                     default:
-                    if newOperationName == "binaryOperation" || newOperationName == "constant" {
-                        displayArray.append(element)
-                    } else {
-                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" || beforeTheLastWasEqual{
+                        if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
+                            displayArray.append(element)
+                            
+                        } else if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
+                            displayArray.insert("(", at: displayArray.startIndex)
+                            displayArray.append(")" + element)
+                            
+                        } else {
+                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
                                 displayArray.insert(element + "(", at: displayArray.startIndex)
                                 displayArray.append(")")
-                                beforeTheLastWasEqual = true
                             } else {
-                                if lastOperationName == "unaryOperation" {
+                                if lastOperationName == "unaryOperation" { //|| newOperationName == "binaryOperation" {
                                     displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
                                     repetetiveNumber += 1
                                 } else {

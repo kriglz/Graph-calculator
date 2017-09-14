@@ -125,6 +125,8 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
     
     @IBAction func setVarX(_ sender: UIButton) {
         brain.setOperand(variable: "x")
+        displayValue = 0.0
+        userIsInTheMiddleOfTyping = false
         displayDescription()
     }
     
