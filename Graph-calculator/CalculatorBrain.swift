@@ -27,7 +27,6 @@ struct CalculatorBrain {
 
     private var operations: Dictionary<String, Operation> = [
         "π": Operation.constant(Double.pi),
-//        "e": Operation.constant(M_E),
         "√": Operation.unaryOperation(sqrt),
         "cos": Operation.unaryOperation(cos),
         "sin": Operation.unaryOperation(sin),
@@ -339,51 +338,43 @@ struct CalculatorBrain {
                             displayArray.insert("(", at: displayArray.startIndex)
                             displayArray.append(")" + "⁻¹")
                             
+                        } else if lastOperationName == "unaryOperation" {
+                            displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
+                            repetetiveNumber += 1
                         } else {
-                            if lastOperationName == "unaryOperation" {
-                                displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
-                                repetetiveNumber += 1
-                            } else {
-                                displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex))
-                            }
-                            displayArray.append(")" + "⁻¹")
+                            displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex))
                         }
-
-                        
+                        displayArray.append(")" + "⁻¹")
+   
                     case "±":
                         if performOperation(with: partialArray).result! < 0 {
                             if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
                                 displayArray.insert("-" + "(", at: descriptionArray.startIndex)
                                 displayArray.append(")")
-                            }
-                            else if lastOperationName == "binaryOperation" {
+                            } else if lastOperationName == "binaryOperation" {
                                 displayArray.insert("(" + "-", at: displayArray.index(before: displayArray.endIndex))
                                 displayArray.append(")")
                             } else {
                                     displayArray.insert("-", at: displayArray.index(before: displayArray.endIndex))
                             }
-                        } else {
-                            if performOperation(with: partialArray).result! > 0 {
-                                if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
-                                    displayArray.insert("-" + "(", at: descriptionArray.startIndex)
-                                    displayArray.append(")")
-                                }
-                                else {
-                                    displayArray.insert("-,", at: displayArray.index(before: displayArray.endIndex))
-                                }
+                            
+                        } else if performOperation(with: partialArray).result! > 0 {
+                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                                displayArray.insert("-" + "(", at: descriptionArray.startIndex)
+                                displayArray.append(")")
+                            }
+                            else {
+                                displayArray.insert("-,", at: displayArray.index(before: displayArray.endIndex))
                             }
                         }
                         
                     default:
                         if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
                             displayArray.append(element)
-                            
                         } else if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
                             displayArray.insert("(", at: displayArray.startIndex)
                             displayArray.append(")" + element)
-                            
-                        } else {
-                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                        } else if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
                                 displayArray.insert(element + "(", at: displayArray.startIndex)
                                 displayArray.append(")")
                             } else {
@@ -395,7 +386,6 @@ struct CalculatorBrain {
                                 }
                                 displayArray.append(")")
                             }
-                        }
                     }
                     lastOperationName = newOperationName
                 }
