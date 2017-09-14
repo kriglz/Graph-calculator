@@ -38,7 +38,7 @@ struct GraphDrawer {
             oldY = origin.y - from.y!
         }
         
-        if oldX != nil && oldY != nil {
+        if oldX != nil && oldY != nil && !newY.isNaN && !oldY!.isNaN {
             path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
             path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
             path.stroke()
