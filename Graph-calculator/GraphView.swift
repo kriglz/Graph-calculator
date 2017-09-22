@@ -124,7 +124,7 @@ class GraphView: UIView {
                 oldY = CGFloat(newY!)
             }
         }
-        
+        print(scaleConstant)
     }
     
     // handlers

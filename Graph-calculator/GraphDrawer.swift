@@ -27,7 +27,7 @@ struct GraphDrawer {
         UIGraphicsGetCurrentContext()?.saveGState()
         color.set()
         let path = UIBezierPath()
-
+     
         let newX = origin.x + to.x
         let newY = origin.y - to.y
         var oldX: CGFloat?
@@ -43,6 +43,7 @@ struct GraphDrawer {
             path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
             path.stroke()
         }
+        
         
         UIGraphicsGetCurrentContext()?.restoreGState()
     }
