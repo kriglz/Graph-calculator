@@ -13,6 +13,8 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         graphButton.isEnabled = false
+        graphButtonV.isEnabled = false
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,12 +77,15 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
 
     var userIsInTheMiddleOfTyping = false
 
+    @IBOutlet weak var graphButtonV: UIButton!
     @IBOutlet weak var graphButton: UIButton!
     
     private func changeGraphButtonStatusToReady() {
+        graphButtonV.isEnabled = true
         graphButton.isEnabled = true
     }
     private func changeGraphButtonStatusToNotReady() {
+        graphButtonV.isEnabled = false
         graphButton.isEnabled = false
     }
     
