@@ -13,7 +13,7 @@ struct GraphDrawer {
     var color: UIColor
     var contentScaleFactor: CGFloat          // set this from UIView's contentScaleFactor to position axes with maximum accuracy
     
-    init(color: UIColor = UIColor.red, contentScaleFactor: CGFloat = 1) {
+    init(color: UIColor = .black, contentScaleFactor: CGFloat = 1) {
         self.color = color
         self.contentScaleFactor = contentScaleFactor
     }
@@ -22,12 +22,13 @@ struct GraphDrawer {
                    to: (x: CGFloat, y: CGFloat),
                    in rect: CGRect,
                    origin: CGPoint,
-                   pointsPerUnit: CGFloat)
-    {
+                   pointsPerUnit: CGFloat){
+        
         UIGraphicsGetCurrentContext()?.saveGState()
+        
         color.set()
         let path = UIBezierPath()
-     
+        
         let newX = origin.x + to.x
         let newY = origin.y - to.y
         var oldX: CGFloat?
@@ -41,9 +42,9 @@ struct GraphDrawer {
         if oldX != nil && oldY != nil && !newY.isNaN && !oldY!.isNaN {
             path.move(to: CGPoint(x: oldX!, y: oldY!).aligned(usingScaleFactor: contentScaleFactor)!)
             path.addLine(to: CGPoint(x: newX, y: newY).aligned(usingScaleFactor: contentScaleFactor)!)
+            path.lineWidth = 3
             path.stroke()
         }
-        
         
         UIGraphicsGetCurrentContext()?.restoreGState()
     }

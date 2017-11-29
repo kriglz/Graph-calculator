@@ -21,7 +21,7 @@ class GraphView: UIView {
     
     
     override func draw(_ rect: CGRect) {
-        let axe = AxesDrawer.init(color: UIColor.blue, contentScaleFactor: CGFloat(1))
+        let axe = AxesDrawer.init(color: UIColor.lightGray, contentScaleFactor: CGFloat(1))
         var centerCoordinate: CGPoint = CGPoint(x: bounds.maxX/2, y: bounds.maxY/2)
        
 
@@ -60,7 +60,7 @@ class GraphView: UIView {
         
         
         //draw function
-        let functionGraph = GraphDrawer.init(color: UIColor.red, contentScaleFactor: CGFloat(1))
+        let functionGraph = GraphDrawer.init(color: UIColor.init(red: 255/225, green: 73/255, blue: 94/255, alpha: 1), contentScaleFactor: CGFloat(1))
         
         let start = Int(-rect.maxX/2) - Int(sumOfTransitions.x)
         let end = Int(rect.maxX/2) - Int(sumOfTransitions.x)
@@ -124,7 +124,6 @@ class GraphView: UIView {
                 oldY = CGFloat(newY!)
             }
         }
-        print(scaleConstant)
     }
     
     // handlers
@@ -141,12 +140,9 @@ class GraphView: UIView {
     func changePosition (byReactingTo panRecognizer: UIPanGestureRecognizer){
         switch panRecognizer.state {
         case .changed, .ended:
-            
             translationCoordinate = panRecognizer.translation(in: self)
             panRecognizer.setTranslation(CGPoint.zero, in: self)
-            
-            
-            
+    
         default:
             break
         }
