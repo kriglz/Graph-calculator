@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController, UISplitViewControllerDelegate {
+class CalculatorViewController: UIViewController { //}, UISplitViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,19 +216,19 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate 
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.splitViewController?.delegate = self
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        self.splitViewController?.delegate = self
+//    }
     
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        if primaryViewController.contents == self {
-            if let gvc = secondaryViewController.contents as? GraphViewController, gvc.graphView == nil {
-                return true
-            }
-        }
-        return false
-    }
+//    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+//        if primaryViewController.contents == self {
+//            if let gvc = secondaryViewController.contents as? GraphViewController, gvc.graphView == nil {
+//                return true
+//            }
+//        }
+//        return false
+//    }
     
     
 }
