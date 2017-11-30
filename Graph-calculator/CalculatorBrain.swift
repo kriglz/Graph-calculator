@@ -112,6 +112,8 @@ struct CalculatorBrain {
         }
         
         for element in array {
+            print(array)
+            
             if Double(element) != nil {
                 accumulation = Double(element)!
                 
@@ -129,11 +131,9 @@ struct CalculatorBrain {
                     else {
                         accumulation = 0
                     }
-                    if pendingBindingOperation != nil {
-                        performPendingBinaryOperation()
-                        pendingBindingOperation = nil
-                    }
+
                     resultIsPending = false
+                    
                 }
                 if element == "x" {
                     if let value = withXValue {
