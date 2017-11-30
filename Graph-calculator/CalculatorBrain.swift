@@ -112,7 +112,6 @@ struct CalculatorBrain {
         }
         
         for element in array {
-            print(array)
             
             if Double(element) != nil {
                 accumulation = Double(element)!
