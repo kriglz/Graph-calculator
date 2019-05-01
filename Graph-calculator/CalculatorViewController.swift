@@ -40,9 +40,9 @@ class CalculatorViewController: UIViewController { //}, UISplitViewControllerDel
     @IBOutlet weak var memoryDisplay: UILabel!
     @IBAction func undoButton(_ sender: UIButton) {
         if userIsInTheMiddleOfTyping {          //undo characters
-            if !(display.text?.characters.isEmpty)! {
-                display.text!.characters.removeLast()
-                if (display.text?.characters.isEmpty)! {
+            if !(display.text?.isEmpty)! {
+                display.text!.removeLast()
+                if (display.text?.isEmpty)! {
                     display.text! = "0.0"
                     userIsInTheMiddleOfTyping = false
                 }

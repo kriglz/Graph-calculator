@@ -126,8 +126,7 @@ class GraphView: UIView {
         }
     }
     
-    // handlers
-    func changeScale (byReactingTo pinchRecognizer: UIPinchGestureRecognizer){
+    @objc func changeScale(byReactingTo pinchRecognizer: UIPinchGestureRecognizer){
         switch pinchRecognizer.state {
         case .changed, .ended:
             scaleConstant *= Double(pinchRecognizer.scale)
@@ -137,7 +136,7 @@ class GraphView: UIView {
         }
     }
     
-    func changePosition (byReactingTo panRecognizer: UIPanGestureRecognizer){
+    @objc func changePosition(byReactingTo panRecognizer: UIPanGestureRecognizer){
         switch panRecognizer.state {
         case .changed, .ended:
             translationCoordinate = panRecognizer.translation(in: self)
@@ -148,7 +147,7 @@ class GraphView: UIView {
         }
     }
     
-    func resetTheCenterCoordinate (byReactingTo tapRecognizer: UITapGestureRecognizer) {
+    @objc func resetTheCenterCoordinate(byReactingTo tapRecognizer: UITapGestureRecognizer) {
         switch tapRecognizer.state {
         case .changed, .ended:
             sumOfTransitions = CGPoint(x: 0.0, y: 0.0)
