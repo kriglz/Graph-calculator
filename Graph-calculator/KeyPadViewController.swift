@@ -23,6 +23,7 @@ class KeyPadViewController: UIViewController {
         
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = false
+        collectionView.delaysContentTouches = false
 
         collectionView.backgroundColor = .clear
         
