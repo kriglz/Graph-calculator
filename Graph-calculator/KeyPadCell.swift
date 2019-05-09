@@ -19,6 +19,7 @@ class KeyPadCell: UICollectionViewCell {
             self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
 
+        // long touch should generate impact also show alternative selections
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
         generator.impactOccurred()

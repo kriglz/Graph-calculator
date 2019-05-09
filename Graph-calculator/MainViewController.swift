@@ -38,11 +38,13 @@ class MainViewController: UIViewController {
         self.keyPadViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.displayViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        self.displayViewController.view.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
-        
+       self.makeConstraints()
+    }
+
+    private func makeConstraints() {        
         self.displayViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         self.displayViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-
+        
         if #available(iOS 11.0, *) {
             self.displayViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         } else {
@@ -60,7 +62,7 @@ class MainViewController: UIViewController {
             self.keyPadViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         }
     }
-
+    
     /*
     // MARK: - Navigation
 
