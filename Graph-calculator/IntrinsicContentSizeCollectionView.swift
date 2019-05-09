@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kristina Gelzinyte. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class IntrinsicContentSizeCollectionView: UICollectionView {
     
