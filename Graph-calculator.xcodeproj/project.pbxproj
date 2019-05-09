@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89246F1B2284A46B009416E5 /* KeyPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeyPadViewController.swift */; };
 		89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */; };
+		89581F6A2284A678009D8469 /* KeyPadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F692284A678009D8469 /* KeyPadCell.swift */; };
+		89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F6B2284A6D9009D8469 /* UIView+Extension.swift */; };
+		89581F702284C547009D8469 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F6F2284C547009D8469 /* MainViewController.swift */; };
+		89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */; };
+		89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */; };
+		89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */; };
 		89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E1D1F4C238700B3A58D /* AppDelegate.swift */; };
 		89998E251F4C238700B3A58D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89998E241F4C238700B3A58D /* Assets.xcassets */; };
 		89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */; };
@@ -20,7 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		89246F1A2284A46B009416E5 /* KeyPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadViewController.swift; sourceTree = "<group>"; };
 		89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		89581F692284A678009D8469 /* KeyPadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadCell.swift; sourceTree = "<group>"; };
+		89581F6B2284A6D9009D8469 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		89581F6F2284C547009D8469 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSpacingCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
+		89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicContentSizeCollectionView.swift; sourceTree = "<group>"; };
 		89998E1A1F4C238700B3A58D /* Graph-calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graph-calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89998E1D1F4C238700B3A58D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89998E241F4C238700B3A58D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +59,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		89581F6D2284C4B2009D8469 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				89581F772284D123009D8469 /* Collection View */,
+				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
+				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		89581F6E2284C4BB009D8469 /* Key pad */ = {
+			isa = PBXGroup;
+			children = (
+				89246F1A2284A46B009416E5 /* KeyPadViewController.swift */,
+				89581F692284A678009D8469 /* KeyPadCell.swift */,
+			);
+			name = "Key pad";
+			sourceTree = "<group>";
+		};
+		89581F772284D123009D8469 /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */,
+				89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
 		89998E111F4C238700B3A58D = {
 			isa = PBXGroup;
 			children = (
@@ -64,14 +106,17 @@
 		89998E1C1F4C238700B3A58D /* Graph-calculator */ = {
 			isa = PBXGroup;
 			children = (
-				89998E2F1F4C239200B3A58D /* Supporting Files */,
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
+				89581F6F2284C547009D8469 /* MainViewController.swift */,
+				89581F6E2284C4BB009D8469 /* Key pad */,
 				89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */,
 				89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */,
 				89A61F771F51A3CB0063FDE2 /* GraphView.swift */,
 				89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */,
 				89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */,
+				89581F6D2284C4B2009D8469 /* Helpers */,
 				89998E361F4C240700B3A58D /* Main.storyboard */,
+				89998E2F1F4C239200B3A58D /* Supporting Files */,
 			);
 			path = "Graph-calculator";
 			sourceTree = "<group>";
@@ -162,11 +207,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */,
+				89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */,
+				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
+				89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */,
+				89246F1B2284A46B009416E5 /* KeyPadViewController.swift in Sources */,
 				89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */,
 				89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */,
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
+				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
+				89581F6A2284A678009D8469 /* KeyPadCell.swift in Sources */,
+				89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */,
 				89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
