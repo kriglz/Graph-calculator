@@ -12,8 +12,8 @@ class KeyPadViewController: UIViewController {
     
     private var gridCollectionView: UICollectionView {
         let layout = FixedSpacingCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 3
+        layout.minimumInteritemSpacing = 3
         
         let collectionView = IntrinsicContentSizeCollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.register(KeyPadCell.self, forCellWithReuseIdentifier: KeyPadCell.identifier)
@@ -73,7 +73,7 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     // MARK: - UICollectionViewDelegateFlowLayout implementation
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = view.frame.size.width * 0.1772
+        let size = view.frame.size.width * 0.1796
         return CGSize(width: size, height: size)
     }
     

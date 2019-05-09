@@ -21,6 +21,10 @@ class KeyPadCell: UICollectionViewCell {
             self.addSubview(view)
             view.mask = self.shapeView
             self.shapeView.frame = self.frame
+            
+            shapeView.layer.shadowOffset = CGSize(width: 0, height: 1)
+            shapeView.layer.shadowOpacity = 0.3
+            shapeView.layer.shadowRadius = 1
         }
     }
     
@@ -34,9 +38,9 @@ class KeyPadCell: UICollectionViewCell {
         }
 
         // long touch should generate impact also show alternative selections
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.prepare()
-        generator.impactOccurred()
+//        let generator = UIImpactFeedbackGenerator(style: .light)
+//        generator.prepare()
+//        generator.impactOccurred()
     }
     
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
