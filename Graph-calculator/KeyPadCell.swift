@@ -12,6 +12,20 @@ class KeyPadCell: UICollectionViewCell {
     
     static let identifier = "KeyPadCollectionViewCellIdentifier"
     
+    var backgroundMaskView: UIImageView? {
+        didSet {
+            guard let view = self.backgroundMaskView else {
+                return
+            }
+            
+            self.addSubview(view)
+            view.mask = self.shapeView
+            self.shapeView.frame = self.frame
+        }
+    }
+    
+    private let shapeView = UIImageView(image: UIImage(named: "ButtonShape"))
+    
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         

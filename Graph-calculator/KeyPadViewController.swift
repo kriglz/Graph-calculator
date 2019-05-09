@@ -12,7 +12,6 @@ class KeyPadViewController: UIViewController {
     
     private var gridCollectionView: UICollectionView {
         let layout = FixedSpacingCollectionViewFlowLayout()
-//        layout.scrollDirection = .
         layout.minimumLineSpacing = 4
         layout.minimumInteritemSpacing = 4
         
@@ -29,6 +28,8 @@ class KeyPadViewController: UIViewController {
         
         return collectionView
     }
+    
+//    fileprivate let maskView = UIImageView(image: UIImage(named: "KeyPadMask"))
     
     // MARK: - Life cycle
     
@@ -60,8 +61,11 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeyPadCell.identifier, for: indexPath) as! KeyPadCell
         
-        cell.backgroundColor = .red
-        cell.layer.cornerRadius = 4
+        let maskView = UIImageView(image: UIImage(named: "KeyPadMask"))
+        let origin = CGPoint(x: -cell.frame.origin.x, y: -cell.frame.origin.y)
+        let size = self.view.bounds.size
+        maskView.frame = CGRect(origin: origin, size: size)
+        cell.backgroundMaskView = maskView
         
         return cell
     }
