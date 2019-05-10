@@ -40,26 +40,7 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
     // MARK: - Private properties
     
     private let shapeView = UIImageView(image: UIImage(named: "ButtonShape"))
-    
-    private lazy var alternativeSelectionPopoverViewController: UIViewController = {
-        let controller = UIViewController()
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        label.text = "Hello"
-        controller.view.addSubview(label)
-        
-        controller.view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: 50, height: 50)
-        
-        let popover = controller.popoverPresentationController
-        popover?.delegate = self
-        popover?.sourceView = self
-        popover?.sourceRect = self.bounds
-        popover?.permittedArrowDirections = .down
-        
-        return controller
-    }()
+    private var alternativeSelectionPopoverViewController: UIViewController?
     
     // MARK: - Initialization
     
@@ -83,10 +64,17 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
         
         switch gestureRecognizer.state {
         case .began:
-            self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController)
+            if self.alternativeSelectionPopoverViewController == nil {
+                self.alternativeSelectionPopoverViewController = self.setuoAlternativeSelectionPopoverViewController()
+            }
+            self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
         case .ended, .failed, .cancelled:
             self.resetScale()
-            self.delegate?.keyPadCell(self, didDeselect: self.alternativeSelectionPopoverViewController)
+            
+            if let alternativeSelectionPopoverViewController = self.alternativeSelectionPopoverViewController {
+                self.delegate?.keyPadCell(self, didDeselect: alternativeSelectionPopoverViewController)
+                self.alternativeSelectionPopoverViewController = nil
+            }
         default:
             break
         }
@@ -123,6 +111,28 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
         UIView.animate(withDuration: 0.07) {
             self.transform = CGAffineTransform.identity
         }
+    }
+    
+    // MARK: - Selection controller
+    
+    private func setuoAlternativeSelectionPopoverViewController() -> UIViewController {
+        let controller = UIViewController()
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        label.text = "Hello"
+        controller.view.addSubview(label)
+        
+        controller.view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        controller.modalPresentationStyle = .popover
+        controller.preferredContentSize = CGSize(width: 50, height: 50)
+        
+        let popover = controller.popoverPresentationController
+        popover?.delegate = self
+        popover?.sourceView = self
+        popover?.sourceRect = self.bounds
+        popover?.permittedArrowDirections = .down
+        
+        return controller
     }
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
