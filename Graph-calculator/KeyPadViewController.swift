@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KeyPadViewController: UIViewController {
+class KeyPadViewController: UIViewController, KeyPadCellDelegate {
     
     private var gridCollectionView: UICollectionView {
         let layout = FixedSpacingCollectionViewFlowLayout()
@@ -61,11 +61,13 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeyPadCell.identifier, for: indexPath) as! KeyPadCell
         
+        cell.delegate = self
+        
         let maskView = UIImageView(image: UIImage(named: "KeyPadMask"))
         let origin = CGPoint(x: -cell.frame.origin.x, y: -cell.frame.origin.y)
         let size = self.view.bounds.size
         maskView.frame = CGRect(origin: origin, size: size)
-        cell.backgroundMaskView = maskView
+        cell.backgroundMaskedView = maskView
         
         return cell
     }
@@ -80,5 +82,15 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let constant = view.frame.size.width * 0.035
         return UIEdgeInsets(top: 0, left: constant, bottom: constant, right: constant)
+    }
+    
+    // MARK: - KeyPadCellDelegate
+    
+    func keyPadCell(_ cell: KeyPadCell, didSelectPresentPopover popoverViewController: UIViewController) {
+        self.present(popoverViewController, animated: true)
+    }
+
+    func keyPadCell(_ cell: KeyPadCell, didDeselect popoverViewController: UIViewController) {
+        popoverViewController.dismiss(animated: true, completion: nil)
     }
 }
