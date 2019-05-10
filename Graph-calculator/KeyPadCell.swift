@@ -48,6 +48,7 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
         super.init(frame: frame)
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.showAlternativeSelection(_:)))
+        longPressGestureRecognizer.minimumPressDuration = 0
         self.addGestureRecognizer(longPressGestureRecognizer)
     }
     
@@ -61,16 +62,18 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
         guard let gestureRecognizer = sender as? UILongPressGestureRecognizer else {
             return
         }
-        
+
         switch gestureRecognizer.state {
         case .began:
+            self.scaleDown()
+
             if self.alternativeSelectionPopoverViewController == nil {
                 self.alternativeSelectionPopoverViewController = self.setuoAlternativeSelectionPopoverViewController()
             }
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
         case .ended, .failed, .cancelled:
             self.resetScale()
-            
+
             if let alternativeSelectionPopoverViewController = self.alternativeSelectionPopoverViewController {
                 self.delegate?.keyPadCell(self, didDeselect: alternativeSelectionPopoverViewController)
                 self.alternativeSelectionPopoverViewController = nil
@@ -78,25 +81,6 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
         default:
             break
         }
-    }
-    
-    // MARK: - Events
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        self.scaleDown()
-
-        // long touch should generate impact also show alternative selections
-//        let generator = UIImpactFeedbackGenerator(style: .light)
-//        generator.prepare()
-//        generator.impactOccurred()
-    }
-    
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        self.resetScale()
     }
     
     // MARK: - Animation

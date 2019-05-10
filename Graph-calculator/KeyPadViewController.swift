@@ -87,10 +87,10 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     // MARK: - KeyPadCellDelegate
     
     func keyPadCell(_ cell: KeyPadCell, didSelectPresentPopover popoverViewController: UIViewController) {
-        self.present(popoverViewController, animated: true)
+        self.present(popoverViewController, animated: false)
     }
 
     func keyPadCell(_ cell: KeyPadCell, didDeselect popoverViewController: UIViewController) {
-        popoverViewController.dismiss(animated: true, completion: nil)
+        popoverViewController.dismiss(animated: false, completion: nil)
     }
 }
