@@ -102,13 +102,26 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
     private func setuoAlternativeSelectionPopoverViewController() -> UIViewController {
         let controller = UIViewController()
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        label.text = "Hello"
-        controller.view.addSubview(label)
+//        let buttonStack = UIStackView()
+//        buttonStack.alignment = .fill
+//        buttonStack.distribution = .fillEqually
+//        buttonStack.axis = .horizontal
         
-        controller.view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        let first = UIButton(type: .system)
+        first.titleLabel?.text = "First"
+        
+//        let second = UIButton(frame: self.bounds)
+//        second.titleLabel?.text = "Second"
+//
+//        buttonStack.addArrangedSubview(first)
+//        buttonStack.addArrangedSubview(second)
+        
+        controller.view.addSubview(first)
+        first.constraint(edgesTo: controller.view)
+        
+        controller.view.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
         controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: 50, height: 50)
+        controller.preferredContentSize = CGSize(width: 100, height: 50)
         
         let popover = controller.popoverPresentationController
         popover?.delegate = self
@@ -121,7 +134,64 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
     
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        popoverPresentationController.popoverBackgroundViewClass = PopoverBackground.self
+    }
+    
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+class PopoverBackground: UIPopoverBackgroundView {
+    
+    override class func arrowBase() -> CGFloat {
+        return 0
+    }
+    
+    override class func arrowHeight() -> CGFloat {
+        return 0
+    }
+    
+    override var arrowDirection: UIPopoverArrowDirection {
+        get {
+            return .down
+        }
+        set {}
+    }
+    
+    override var arrowOffset: CGFloat {
+        get {
+            return 0
+        }
+        set {}
+    }
+    
+    override class var wantsDefaultContentAppearance : Bool {
+        return true
+    }
+    
+    override class func contentViewInsets() -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.layer.shadowColor = UIColor.clear.cgColor
+        self.backgroundColor = .red
+        
+//        let rect = CGRect(origin: .zero, size: frame.size)
+//        let elipse = CGPath(ellipseIn: rect, transform: nil)
+//        let layer = CAShapeLayer()
+//        layer.path = elipse
+//        layer.lineWidth = 2
+//        layer.strokeColor = UIColor.blue.cgColor
+//
+//        self.layer.addSublayer(layer)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
