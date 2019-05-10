@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor(red: 0.173, green: 0.22, blue: 0.27, alpha: 1)
         
         self.addChild(self.keyPadViewController)
         self.addChild(self.displayViewController)

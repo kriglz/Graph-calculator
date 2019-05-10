@@ -21,25 +21,8 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
     
     weak var delegate: KeyPadCellDelegate?
     
-    var backgroundMaskedView: UIImageView? {
-        didSet {
-            guard let view = self.backgroundMaskedView else {
-                return
-            }
-            
-            self.addSubview(view)
-            view.mask = self.shapeView
-            self.shapeView.frame = self.frame
-            
-            shapeView.layer.shadowOffset = CGSize(width: 0, height: 1)
-            shapeView.layer.shadowOpacity = 0.3
-            shapeView.layer.shadowRadius = 1
-        }
-    }
-    
     // MARK: - Private properties
     
-    private let shapeView = UIImageView(image: UIImage(named: "ButtonShape"))
     private var alternativeSelectionPopoverViewController: UIViewController?
     
     // MARK: - Initialization
@@ -47,6 +30,10 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        let shapeView = UIImageView(image: UIImage(named: "ButtonShape"))
+        self.addSubview(shapeView)
+        shapeView.constraint(edgesTo: self)
+
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.showAlternativeSelection(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0
         self.addGestureRecognizer(longPressGestureRecognizer)
@@ -71,6 +58,7 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
                 self.alternativeSelectionPopoverViewController = self.setuoAlternativeSelectionPopoverViewController()
             }
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
+            
         case .ended, .failed, .cancelled:
             self.resetScale()
 

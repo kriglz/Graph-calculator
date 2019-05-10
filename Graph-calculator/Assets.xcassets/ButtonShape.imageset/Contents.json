@@ -28,7 +28,7 @@
           "height" : 2
         },
         "cap-insets" : {
-          "bottom" : 12,
+          "bottom" : 8,
           "top" : 12,
           "right" : 12,
           "left" : 12
@@ -43,8 +43,8 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 3,
-          "height" : 3
+          "width" : 1,
+          "height" : 1
         },
         "cap-insets" : {
           "bottom" : 18,

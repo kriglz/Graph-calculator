@@ -63,12 +63,6 @@ extension KeyPadViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.delegate = self
         
-        let maskView = UIImageView(image: UIImage(named: "KeyPadMask"))
-        let origin = CGPoint(x: -cell.frame.origin.x, y: -cell.frame.origin.y)
-        let size = self.view.bounds.size
-        maskView.frame = CGRect(origin: origin, size: size)
-        cell.backgroundMaskedView = maskView
-        
         return cell
     }
     
