@@ -24,11 +24,11 @@
         "mode" : "9-part",
         "center" : {
           "mode" : "tile",
-          "width" : 2,
-          "height" : 2
+          "width" : 1,
+          "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 8,
+          "bottom" : 12,
           "top" : 12,
           "right" : 12,
           "left" : 12
