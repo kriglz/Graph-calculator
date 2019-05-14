@@ -23,6 +23,9 @@
 		89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */; };
 		89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F771F51A3CB0063FDE2 /* GraphView.swift */; };
 		89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */; };
+		89D58A5E228B59F200438AAF /* OperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5D228B59F200438AAF /* OperationType.swift */; };
+		89D58A60228B5A1A00438AAF /* PopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */; };
+		89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A61228B5A6400438AAF /* PopoverViewController.swift */; };
 		89E878EE1FCFE67000946F93 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		89A61F771F51A3CB0063FDE2 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDrawer.swift; sourceTree = "<group>"; };
+		89D58A5D228B59F200438AAF /* OperationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationType.swift; sourceTree = "<group>"; };
+		89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBackgroundView.swift; sourceTree = "<group>"; };
+		89D58A61228B5A6400438AAF /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +80,8 @@
 			children = (
 				89246F1A2284A46B009416E5 /* KeyPadViewController.swift */,
 				89581F692284A678009D8469 /* KeyPadCell.swift */,
+				89D58A5D228B59F200438AAF /* OperationType.swift */,
+				89D58A63228B5A8400438AAF /* Popover */,
 			);
 			name = "Key pad";
 			sourceTree = "<group>";
@@ -130,6 +138,15 @@
 				89998E291F4C238700B3A58D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89D58A63228B5A8400438AAF /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */,
+				89D58A61228B5A6400438AAF /* PopoverViewController.swift */,
+			);
+			name = Popover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,10 +232,13 @@
 				89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */,
 				89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */,
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
+				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
 				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
 				89581F6A2284A678009D8469 /* KeyPadCell.swift in Sources */,
 				89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */,
+				89D58A60228B5A1A00438AAF /* PopoverBackgroundView.swift in Sources */,
+				89D58A5E228B59F200438AAF /* OperationType.swift in Sources */,
 				89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
