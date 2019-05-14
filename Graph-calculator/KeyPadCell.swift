@@ -92,9 +92,13 @@ class ButtonStackViewController: UIViewController, UIPopoverPresentationControll
     
     let buttonStack = UIStackView()
     
+    private var targetSize: CGSize = .zero
+    
     convenience init(popoverSourceView: UIView, sourceRect: CGRect) {
         self.init()
         
+        self.targetSize = sourceRect.size
+
         self.modalPresentationStyle = .popover
 
         let popover = self.popoverPresentationController
@@ -111,11 +115,20 @@ class ButtonStackViewController: UIViewController, UIPopoverPresentationControll
         buttonStack.distribution = .fillEqually
         buttonStack.axis = .horizontal
         
-        let first = UIButton(type: .system)
-        first.setTitle("First", for: .normal)
+        let first = UILabel()
+        first.text = "First"
         
-        let second = UIButton(type: .system)
-        second.setTitle("Second", for: .normal)
+        let second = UILabel()
+        second.text = "Second"
+        
+        first.translatesAutoresizingMaskIntoConstraints = false
+        second.translatesAutoresizingMaskIntoConstraints = false
+        
+        first.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
+        first.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
+        
+        second.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
+        second.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
         
         buttonStack.addArrangedSubview(first)
         buttonStack.addArrangedSubview(second)
@@ -123,6 +136,8 @@ class ButtonStackViewController: UIViewController, UIPopoverPresentationControll
         self.view.addSubview(buttonStack)
         
         self.buttonStack.translatesAutoresizingMaskIntoConstraints = false
+        
+    
         
         self.buttonStack.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         self.buttonStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
