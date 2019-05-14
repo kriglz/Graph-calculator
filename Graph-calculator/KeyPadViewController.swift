@@ -28,9 +28,7 @@ class KeyPadViewController: UIViewController, KeyPadCellDelegate {
         
         return collectionView
     }
-    
-//    fileprivate let maskView = UIImageView(image: UIImage(named: "KeyPadMask"))
-    
+
     // MARK: - Life cycle
     
     override func viewDidLoad() {

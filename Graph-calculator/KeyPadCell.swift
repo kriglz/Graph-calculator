@@ -13,7 +13,7 @@ protocol KeyPadCellDelegate: class {
     func keyPadCell(_ cell: KeyPadCell, didDeselect popoverViewController: UIViewController)
 }
 
-class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate {
+class KeyPadCell: UICollectionViewCell {
     
     // MARK: - Public properties
 
@@ -55,11 +55,13 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
             self.scaleDown()
 
             if self.alternativeSelectionPopoverViewController == nil {
-                self.alternativeSelectionPopoverViewController = self.setuoAlternativeSelectionPopoverViewController()
+                self.alternativeSelectionPopoverViewController = ButtonStackViewController(popoverSourceView: self, sourceRect: self.bounds)
             }
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
             
         case .ended, .failed, .cancelled:
+            print(gestureRecognizer.location(in: alternativeSelectionPopoverViewController?.view))
+            
             self.resetScale()
 
             if let alternativeSelectionPopoverViewController = self.alternativeSelectionPopoverViewController {
@@ -84,40 +86,51 @@ class KeyPadCell: UICollectionViewCell, UIPopoverPresentationControllerDelegate 
             self.transform = CGAffineTransform.identity
         }
     }
+}
+
+class ButtonStackViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    // MARK: - Selection controller
+    let buttonStack = UIStackView()
     
-    private func setuoAlternativeSelectionPopoverViewController() -> UIViewController {
-        let controller = UIViewController()
+    convenience init(popoverSourceView: UIView, sourceRect: CGRect) {
+        self.init()
         
-//        let buttonStack = UIStackView()
-//        buttonStack.alignment = .fill
-//        buttonStack.distribution = .fillEqually
-//        buttonStack.axis = .horizontal
+        self.modalPresentationStyle = .popover
+
+        let popover = self.popoverPresentationController
+        popover?.delegate = self
+        popover?.sourceView = popoverSourceView
+        popover?.sourceRect = sourceRect
+        popover?.permittedArrowDirections = .down
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        buttonStack.alignment = .fill
+        buttonStack.distribution = .fillEqually
+        buttonStack.axis = .horizontal
         
         let first = UIButton(type: .system)
-        first.titleLabel?.text = "First"
+        first.setTitle("First", for: .normal)
         
-//        let second = UIButton(frame: self.bounds)
-//        second.titleLabel?.text = "Second"
-//
-//        buttonStack.addArrangedSubview(first)
-//        buttonStack.addArrangedSubview(second)
+        let second = UIButton(type: .system)
+        second.setTitle("Second", for: .normal)
         
-        controller.view.addSubview(first)
-        first.constraint(edgesTo: controller.view)
+        buttonStack.addArrangedSubview(first)
+        buttonStack.addArrangedSubview(second)
         
-        controller.view.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        controller.modalPresentationStyle = .popover
-        controller.preferredContentSize = CGSize(width: 100, height: 50)
+        self.view.addSubview(buttonStack)
         
-        let popover = controller.popoverPresentationController
-        popover?.delegate = self
-        popover?.sourceView = self
-        popover?.sourceRect = self.bounds
-        popover?.permittedArrowDirections = .down
+        self.buttonStack.translatesAutoresizingMaskIntoConstraints = false
         
-        return controller
+        self.buttonStack.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.buttonStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        
+        self.view.bottomAnchor.constraint(equalTo: self.buttonStack.bottomAnchor).isActive = true
+        self.view.trailingAnchor.constraint(equalTo: self.buttonStack.trailingAnchor).isActive = true
+        
+        self.preferredContentSize = self.buttonStack.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
@@ -155,10 +168,6 @@ class PopoverBackground: UIPopoverBackgroundView {
         set {}
     }
     
-    override class var wantsDefaultContentAppearance : Bool {
-        return true
-    }
-    
     override class func contentViewInsets() -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
@@ -167,16 +176,17 @@ class PopoverBackground: UIPopoverBackgroundView {
         super.init(frame: frame)
         
         self.layer.shadowColor = UIColor.clear.cgColor
-        self.backgroundColor = .red
+        self.backgroundColor = .clear
         
-//        let rect = CGRect(origin: .zero, size: frame.size)
-//        let elipse = CGPath(ellipseIn: rect, transform: nil)
-//        let layer = CAShapeLayer()
-//        layer.path = elipse
-//        layer.lineWidth = 2
-//        layer.strokeColor = UIColor.blue.cgColor
-//
-//        self.layer.addSublayer(layer)
+        let rect = CGRect(origin: .zero, size: frame.size)
+        let elipse = CGPath(roundedRect: rect, cornerWidth: 4, cornerHeight: 4, transform: nil)
+        let layer = CAShapeLayer()
+        layer.path = elipse
+        layer.lineWidth = 1
+        layer.strokeColor = UIColor.blue.cgColor
+        layer.fillColor = UIColor.blue.cgColor
+
+        self.layer.addSublayer(layer)
     }
     
     required init?(coder aDecoder: NSCoder) {
