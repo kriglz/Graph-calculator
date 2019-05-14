@@ -23,7 +23,7 @@ class KeyPadCell: UICollectionViewCell {
     
     // MARK: - Private properties
     
-    private var alternativeSelectionPopoverViewController: UIViewController?
+    private var alternativeSelectionPopoverViewController: ButtonStackViewController?
     
     // MARK: - Initialization
     
@@ -56,6 +56,7 @@ class KeyPadCell: UICollectionViewCell {
 
             if self.alternativeSelectionPopoverViewController == nil {
                 self.alternativeSelectionPopoverViewController = ButtonStackViewController(popoverSourceView: self, sourceRect: self.bounds)
+                self.alternativeSelectionPopoverViewController?.alternativeButtons = OperationType.sin.alternativeOperations
             }
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
             
@@ -88,10 +89,64 @@ class KeyPadCell: UICollectionViewCell {
     }
 }
 
+enum OperationType: CaseIterable {
+    case sum
+    case difference
+    case multiplication
+    case division
+    
+    case sin
+    case cos
+    case tan
+    case cot
+
+    var stringRepresentation: String {
+        switch self {
+        case .sum:
+            return "+"
+        case .sin:
+            return "sin"
+        case .cos:
+            return "cos"
+        case .tan:
+            return "tan"
+        case .cot:
+            return "cot"
+        default:
+            return "-"
+        }
+    }
+    
+    var alternativeOperations: [OperationType] {
+        switch self {
+        case .sin:
+            return [self, .cos, .tan, .cot]
+        default:
+            return [self]
+        }
+    }
+}
+
 class ButtonStackViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+
+    var alternativeButtons: [OperationType] = [] {
+        didSet {
+            for button in self.alternativeButtons {
+                let label = UILabel()
+                label.text = button.stringRepresentation
+                label.textAlignment = .center
+                
+                label.translatesAutoresizingMaskIntoConstraints = false
+                
+                label.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
+                label.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
+                
+                self.stackView.addArrangedSubview(label)
+            }
+        }
+    }
     
-    let buttonStack = UIStackView()
-    
+    private let stackView = UIStackView()
     private var targetSize: CGSize = .zero
     
     convenience init(popoverSourceView: UIView, sourceRect: CGRect) {
@@ -111,41 +166,21 @@ class ButtonStackViewController: UIViewController, UIPopoverPresentationControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonStack.alignment = .fill
-        buttonStack.distribution = .fillEqually
-        buttonStack.axis = .horizontal
+        self.stackView.alignment = .fill
+        self.stackView.distribution = .fillEqually
+        self.stackView.axis = .horizontal
         
-        let first = UILabel()
-        first.text = "First"
+        self.view.addSubview(stackView)
         
-        let second = UILabel()
-        second.text = "Second"
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.stackView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         
-        first.translatesAutoresizingMaskIntoConstraints = false
-        second.translatesAutoresizingMaskIntoConstraints = false
+        self.view.bottomAnchor.constraint(equalTo: self.stackView.bottomAnchor).isActive = true
+        self.view.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor).isActive = true
         
-        first.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
-        first.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
-        
-        second.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
-        second.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
-        
-        buttonStack.addArrangedSubview(first)
-        buttonStack.addArrangedSubview(second)
-        
-        self.view.addSubview(buttonStack)
-        
-        self.buttonStack.translatesAutoresizingMaskIntoConstraints = false
-        
-    
-        
-        self.buttonStack.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.buttonStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        
-        self.view.bottomAnchor.constraint(equalTo: self.buttonStack.bottomAnchor).isActive = true
-        self.view.trailingAnchor.constraint(equalTo: self.buttonStack.trailingAnchor).isActive = true
-        
-        self.preferredContentSize = self.buttonStack.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        self.preferredContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
