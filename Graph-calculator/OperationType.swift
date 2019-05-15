@@ -1,5 +1,5 @@
 //
-//  OperationType.swift
+//  KeyPad+Types.swift
 //  Graph-calculator
 //
 //  Created by Kristina Gelzinyte on 5/14/19.
@@ -8,11 +8,30 @@
 
 import Foundation
 
+extension KeyPadViewController {
+    enum Number: Int, CaseIterable {
+        case zero = 0
+        case one
+        case two
+        case three
+        case four
+        case five
+        case six
+        case seven
+        case eight
+        case nine
+    }
+    
+    
+}
+
 enum OperationType: CaseIterable {
     case sum
     case difference
     case multiplication
     case division
+    
+    case comma
     
     case sin
     case cos

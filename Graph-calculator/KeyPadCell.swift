@@ -56,7 +56,7 @@ class KeyPadCell: UICollectionViewCell {
 
             if self.alternativeSelectionPopoverViewController == nil {
                 self.alternativeSelectionPopoverViewController = PopoverViewController(popoverSourceView: self, sourceRect: self.bounds)
-                self.alternativeSelectionPopoverViewController?.alternativeButtons = OperationType.sin.alternativeOperations
+                self.alternativeSelectionPopoverViewController?.alternativeButtons = KeyPadViewController.Operation.sin.alternativeOperations
             }
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
             

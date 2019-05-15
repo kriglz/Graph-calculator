@@ -10,7 +10,7 @@ import UIKit
 
 class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    var alternativeButtons: [OperationType] = [] {
+    var alternativeButtons: [KeyPadViewController.Operation] = [] {
         didSet {
             for button in self.alternativeButtons {
                 let label = UILabel()
