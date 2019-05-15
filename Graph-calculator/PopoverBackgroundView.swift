@@ -15,7 +15,7 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
     }
     
     override class func arrowHeight() -> CGFloat {
-        return 0
+        return 5
     }
     
     override var arrowDirection: UIPopoverArrowDirection {
@@ -32,6 +32,10 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
         set {}
     }
     
+    override class var wantsDefaultContentAppearance: Bool {
+        return false
+    }
+    
     override class func contentViewInsets() -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
@@ -42,13 +46,12 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
         self.layer.shadowColor = UIColor.clear.cgColor
         self.backgroundColor = .clear
         
-        let rect = CGRect(origin: .zero, size: frame.size)
+        let rect = CGRect(origin: CGPoint(x: 0, y: -5), size: frame.size)
         let elipse = CGPath(roundedRect: rect, cornerWidth: 4, cornerHeight: 4, transform: nil)
         let layer = CAShapeLayer()
         layer.path = elipse
-        layer.lineWidth = 1
-        layer.strokeColor = UIColor.blue.cgColor
-        layer.fillColor = UIColor.blue.cgColor
+        layer.lineWidth = 0
+        layer.fillColor = UIColor(red: 0.4, green: 0.47, blue: 0.482, alpha: 1).cgColor
         
         self.layer.addSublayer(layer)
     }

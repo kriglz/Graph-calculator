@@ -86,9 +86,9 @@ extension KeyPadViewController {
                 return "e"
             case .random:
                 return "Rand"
-                
-            default:
-                return "-"
+
+            @unknown default:
+                return ""
             }
         }
         

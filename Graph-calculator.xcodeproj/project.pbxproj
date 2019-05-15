@@ -23,6 +23,7 @@
 		89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */; };
 		89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F771F51A3CB0063FDE2 /* GraphView.swift */; };
 		89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */; };
+		89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */; };
 		89D58A5E228B59F200438AAF /* KeyPad+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5D228B59F200438AAF /* KeyPad+Types.swift */; };
 		89D58A60228B5A1A00438AAF /* PopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */; };
 		89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A61228B5A6400438AAF /* PopoverViewController.swift */; };
@@ -48,6 +49,7 @@
 		89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		89A61F771F51A3CB0063FDE2 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDrawer.swift; sourceTree = "<group>"; };
+		89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		89D58A5D228B59F200438AAF /* KeyPad+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyPad+Types.swift"; sourceTree = "<group>"; };
 		89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBackgroundView.swift; sourceTree = "<group>"; };
 		89D58A61228B5A6400438AAF /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				89581F772284D123009D8469 /* Collection View */,
 				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
 				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
+				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */,
 				89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */,
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
+				89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */,
 				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
 				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
