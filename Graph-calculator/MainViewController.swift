@@ -13,6 +13,10 @@ class MainViewController: UIViewController {
     private let keyPadViewController: KeyPadViewController
     private let displayViewController: UIViewController
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.keyPadViewController = KeyPadViewController()
         self.displayViewController = UIViewController()
