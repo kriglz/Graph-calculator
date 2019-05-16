@@ -46,12 +46,12 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
         self.layer.shadowColor = UIColor.clear.cgColor
         self.backgroundColor = .clear
         
-        let rect = CGRect(origin: CGPoint(x: 0, y: -5), size: frame.size)
-        let elipse = CGPath(roundedRect: rect, cornerWidth: 4, cornerHeight: 4, transform: nil)
         let layer = CAShapeLayer()
-        layer.path = elipse
-        layer.lineWidth = 0
-        layer.fillColor = UIColor(red: 0.4, green: 0.47, blue: 0.482, alpha: 1).cgColor
+        let rect = CGRect(origin: CGPoint(x: 0, y: -5), size: frame.size)
+        layer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
+        layer.lineWidth = 0.5
+        layer.strokeColor = UIColor.white.cgColor
+        layer.fillColor = UIColor.highlightColor.cgColor
         
         self.layer.addSublayer(layer)
     }

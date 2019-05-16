@@ -34,12 +34,8 @@ class KeyPadCell: UICollectionViewCell {
         let rect = CGRect(origin: .zero, size: frame.size)
         self.cardLayer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
         self.cardLayer.frame = rect
-        
         self.cardLayer.lineWidth = 0.5
-        self.cardLayer.shadowColor = UIColor.white.cgColor
-        self.cardLayer.shadowOffset = .zero
-        self.cardLayer.shadowRadius = 1
-        
+
         self.updateHeighlighted(false)
         
         self.layer.addSublayer(cardLayer)
@@ -57,13 +53,11 @@ class KeyPadCell: UICollectionViewCell {
 
     private func updateHeighlighted(_ heighlighted: Bool) {
         if heighlighted {
-            self.cardLayer.fillColor = UIColor(red: 0.4, green: 0.47, blue: 0.482, alpha: 1).cgColor
-            self.cardLayer.strokeColor = UIColor.clear.cgColor
-            self.cardLayer.shadowOpacity = 1
+            self.cardLayer.fillColor = UIColor.highlightColor.cgColor
+            self.cardLayer.strokeColor = UIColor.white.cgColor
         } else {
             self.cardLayer.fillColor = UIColor(red: 0.38, green: 0.388, blue: 0.388, alpha: 1).cgColor
             self.cardLayer.strokeColor = UIColor(red: 0.588, green: 0.59, blue: 0.59, alpha: 1).cgColor
-            self.cardLayer.shadowOpacity = 0
         }
     }
     

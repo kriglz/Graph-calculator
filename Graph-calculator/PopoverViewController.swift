@@ -14,6 +14,7 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
         didSet {
             for button in self.alternativeButtons {
                 let label = UILabel()
+                label.textColor = .white
                 label.text = button.stringRepresentation
                 label.textAlignment = .center
                 

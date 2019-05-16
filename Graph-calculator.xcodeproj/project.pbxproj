@@ -20,6 +20,7 @@
 		89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */; };
 		89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E341F4C23F000B3A58D /* CalculatorViewController.swift */; };
 		89998E371F4C240700B3A58D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89998E361F4C240700B3A58D /* Main.storyboard */; };
+		899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899E3F60228DF519005265E7 /* UIColor+Extension.swift */; };
 		89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */; };
 		89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F771F51A3CB0063FDE2 /* GraphView.swift */; };
 		89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */; };
@@ -46,6 +47,7 @@
 		89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		89998E341F4C23F000B3A58D /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		89998E361F4C240700B3A58D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		899E3F60228DF519005265E7 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		89A61F771F51A3CB0063FDE2 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDrawer.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
 				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
 				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
+				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */,
+				899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */,
 				89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */,
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
