@@ -45,10 +45,7 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.view.tintColor = .clear
-//        self.view.tintAdjustmentMode = .normal
-        
+
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
         self.stackView.axis = .horizontal
@@ -65,12 +62,13 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
         self.preferredContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        self.popoverPresentationController?.sourceView?.tintAdjustmentMode = .normal
-//        self.popoverPresentationController?.sourceView?.tintColor = .clear
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.popoverPresentationController?.containerView?.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
     
