@@ -17,12 +17,11 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
                 label.text = button.stringRepresentation
                 label.textAlignment = .center
                 
-                label.translatesAutoresizingMaskIntoConstraints = false
-                
-                label.heightAnchor.constraint(equalToConstant: self.targetSize.height).isActive = true
-                label.widthAnchor.constraint(equalToConstant: self.targetSize.width).isActive = true
-                
                 self.stackView.addArrangedSubview(label)
+
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.heightAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.height).isActive = true
+                label.widthAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.width).isActive = true
             }
         }
     }
@@ -47,22 +46,31 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.view.tintColor = .clear
+//        self.view.tintAdjustmentMode = .normal
+        
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
         self.stackView.axis = .horizontal
         
+        let spacing: CGFloat = 0
+        let horizontalSpacing: CGFloat = 0
+        self.stackView.spacing = spacing
+        self.stackView.isLayoutMarginsRelativeArrangement = true
+        self.stackView.layoutMargins = UIEdgeInsets(top: horizontalSpacing, left: spacing, bottom: horizontalSpacing, right: spacing)
+        
         self.view.addSubview(stackView)
-        
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.stackView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        
-        self.view.bottomAnchor.constraint(equalTo: self.stackView.bottomAnchor).isActive = true
-        self.view.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor).isActive = true
+        self.stackView.constraint(edgesTo: self.view)
         
         self.preferredContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        self.popoverPresentationController?.sourceView?.tintAdjustmentMode = .normal
+//        self.popoverPresentationController?.sourceView?.tintColor = .clear
+//    }
     
     // MARK: - UIPopoverPresentationControllerDelegate implementation
     
