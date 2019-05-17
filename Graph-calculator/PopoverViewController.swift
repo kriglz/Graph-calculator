@@ -10,12 +10,12 @@ import UIKit
 
 class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    var alternativeButtons: [KeyPadViewController.Operation] = [] {
+    var buttonTypes: [KeyType] = [] {
         didSet {
-            for button in self.alternativeButtons {
+            for type in self.buttonTypes {
                 let label = UILabel()
                 label.textColor = .white
-                label.text = button.stringRepresentation
+                label.text = type.stringRepresentation
                 label.textAlignment = .center
                 
                 self.stackView.addArrangedSubview(label)
