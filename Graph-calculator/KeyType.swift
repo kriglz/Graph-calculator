@@ -125,15 +125,6 @@ enum KeyType: Int, CaseIterable {
             return "M-"
         }
     }
-    
-    var isAlternative: Bool {
-        switch self {
-        case .division, .multiplication, .difference, .sum, .equal:
-            return true
-        default:
-            return false
-        }
-    }
         
     var relatedOperations: [KeyType]? {
         switch self {

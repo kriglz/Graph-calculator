@@ -24,7 +24,7 @@ class KeyPadCell: UICollectionViewCell {
     var operation: KeyType = .zero {
         didSet {
             self.titleLabel.text = self.operation.stringRepresentation
-            self.updateHeighlighted(false)
+            self.updateAppearance()
         }
     }
     
@@ -33,6 +33,29 @@ class KeyPadCell: UICollectionViewCell {
     private let cardLayer: CAShapeLayer
     private let titleLabel: UILabel
     private var relatedSelectionPopoverViewController: PopoverViewController?
+
+    private var isKeyHighlighted: Bool = false {
+        didSet {
+            self.updateAppearance()
+        }
+    }
+    
+    private var fillColor: CGColor {
+        if self.isKeyHighlighted {
+            return UIColor.highlightColor.cgColor
+        }
+
+        switch operation {
+        case .division, .multiplication, .difference, .sum, .equal:
+            return UIColor(red: 0.31, green: 0.424, blue: 0.443, alpha: 1).cgColor
+        default:
+            return UIColor.keyColor.cgColor
+        }
+    }
+    
+    private var strokeColor: CGColor {
+        return (self.isKeyHighlighted ? UIColor.white.cgColor : UIColor.keyBorderColor.cgColor
+)    }
 
     // MARK: - Initialization
     
@@ -50,7 +73,7 @@ class KeyPadCell: UICollectionViewCell {
         self.cardLayer.frame = rect
         self.cardLayer.lineWidth = 0.5
 
-        self.updateHeighlighted(false)
+        self.updateAppearance()
         
         self.layer.addSublayer(cardLayer)
 
@@ -72,14 +95,9 @@ class KeyPadCell: UICollectionViewCell {
     
     // MARK: - Appearance
 
-    private func updateHeighlighted(_ heighlighted: Bool) {
-        if heighlighted {
-            self.cardLayer.fillColor = UIColor.highlightColor.cgColor
-            self.cardLayer.strokeColor = UIColor.white.cgColor
-        } else {
-            self.cardLayer.fillColor = self.operation.isAlternative ? UIColor.alternativeKeyColor.cgColor : UIColor.keyColor.cgColor
-            self.cardLayer.strokeColor = UIColor.keyBorderColor.cgColor
-        }
+    private func updateAppearance() {
+        self.cardLayer.fillColor = self.fillColor
+        self.cardLayer.strokeColor = self.strokeColor
     }
     
     // MARK: - Actions
@@ -92,7 +110,7 @@ class KeyPadCell: UICollectionViewCell {
         switch gestureRecognizer.state {
         case .began:
             self.scaleDown()
-            self.updateHeighlighted(true)
+            self.isKeyHighlighted = true
 
             guard let relatedOperation = self.operation.relatedOperations else {
                 return
@@ -110,7 +128,7 @@ class KeyPadCell: UICollectionViewCell {
             print(gestureRecognizer.location(in: relatedSelectionPopoverViewController?.view))
             
             self.resetScale()
-            self.updateHeighlighted(false)
+            self.isKeyHighlighted = false
 
             if let relatedSelectionPopoverViewController = self.relatedSelectionPopoverViewController {
                 self.delegate?.keyPadCell(self, didDeselect: relatedSelectionPopoverViewController)
