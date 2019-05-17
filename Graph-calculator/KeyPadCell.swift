@@ -20,15 +20,29 @@ class KeyPadCell: UICollectionViewCell {
     static let identifier = "KeyPadCollectionViewCellIdentifier"
     
     weak var delegate: KeyPadCellDelegate?
+
+    var operation: KeyType = .zero {
+        didSet {
+            self.titleLabel.text = self.operation.stringRepresentation
+            self.updateHeighlighted(false)
+        }
+    }
     
     // MARK: - Private properties
     
-    private let cardLayer = CAShapeLayer()
-    private var alternativeSelectionPopoverViewController: PopoverViewController?
+    private let cardLayer: CAShapeLayer
+    private let titleLabel: UILabel
+    private var relatedSelectionPopoverViewController: PopoverViewController?
 
     // MARK: - Initialization
     
     override init(frame: CGRect) {
+        self.cardLayer = CAShapeLayer()
+        
+        self.titleLabel = UILabel()
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.textColor = .white
+        
         super.init(frame: frame)
         
         let rect = CGRect(origin: .zero, size: frame.size)
@@ -39,8 +53,15 @@ class KeyPadCell: UICollectionViewCell {
         self.updateHeighlighted(false)
         
         self.layer.addSublayer(cardLayer)
+
+        self.addSubview(self.titleLabel)
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.showAlternativeSelection(_:)))
+        self.titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.showRelatedSelection(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0
         self.addGestureRecognizer(longPressGestureRecognizer)
     }
@@ -56,14 +77,14 @@ class KeyPadCell: UICollectionViewCell {
             self.cardLayer.fillColor = UIColor.highlightColor.cgColor
             self.cardLayer.strokeColor = UIColor.white.cgColor
         } else {
-            self.cardLayer.fillColor = UIColor(red: 0.38, green: 0.388, blue: 0.388, alpha: 1).cgColor
-            self.cardLayer.strokeColor = UIColor(red: 0.588, green: 0.59, blue: 0.59, alpha: 1).cgColor
+            self.cardLayer.fillColor = self.operation.isAlternative ? UIColor.alternativeKeyColor.cgColor : UIColor.keyColor.cgColor
+            self.cardLayer.strokeColor = UIColor.keyBorderColor.cgColor
         }
     }
     
     // MARK: - Actions
     
-    @objc func showAlternativeSelection(_ sender: Any?) {
+    @objc func showRelatedSelection(_ sender: Any?) {
         guard let gestureRecognizer = sender as? UILongPressGestureRecognizer else {
             return
         }
@@ -73,20 +94,27 @@ class KeyPadCell: UICollectionViewCell {
             self.scaleDown()
             self.updateHeighlighted(true)
 
-            if self.alternativeSelectionPopoverViewController == nil {
-                self.alternativeSelectionPopoverViewController = PopoverViewController(popoverSourceView: self, sourceRect: CGRect(origin: .zero, size: self.frame.size))
-                self.alternativeSelectionPopoverViewController?.alternativeButtons = KeyPadViewController.Operation.sin.alternativeOperations
+            guard let relatedOperation = self.operation.relatedOperations else {
+                return
             }
-            self.delegate?.keyPadCell(self, didSelectPresentPopover: self.alternativeSelectionPopoverViewController!)
+            
+            if self.relatedSelectionPopoverViewController == nil {
+                let rect = CGRect(origin: .zero, size: self.frame.size)
+                self.relatedSelectionPopoverViewController = PopoverViewController(popoverSourceView: self, sourceRect: rect)
+                self.relatedSelectionPopoverViewController?.buttonTypes = relatedOperation
+            }
+            
+            self.delegate?.keyPadCell(self, didSelectPresentPopover: self.relatedSelectionPopoverViewController!)
+            
         case .ended, .failed, .cancelled:
-            print(gestureRecognizer.location(in: alternativeSelectionPopoverViewController?.view))
+            print(gestureRecognizer.location(in: relatedSelectionPopoverViewController?.view))
             
             self.resetScale()
             self.updateHeighlighted(false)
 
-            if let alternativeSelectionPopoverViewController = self.alternativeSelectionPopoverViewController {
-                self.delegate?.keyPadCell(self, didDeselect: alternativeSelectionPopoverViewController)
-                self.alternativeSelectionPopoverViewController = nil
+            if let relatedSelectionPopoverViewController = self.relatedSelectionPopoverViewController {
+                self.delegate?.keyPadCell(self, didDeselect: relatedSelectionPopoverViewController)
+                self.relatedSelectionPopoverViewController = nil
             }
 
         default:
