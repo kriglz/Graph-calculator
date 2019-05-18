@@ -11,10 +11,11 @@ import UIKit
 class KeyPad {
     
     static var dataSource: [KeyType] {
-        return [.allClear,      .undo,      .memoryIn,  .memoryOut,     .division,
-                .pi,            .seven,     .eight,     .nine,          .multiplication,
+        return [.allClear,      .undo,      .redo,      .memoryIn,      .memoryOut,
+                .sqrt,          .pi,        .lParenthesis,.rParenthesis,.percentage,
+                .pow,           .seven,     .eight,     .nine,          .multiplication,
                 .sin,           .four,      .five,      .six,           .difference,
-                .log,           .one,       .two,       .three,         .sum,
-                .pow,           .zero,      .signChange,.comma,         .equal]
+                .sinh,          .one,       .two,       .three,         .sum,
+                .log,           .zero,      .comma,     .signChange,    .equal]
     }
 }
