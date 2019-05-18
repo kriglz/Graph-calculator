@@ -15,7 +15,7 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
     }
     
     override class func arrowHeight() -> CGFloat {
-        return 5
+        return 0
     }
     
     override var arrowDirection: UIPopoverArrowDirection {
@@ -47,7 +47,7 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
         self.backgroundColor = .clear
         
         let layer = CAShapeLayer()
-        let rect = CGRect(origin: CGPoint(x: 0, y: -5), size: frame.size)
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: frame.size)
         layer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
         layer.lineWidth = 0.5
         layer.strokeColor = UIColor.white.cgColor
