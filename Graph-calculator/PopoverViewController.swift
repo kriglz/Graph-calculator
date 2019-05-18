@@ -10,25 +10,36 @@ import UIKit
 
 class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
+    // MARK: - Public properties
+    
     var buttonTypes: [KeyType] = [] {
         didSet {
             for type in self.buttonTypes {
-                let label = UILabel()
-                label.textColor = .white
-                label.text = type.stringRepresentation
-                label.textAlignment = .center
+                let button = Button()
+                button.title = type.stringRepresentation
+                button.isSelected = type == self.buttonTypes.first
                 
-                self.stackView.addArrangedSubview(label)
+                if type == self.buttonTypes.first {
+                    self.currentSelectedButton = button
+                }
+                
+                self.stackView.addArrangedSubview(button)
 
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.heightAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.height).isActive = true
-                label.widthAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.width).isActive = true
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.heightAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.height).isActive = true
+                button.widthAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.width).isActive = true
             }
         }
     }
     
+    // MARK: - Private properties
+
     private let stackView = UIStackView()
     private var targetSize: CGSize = .zero
+    
+    private var currentSelectedButton: Button?
+    
+    // MARK: - Initialization
     
     convenience init(popoverSourceView: UIView, sourceRect: CGRect) {
         self.init()
@@ -44,18 +55,14 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
         popover?.permittedArrowDirections = .down
     }
     
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
         self.stackView.axis = .horizontal
-        
-        let spacing: CGFloat = 0
-        let horizontalSpacing: CGFloat = 0
-        self.stackView.spacing = spacing
-        self.stackView.isLayoutMarginsRelativeArrangement = true
-        self.stackView.layoutMargins = UIEdgeInsets(top: horizontalSpacing, left: spacing, bottom: horizontalSpacing, right: spacing)
         
         self.view.addSubview(stackView)
         self.stackView.constraint(edgesTo: self.view)
@@ -68,6 +75,28 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
 
         self.popoverPresentationController?.containerView?.subviews.forEach {
             $0.removeFromSuperview()
+        }
+    }
+    
+    // MARK: - Button highlight
+    
+    func selectButton(at location: CGPoint) {
+        guard let buttons = self.stackView.arrangedSubviews as? [Button] else {
+            return
+        }
+
+        guard let selectedButton = buttons.first(where: { $0.frame.contains(location)}) else {
+            return
+        }
+        
+        if self.currentSelectedButton == selectedButton {
+            return
+        }
+
+        self.currentSelectedButton = selectedButton
+
+        buttons.forEach { button in
+            button.isSelected = button == selectedButton
         }
     }
     

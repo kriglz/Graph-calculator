@@ -124,9 +124,15 @@ class KeyPadCell: UICollectionViewCell {
             
             self.delegate?.keyPadCell(self, didSelectPresentPopover: self.relatedSelectionPopoverViewController!)
             
-        case .ended, .failed, .cancelled:
-            print(gestureRecognizer.location(in: relatedSelectionPopoverViewController?.view))
+        case .changed:
+            guard let keyView = self.relatedSelectionPopoverViewController?.view else {
+                return
+            }
             
+            let location = gestureRecognizer.location(in: keyView)
+            self.relatedSelectionPopoverViewController?.selectButton(at: location)
+
+        case .ended, .failed, .cancelled:
             self.resetScale()
             self.isKeyHighlighted = false
 
