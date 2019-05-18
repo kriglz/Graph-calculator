@@ -85,7 +85,7 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
             return
         }
 
-        guard let selectedButton = buttons.first(where: { $0.frame.contains(location)}) else {
+        guard let selectedButton = buttons.first(where: { $0.contains(location)}) else {
             return
         }
         

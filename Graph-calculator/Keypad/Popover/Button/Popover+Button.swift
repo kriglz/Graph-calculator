@@ -73,6 +73,15 @@ extension PopoverViewController {
             self.backgroundLayer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
         }
         
+        // MARK: - Contains
+        
+        func contains(_ point: CGPoint) -> Bool {
+            var rect = self.frame
+            rect.size.height *= 2
+            
+            return rect.contains(point)
+        }
+        
         // MARK: - Appearnace
         
         private func updateAppearance() {
