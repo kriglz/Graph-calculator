@@ -1,5 +1,5 @@
 //
-//  KeyPadCell.swift
+//  KeypadCell.swift
 //  Graph-calculator
 //
 //  Created by Kristina Gelzinyte on 5/9/19.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol KeyPadCellDelegate: class {
-    func keyPadCell(_ cell: KeyPadCell, didSelectPresentPopover popoverViewController: UIViewController)
-    func keyPadCell(_ cell: KeyPadCell, didDeselect popoverViewController: UIViewController)
+protocol KeypadCellDelegate: class {
+    func keyPadCell(_ cell: KeypadCell, didSelectPresentPopover popoverViewController: UIViewController)
+    func keyPadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController)
 }
 
-class KeyPadCell: UICollectionViewCell {
+class KeypadCell: UICollectionViewCell {
     
     // MARK: - Public properties
 
     static let identifier = "KeyPadCollectionViewCellIdentifier"
     
-    weak var delegate: KeyPadCellDelegate?
+    weak var delegate: KeypadCellDelegate?
 
     var operation: KeyType = .zero {
         didSet {

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89246F1B2284A46B009416E5 /* KeyPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeyPadViewController.swift */; };
+		89246F1B2284A46B009416E5 /* KeypadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadViewController.swift */; };
 		89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */; };
-		89581F6A2284A678009D8469 /* KeyPadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F692284A678009D8469 /* KeyPadCell.swift */; };
+		89581F6A2284A678009D8469 /* KeypadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F692284A678009D8469 /* KeypadCell.swift */; };
 		89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F6B2284A6D9009D8469 /* UIView+Extension.swift */; };
 		89581F702284C547009D8469 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F6F2284C547009D8469 /* MainViewController.swift */; };
 		89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */; };
@@ -34,9 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		89246F1A2284A46B009416E5 /* KeyPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadViewController.swift; sourceTree = "<group>"; };
+		89246F1A2284A46B009416E5 /* KeypadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewController.swift; sourceTree = "<group>"; };
 		89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		89581F692284A678009D8469 /* KeyPadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadCell.swift; sourceTree = "<group>"; };
+		89581F692284A678009D8469 /* KeypadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadCell.swift; sourceTree = "<group>"; };
 		89581F6B2284A6D9009D8469 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		89581F6F2284C547009D8469 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSpacingCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		896162D12290136D00C6B477 /* Keypad */ = {
 			isa = PBXGroup;
 			children = (
-				89246F1A2284A46B009416E5 /* KeyPadViewController.swift */,
+				89246F1A2284A46B009416E5 /* KeypadViewController.swift */,
 				896162DA229015FF00C6B477 /* Key Types */,
 				896162D82290156400C6B477 /* Data Source */,
 				896162D72290153C00C6B477 /* Key Cell */,
@@ -136,7 +136,7 @@
 		896162D72290153C00C6B477 /* Key Cell */ = {
 			isa = PBXGroup;
 			children = (
-				89581F692284A678009D8469 /* KeyPadCell.swift */,
+				89581F692284A678009D8469 /* KeypadCell.swift */,
 			);
 			path = "Key Cell";
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
 				89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */,
 				899E3F63228F1D20005265E7 /* KeyPad.swift in Sources */,
-				89246F1B2284A46B009416E5 /* KeyPadViewController.swift in Sources */,
+				89246F1B2284A46B009416E5 /* KeypadViewController.swift in Sources */,
 				899E3F67228FF4D1005265E7 /* Popover+Button.swift in Sources */,
 				89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */,
 				89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */,
@@ -307,7 +307,7 @@
 				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
 				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
-				89581F6A2284A678009D8469 /* KeyPadCell.swift in Sources */,
+				89581F6A2284A678009D8469 /* KeypadCell.swift in Sources */,
 				89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */,
 				89D58A60228B5A1A00438AAF /* PopoverBackgroundView.swift in Sources */,
 				89D58A5E228B59F200438AAF /* KeyType.swift in Sources */,

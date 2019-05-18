@@ -1,5 +1,5 @@
 //
-//  KeyPad.swift
+//  Keypad.swift
 //  Graph-calculator
 //
 //  Created by Kristina Gelzinyte on 5/17/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KeyPad {
+class Keypad {
     
     static var dataSource: [KeyType] {
         return [.allClear,      .undo,      .redo,      .memoryIn,      .memoryOut,

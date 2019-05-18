@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
 
-    private let keyPadViewController: KeyPadViewController
+    private let keypadViewController: KeypadViewController
     private let displayViewController: UIViewController
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.keyPadViewController = KeyPadViewController()
+        self.keypadViewController = KeypadViewController()
         self.displayViewController = UIViewController()
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)        
@@ -33,13 +33,13 @@ class MainViewController: UIViewController {
 
         self.view.backgroundColor = UIColor(red: 0.18, green: 0.184, blue: 0.188, alpha: 1)
         
-        self.addChild(self.keyPadViewController)
+        self.addChild(self.keypadViewController)
         self.addChild(self.displayViewController)
         
-        self.view.addSubview(self.keyPadViewController.view)
+        self.view.addSubview(self.keypadViewController.view)
         self.view.addSubview(self.displayViewController.view)
         
-        self.keyPadViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.keypadViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.displayViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
        self.makeConstraints()
@@ -54,16 +54,16 @@ class MainViewController: UIViewController {
         } else {
             self.displayViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         }
-        self.displayViewController.view.bottomAnchor.constraint(equalTo: self.keyPadViewController.view.topAnchor).with(priority: .required).isActive = true
+        self.displayViewController.view.bottomAnchor.constraint(equalTo: self.keypadViewController.view.topAnchor).with(priority: .required).isActive = true
         
-        self.keyPadViewController.view.leadingAnchor.constraint(equalTo: self.displayViewController.view.leadingAnchor).isActive = true
-        self.keyPadViewController.view.trailingAnchor.constraint(equalTo: self.displayViewController.view.trailingAnchor).isActive = true
+        self.keypadViewController.view.leadingAnchor.constraint(equalTo: self.displayViewController.view.leadingAnchor).isActive = true
+        self.keypadViewController.view.trailingAnchor.constraint(equalTo: self.displayViewController.view.trailingAnchor).isActive = true
         
-        self.keyPadViewController.view.topAnchor.constraint(equalTo: self.displayViewController.view.bottomAnchor).isActive = true
+        self.keypadViewController.view.topAnchor.constraint(equalTo: self.displayViewController.view.bottomAnchor).isActive = true
         if #available(iOS 11.0, *) {
-            self.keyPadViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            self.keypadViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
-            self.keyPadViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            self.keypadViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         }
     }
     
