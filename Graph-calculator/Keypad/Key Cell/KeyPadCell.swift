@@ -24,7 +24,7 @@ class KeyPadCell: UICollectionViewCell {
     var operation: KeyType = .zero {
         didSet {
             self.titleLabel.text = self.operation.stringRepresentation
-            self.updateAppearance()
+            self.setupAppearance()
         }
     }
     
@@ -40,11 +40,24 @@ class KeyPadCell: UICollectionViewCell {
         }
     }
     
+    private var hasDefaultBackground: Bool {
+        switch self.operation {
+        case .allClear, .undo, .redo, .memoryIn, .memoryOut:
+            return false
+        default:
+            return true
+        }
+    }
+    
     private var fillColor: CGColor {
         if self.isKeyHighlighted {
             return UIColor.highlightColor.cgColor
         }
 
+        guard self.hasDefaultBackground else {
+            return UIColor.clear.cgColor
+        }
+        
         switch operation {
         case .division, .multiplication, .difference, .sum, .equal, .percentage:
             return UIColor(red: 0.31, green: 0.424, blue: 0.443, alpha: 1).cgColor
@@ -54,8 +67,16 @@ class KeyPadCell: UICollectionViewCell {
     }
     
     private var strokeColor: CGColor {
-        return (self.isKeyHighlighted ? UIColor.white.cgColor : UIColor.keyBorderColor.cgColor
-)    }
+        guard self.hasDefaultBackground else {
+            return UIColor.clear.cgColor
+        }
+
+        return (self.isKeyHighlighted ? UIColor.white.cgColor : UIColor.keyBorderColor.cgColor)
+    }
+    
+    private var textColor: UIColor {
+        return self.isKeyHighlighted || self.hasDefaultBackground ? .white : UIColor(red: 0.444, green: 0.584, blue: 0.6, alpha: 1)
+    }
 
     // MARK: - Initialization
     
@@ -64,16 +85,12 @@ class KeyPadCell: UICollectionViewCell {
         
         self.titleLabel = UILabel()
         self.titleLabel.textAlignment = .center
-        self.titleLabel.textColor = .white
         
         super.init(frame: frame)
         
         let rect = CGRect(origin: .zero, size: frame.size)
         self.cardLayer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
         self.cardLayer.frame = rect
-        self.cardLayer.lineWidth = 0.5
-
-        self.updateAppearance()
         
         self.layer.addSublayer(cardLayer)
 
@@ -95,9 +112,28 @@ class KeyPadCell: UICollectionViewCell {
     
     // MARK: - Appearance
 
+    private func setupAppearance() {
+        self.updateAppearance()
+
+        if self.hasDefaultBackground {
+            self.cardLayer.strokeColor = self.strokeColor
+            self.cardLayer.lineWidth = 0.5
+            
+            return
+        }
+        
+        self.cardLayer.lineWidth = 0
+        
+        self.titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .medium)
+        
+        self.titleLabel.shadowOffset = .zero
+        self.titleLabel.shadowColor = UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha: 0.5)
+    }
+    
     private func updateAppearance() {
         self.cardLayer.fillColor = self.fillColor
         self.cardLayer.strokeColor = self.strokeColor
+        self.titleLabel.textColor = self.textColor
     }
     
     // MARK: - Actions
