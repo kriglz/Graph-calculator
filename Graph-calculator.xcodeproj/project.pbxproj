@@ -73,19 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		89581F6D2284C4B2009D8469 /* Helpers */ = {
+		89581F772284D123009D8469 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
-				89581F772284D123009D8469 /* Collection View */,
-				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
-				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
-				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
-				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
+				89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */,
+				89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */,
 			);
-			name = Helpers;
+			name = "Collection View";
+			path = ..;
 			sourceTree = "<group>";
 		};
-		89581F6E2284C4BB009D8469 /* Key pad */ = {
+		896162D12290136D00C6B477 /* Keypad */ = {
 			isa = PBXGroup;
 			children = (
 				89246F1A2284A46B009416E5 /* KeyPadViewController.swift */,
@@ -94,16 +92,45 @@
 				899E3F64228FF469005265E7 /* Data Source */,
 				89D328ED228BDF8900867C51 /* Key Types */,
 			);
-			name = "Key pad";
+			path = Keypad;
 			sourceTree = "<group>";
 		};
-		89581F772284D123009D8469 /* Collection View */ = {
+		896162D2229013B300C6B477 /* Background View */ = {
 			isa = PBXGroup;
 			children = (
-				89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */,
-				89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */,
+				89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */,
 			);
-			name = "Collection View";
+			path = "Background View";
+			sourceTree = "<group>";
+		};
+		896162D3229013CA00C6B477 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				899E3F66228FF4D1005265E7 /* Popover+Button.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		896162D4229013E300C6B477 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				89581F772284D123009D8469 /* Collection View */,
+				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
+				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
+				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
+				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		896162D5229013F800C6B477 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				89998E361F4C240700B3A58D /* Main.storyboard */,
+				89998E241F4C238700B3A58D /* Assets.xcassets */,
+				89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		89998E111F4C238700B3A58D = {
@@ -127,28 +154,18 @@
 			children = (
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
-				89581F6E2284C4BB009D8469 /* Key pad */,
+				896162D12290136D00C6B477 /* Keypad */,
 				89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */,
 				89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */,
 				89A61F771F51A3CB0063FDE2 /* GraphView.swift */,
 				89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */,
 				89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */,
-				89581F6D2284C4B2009D8469 /* Helpers */,
-				89998E361F4C240700B3A58D /* Main.storyboard */,
-				89998E2F1F4C239200B3A58D /* Supporting Files */,
+				896162D4229013E300C6B477 /* Helpers */,
+				896162D5229013F800C6B477 /* Supporting Files */,
+				89998E291F4C238700B3A58D /* Info.plist */,
+				89998E1D1F4C238700B3A58D /* AppDelegate.swift */,
 			);
 			path = "Graph-calculator";
-			sourceTree = "<group>";
-		};
-		89998E2F1F4C239200B3A58D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				89998E1D1F4C238700B3A58D /* AppDelegate.swift */,
-				89998E241F4C238700B3A58D /* Assets.xcassets */,
-				89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */,
-				89998E291F4C238700B3A58D /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		899E3F64228FF469005265E7 /* Data Source */ = {
@@ -157,6 +174,7 @@
 				899E3F62228F1D20005265E7 /* KeyPad.swift */,
 			);
 			name = "Data Source";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		899E3F65228FF492005265E7 /* Key cell */ = {
@@ -165,22 +183,7 @@
 				89581F692284A678009D8469 /* KeyPadCell.swift */,
 			);
 			name = "Key cell";
-			sourceTree = "<group>";
-		};
-		899E3F68228FF4F5005265E7 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-				899E3F66228FF4D1005265E7 /* Popover+Button.swift */,
-			);
-			name = Button;
-			sourceTree = "<group>";
-		};
-		899E3F69228FF641005265E7 /* Background View */ = {
-			isa = PBXGroup;
-			children = (
-				89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */,
-			);
-			name = "Background View";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		89D328ED228BDF8900867C51 /* Key Types */ = {
@@ -189,16 +192,18 @@
 				89D58A5D228B59F200438AAF /* KeyType.swift */,
 			);
 			name = "Key Types";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		89D58A63228B5A8400438AAF /* Popover */ = {
 			isa = PBXGroup;
 			children = (
 				89D58A61228B5A6400438AAF /* PopoverViewController.swift */,
-				899E3F69228FF641005265E7 /* Background View */,
-				899E3F68228FF4F5005265E7 /* Button */,
+				896162D3229013CA00C6B477 /* Button */,
+				896162D2229013B300C6B477 /* Background View */,
 			);
 			name = Popover;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
