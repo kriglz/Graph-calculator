@@ -36,14 +36,24 @@ enum KeyType: Int, CaseIterable {
     case signChange
     case percentage
     
+    case lParenthesis
+    case rParenthesis
+    
     case log
     case ln
+    
     case pow
+    case sqrt
     
     case sin
     case cos
     case tan
     case cot
+    
+    case sinh
+    case cosh
+    case tanh
+    case coth
     
     case pi
     case e
@@ -96,12 +106,20 @@ enum KeyType: Int, CaseIterable {
         case .percentage:
             return "％"
             
+        case .lParenthesis:
+            return "("
+        case .rParenthesis:
+            return ")"
+            
         case .log:
             return "log"
         case .ln:
             return "ln"
+            
         case .pow:
             return "xª"
+        case .sqrt:
+            return "√"
             
         case .sin:
             return "sin"
@@ -111,6 +129,15 @@ enum KeyType: Int, CaseIterable {
             return "tan"
         case .cot:
             return "cot"
+            
+        case .sinh:
+            return "sinh"
+        case .cosh:
+            return "cosh"
+        case .tanh:
+            return "tanh"
+        case .coth:
+            return "coth"
             
         case .pi:
             return "π"
@@ -128,10 +155,10 @@ enum KeyType: Int, CaseIterable {
         
     var relatedOperations: [KeyType]? {
         switch self {
-        case .undo:
-            return [self, .redo]
         case .sin:
             return [self, .cos, .tan, .cot]
+        case .sinh:
+            return [self, .coth, .tanh, .coth]
         case .log:
             return [self, .ln]
         case .pi:

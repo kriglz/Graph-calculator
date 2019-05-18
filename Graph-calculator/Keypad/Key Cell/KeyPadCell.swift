@@ -46,7 +46,7 @@ class KeyPadCell: UICollectionViewCell {
         }
 
         switch operation {
-        case .division, .multiplication, .difference, .sum, .equal:
+        case .division, .multiplication, .difference, .sum, .equal, .percentage:
             return UIColor(red: 0.31, green: 0.424, blue: 0.443, alpha: 1).cgColor
         default:
             return UIColor.keyColor.cgColor
