@@ -86,4 +86,8 @@ extension KeypadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func keypadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController) {
         popoverViewController.dismiss(animated: false, completion: nil)
     }
+    
+    func keypadCell(_ cell: KeypadCell, didSelect keyOperation: KeyType) {
+        print("Selected operation - \(keyOperation)")
+    }
 }

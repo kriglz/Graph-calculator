@@ -13,9 +13,9 @@ extension PopoverViewController {
         
         // MARK: - Public properties
         
-        var title: String = "" {
+        var operation: KeyType = .zero {
             didSet {
-                self.label.text = self.title
+                self.label.text = self.operation.stringRepresentation
             }
         }
         

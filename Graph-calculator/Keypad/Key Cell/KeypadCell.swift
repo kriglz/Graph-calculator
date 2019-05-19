@@ -11,6 +11,7 @@ import UIKit
 protocol KeypadCellDelegate: class {
     func keypadCell(_ cell: KeypadCell, didSelectPresentPopover popoverViewController: UIViewController)
     func keypadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController)
+    func keypadCell(_ cell: KeypadCell, didSelect keyOperation: KeyType)
 }
 
 class KeypadCell: UICollectionViewCell {
@@ -171,6 +172,12 @@ class KeypadCell: UICollectionViewCell {
         case .ended, .failed, .cancelled:
             self.resetScale()
             self.isKeyHighlighted = false
+
+            if let currentOperation = self.relatedSelectionPopoverViewController?.currentOperation {
+                self.delegate?.keypadCell(self, didSelect: currentOperation)
+            } else {
+                self.delegate?.keypadCell(self, didSelect: self.operation)
+            }
 
             if let relatedSelectionPopoverViewController = self.relatedSelectionPopoverViewController {
                 self.delegate?.keypadCell(self, didDeselect: relatedSelectionPopoverViewController)

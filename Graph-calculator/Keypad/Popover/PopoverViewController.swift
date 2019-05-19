@@ -16,7 +16,7 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
         didSet {
             for type in self.buttonTypes {
                 let button = Button()
-                button.title = type.stringRepresentation
+                button.operation = type
                 button.isSelected = type == self.buttonTypes.first
                 
                 if type == self.buttonTypes.first {
@@ -30,6 +30,10 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
                 button.widthAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.width).isActive = true
             }
         }
+    }
+    
+    var currentOperation: KeyType? {
+        return self.currentSelectedButton?.operation
     }
     
     // MARK: - Private properties
