@@ -154,9 +154,7 @@ class KeypadCell: UICollectionViewCell {
             }
             
             if self.relatedSelectionPopoverViewController == nil {
-                let rect = CGRect(origin: .zero, size: self.frame.size)
-                self.relatedSelectionPopoverViewController = PopoverViewController(popoverSourceView: self, sourceRect: rect)
-                self.relatedSelectionPopoverViewController?.buttonTypes = relatedOperation
+                self.relatedSelectionPopoverViewController = PopoverViewController(sourceView: self, buttonTypes: relatedOperation)
             }
             
             self.delegate?.keypadCell(self, didSelectPresentPopover: self.relatedSelectionPopoverViewController!)

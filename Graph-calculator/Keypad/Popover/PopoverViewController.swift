@@ -18,13 +18,16 @@ class PopoverViewController: UIViewController {
     
     // MARK: - Private properties
 
+    private let popoverPresentationDelegate: PopoverTransitioningDelegate
     private let stackView: UIStackView
     private var sourceRect: CGRect
     private var currentSelectedButton: Button?
-    
+
     // MARK: - Initialization
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.popoverPresentationDelegate = PopoverTransitioningDelegate()
+
         self.stackView = UIStackView()
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
@@ -39,6 +42,10 @@ class PopoverViewController: UIViewController {
         self.init()
         
         self.sourceRect = sourceView.frame
+        self.popoverPresentationDelegate.sourceRect = sourceView.frame
+        
+        self.transitioningDelegate = self.popoverPresentationDelegate
+        self.modalPresentationStyle = .custom
         
         self.setupView(for: buttonTypes)
         

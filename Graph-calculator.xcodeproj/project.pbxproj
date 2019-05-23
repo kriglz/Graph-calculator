@@ -31,6 +31,7 @@
 		89D58A60228B5A1A00438AAF /* PopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */; };
 		89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A61228B5A6400438AAF /* PopoverViewController.swift */; };
 		89E878EE1FCFE67000946F93 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */; };
+		89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		89D58A5F228B5A1A00438AAF /* PopoverBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBackgroundView.swift; sourceTree = "<group>"; };
 		89D58A61228B5A6400438AAF /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				89D58A61228B5A6400438AAF /* PopoverViewController.swift */,
+				89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */,
 				896162D3229013CA00C6B477 /* Button */,
 				896162D2229013B300C6B477 /* Background View */,
 			);
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */,
+				89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */,
 				899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */,
 				89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */,
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,

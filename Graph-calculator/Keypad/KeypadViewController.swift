@@ -80,7 +80,7 @@ extension KeypadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     // MARK: - KeypadCellDelegate
     
     func keypadCell(_ cell: KeypadCell, didSelectPresentPopover popoverViewController: UIViewController) {
-        self.present(popoverViewController, animated: false)
+        self.present(popoverViewController, animated: false)        
     }
 
     func keypadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController) {
