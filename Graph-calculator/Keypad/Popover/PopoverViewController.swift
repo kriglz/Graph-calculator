@@ -42,7 +42,6 @@ class PopoverViewController: UIViewController {
         self.init()
         
         self.sourceRect = sourceView.frame
-        self.popoverPresentationDelegate.sourceRect = sourceView.frame
         
         self.transitioningDelegate = self.popoverPresentationDelegate
         self.modalPresentationStyle = .custom
@@ -52,7 +51,11 @@ class PopoverViewController: UIViewController {
         self.view.addSubview(stackView)
         self.stackView.constraint(edgesTo: self.view)
 
-        self.preferredContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        self.preferredContentSize = contentSize
+        
+        self.popoverPresentationDelegate.sourceRect = sourceView.frame
+        self.popoverPresentationDelegate.contentSize = contentSize
     }
     
     required init?(coder aDecoder: NSCoder) {
