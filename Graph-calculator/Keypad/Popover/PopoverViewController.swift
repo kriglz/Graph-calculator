@@ -8,29 +8,9 @@
 
 import UIKit
 
-class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class PopoverViewController: UIViewController {
     
     // MARK: - Public properties
-    
-    var buttonTypes: [KeyType] = [] {
-        didSet {
-            for type in self.buttonTypes {
-                let button = Button()
-                button.operation = type
-                button.isSelected = type == self.buttonTypes.first
-                
-                if type == self.buttonTypes.first {
-                    self.currentSelectedButton = button
-                }
-                
-                self.stackView.addArrangedSubview(button)
-
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.height).isActive = true
-                button.widthAnchor.constraint(greaterThanOrEqualToConstant: self.targetSize.width).isActive = true
-            }
-        }
-    }
     
     var currentOperation: KeyType? {
         return self.currentSelectedButton?.operation
@@ -38,47 +18,55 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
     
     // MARK: - Private properties
 
-    private let stackView = UIStackView()
-    private var targetSize: CGSize = .zero
-    
+    private let stackView: UIStackView
+    private var sourceRect: CGRect
     private var currentSelectedButton: Button?
     
     // MARK: - Initialization
     
-    convenience init(popoverSourceView: UIView, sourceRect: CGRect) {
-        self.init()
-        
-        self.targetSize = sourceRect.size
-        
-        self.modalPresentationStyle = .popover
-        
-        let popover = self.popoverPresentationController
-        popover?.delegate = self
-        popover?.sourceView = popoverSourceView
-        popover?.sourceRect = sourceRect
-        popover?.permittedArrowDirections = .down
-    }
-    
-    // MARK: - Life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.stackView = UIStackView()
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
         self.stackView.axis = .horizontal
         
+        self.sourceRect = .zero
+        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    convenience init(sourceView: UIView, buttonTypes: [KeyType]) {
+        self.init()
+        
+        self.sourceRect = sourceView.frame
+        
+        self.setupView(for: buttonTypes)
+        
         self.view.addSubview(stackView)
         self.stackView.constraint(edgesTo: self.view)
-        
+
         self.preferredContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.popoverPresentationController?.containerView?.subviews.forEach {
-            $0.removeFromSuperview()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView(for buttonTypes: [KeyType]) {
+        for type in buttonTypes {
+            let button = Button()
+            button.operation = type
+            button.isSelected = type == buttonTypes.first
+            
+            if type == buttonTypes.first {
+                self.currentSelectedButton = button
+            }
+            
+            self.stackView.addArrangedSubview(button)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.heightAnchor.constraint(greaterThanOrEqualToConstant: self.sourceRect.height).isActive = true
+            button.widthAnchor.constraint(greaterThanOrEqualToConstant: self.sourceRect.width).isActive = true
         }
     }
     
@@ -102,15 +90,5 @@ class PopoverViewController: UIViewController, UIPopoverPresentationControllerDe
         buttons.forEach { button in
             button.isSelected = button == selectedButton
         }
-    }
-    
-    // MARK: - UIPopoverPresentationControllerDelegate implementation
-    
-    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        popoverPresentationController.popoverBackgroundViewClass = PopoverBackgroundView.self
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
     }
 }

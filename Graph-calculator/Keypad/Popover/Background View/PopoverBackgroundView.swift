@@ -53,7 +53,7 @@ class PopoverBackgroundView: UIPopoverBackgroundView {
         layer.strokeColor = UIColor.white.cgColor
         layer.fillColor = UIColor.highlightColor.cgColor
         
-        self.layer.addSublayer(layer)
+        self.layer.addSublayer(layer)        
     }
     
     required init?(coder aDecoder: NSCoder) {
