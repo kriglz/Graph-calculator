@@ -9,7 +9,7 @@
 import UIKit
 
 protocol KeypadCellDelegate: class {
-    func keypadCell(_ cell: KeypadCell, didSelectPresentPopover popoverViewController: UIViewController)
+    func keypadCell(_ cell: KeypadCell, didSelectPresent popoverViewController: UIViewController)
     func keypadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController)
     func keypadCell(_ cell: KeypadCell, didSelect keyOperation: KeyType)
 }
@@ -157,7 +157,7 @@ class KeypadCell: UICollectionViewCell {
                 self.relatedSelectionPopoverViewController = PopoverViewController(sourceView: self, buttonTypes: relatedOperation)
             }
             
-            self.delegate?.keypadCell(self, didSelectPresentPopover: self.relatedSelectionPopoverViewController!)
+            self.delegate?.keypadCell(self, didSelectPresent: self.relatedSelectionPopoverViewController!)
             
         case .changed:
             guard let keyView = self.relatedSelectionPopoverViewController?.view else {

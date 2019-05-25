@@ -8,14 +8,22 @@
 
 import UIKit
 
-class KeypadViewController: UIViewController, KeypadCellDelegate {
+protocol KeypadViewDelegate: class {
+    func keypadView(_ view: KeypadView, didSelectPresent popoverViewController: UIViewController)
+    func keypadView(_ view: KeypadView, didDeselect popoverViewController: UIViewController)
+    func keypadView(_ view: KeypadView, didSelect keyOperation: KeyType)
+}
+
+class KeypadView: UIView, KeypadCellDelegate {
     
-    private var gridCollectionView: UICollectionView {
+    weak var delegate: KeypadViewDelegate?
+    
+    private lazy var gridCollectionView: UICollectionView = {
         let layout = FixedSpacingCollectionViewFlowLayout()
         layout.minimumLineSpacing = 3
         layout.minimumInteritemSpacing = 3
         
-        let collectionView = IntrinsicContentSizeCollectionView(frame: view.frame, collectionViewLayout: layout)
+        let collectionView = IntrinsicContentSizeCollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView.register(KeypadCell.self, forCellWithReuseIdentifier: KeypadCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -27,22 +35,29 @@ class KeypadViewController: UIViewController, KeypadCellDelegate {
         collectionView.backgroundColor = .clear
         
         return collectionView
-    }
+    }()
 
     // MARK: - Life cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        self.view.backgroundColor = .clear
+        self.backgroundColor = .clear
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        let collectionView = self.gridCollectionView
-        self.view.addSubview(collectionView)
-        collectionView.constraint(edgesTo: self.view)
+        self.addSubview(self.gridCollectionView)
+        self.gridCollectionView.constraint(edgesTo: self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension KeypadViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegate implementation
     
@@ -68,26 +83,26 @@ extension KeypadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     // MARK: - UICollectionViewDelegateFlowLayout implementation
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = view.frame.size.width * 0.1796
+        let size = self.frame.size.width * 0.1796
         return CGSize(width: size, height: size)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let constant = view.frame.size.width * 0.035
+        let constant = self.frame.size.width * 0.035
         return UIEdgeInsets(top: 0, left: constant, bottom: constant, right: constant)
     }
     
     // MARK: - KeypadCellDelegate
     
-    func keypadCell(_ cell: KeypadCell, didSelectPresentPopover popoverViewController: UIViewController) {
-        self.present(popoverViewController, animated: false)        
+    func keypadCell(_ cell: KeypadCell, didSelectPresent popoverViewController: UIViewController) {
+        self.delegate?.keypadView(self, didSelectPresent: popoverViewController)
     }
 
     func keypadCell(_ cell: KeypadCell, didDeselect popoverViewController: UIViewController) {
-        popoverViewController.dismiss(animated: false, completion: nil)
+        self.delegate?.keypadView(self, didDeselect: popoverViewController)
     }
     
     func keypadCell(_ cell: KeypadCell, didSelect keyOperation: KeyType) {
-        print("Selected operation - \(keyOperation)")
+        self.delegate?.keypadView(self, didSelect: keyOperation)
     }
 }
