@@ -76,6 +76,7 @@ extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         cell.delegate = self
         cell.operation = Keypad.dataSource[indexPath.item]
+        cell.offset = self.frame.origin
         
         return cell
     }

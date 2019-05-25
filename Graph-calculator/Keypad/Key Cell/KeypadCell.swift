@@ -29,6 +29,8 @@ class KeypadCell: UICollectionViewCell {
         }
     }
     
+    var offset: CGPoint = .zero
+    
     // MARK: - Private properties
     
     private let cardLayer: CAShapeLayer
@@ -154,7 +156,10 @@ class KeypadCell: UICollectionViewCell {
             }
             
             if self.relatedSelectionPopoverViewController == nil {
-                self.relatedSelectionPopoverViewController = PopoverViewController(sourceView: self, buttonTypes: relatedOperation)
+                var sourceRect = self.frame
+                sourceRect.origin.x += self.offset.x
+                sourceRect.origin.y += self.offset.y
+                self.relatedSelectionPopoverViewController = PopoverViewController(sourceRect: sourceRect, buttonTypes: relatedOperation)
             }
             
             self.delegate?.keypadCell(self, didSelectPresent: self.relatedSelectionPopoverViewController!)

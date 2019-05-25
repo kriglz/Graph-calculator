@@ -38,10 +38,10 @@ class PopoverViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    convenience init(sourceView: UIView, buttonTypes: [KeyType]) {
+    convenience init(sourceRect: CGRect, buttonTypes: [KeyType]) {
         self.init()
         
-        self.sourceRect = sourceView.frame
+        self.sourceRect = sourceRect
         
         self.transitioningDelegate = self.popoverPresentationDelegate
         self.modalPresentationStyle = .custom
@@ -54,7 +54,7 @@ class PopoverViewController: UIViewController {
         let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         self.preferredContentSize = contentSize
         
-        self.popoverPresentationDelegate.sourceRect = sourceView.frame
+        self.popoverPresentationDelegate.sourceRect = sourceRect
         self.popoverPresentationDelegate.contentSize = contentSize
     }
     
