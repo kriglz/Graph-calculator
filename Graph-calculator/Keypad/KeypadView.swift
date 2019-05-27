@@ -19,9 +19,9 @@ class KeypadView: UIView, KeypadCellDelegate {
     weak var delegate: KeypadViewDelegate?
     
     private lazy var gridCollectionView: UICollectionView = {
-        let layout = FixedSpacingCollectionViewFlowLayout()
-        layout.minimumLineSpacing = 3
-        layout.minimumInteritemSpacing = 3
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         
         let collectionView = IntrinsicContentSizeCollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView.register(KeypadCell.self, forCellWithReuseIdentifier: KeypadCell.identifier)
@@ -84,15 +84,10 @@ extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     // MARK: - UICollectionViewDelegateFlowLayout implementation
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = self.frame.size.width * 0.1796
+        let size = self.frame.size.width * 0.2
         return CGSize(width: size, height: size)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let constant = self.frame.size.width * 0.035
-        return UIEdgeInsets(top: 0, left: constant, bottom: constant, right: constant)
-    }
-    
+
     // MARK: - KeypadCellDelegate
     
     func keypadCell(_ cell: KeypadCell, didSelectPresent popoverViewController: UIViewController) {

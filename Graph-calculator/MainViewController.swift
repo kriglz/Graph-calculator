@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController, KeypadViewDelegate {
 
     private let keypadView: KeypadView
-    private let displayView: UIView
+    private let displayView: DisplayView
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent 
@@ -19,7 +19,7 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.keypadView = KeypadView()
-        self.displayView = UIView()
+        self.displayView = DisplayView()
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -45,8 +45,8 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     }
 
     private func makeConstraints() {        
-        self.displayView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        self.displayView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.displayView.leadingAnchor.constraint(equalTo: self.keypadView.leadingAnchor).isActive = true
+        self.displayView.trailingAnchor.constraint(equalTo: self.keypadView.trailingAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
             self.displayView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -55,8 +55,8 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         }
         self.displayView.bottomAnchor.constraint(equalTo: self.keypadView.topAnchor).with(priority: .required).isActive = true
         
-        self.keypadView.leadingAnchor.constraint(equalTo: self.displayView.leadingAnchor).isActive = true
-        self.keypadView.trailingAnchor.constraint(equalTo: self.displayView.trailingAnchor).isActive = true
+        self.keypadView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.97).isActive = true
+        self.keypadView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
         self.keypadView.topAnchor.constraint(equalTo: self.displayView.bottomAnchor).isActive = true
         if #available(iOS 11.0, *) {
