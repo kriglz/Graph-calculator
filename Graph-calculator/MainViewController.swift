@@ -44,14 +44,16 @@ class MainViewController: UIViewController, KeypadViewDelegate {
        self.makeConstraints()
     }
 
-    private func makeConstraints() {        
+    private func makeConstraints() {
+        self.keypadView.setContentHuggingPriority(.required, for: .vertical)
+        
         self.displayView.leadingAnchor.constraint(equalTo: self.keypadView.leadingAnchor).isActive = true
         self.displayView.trailingAnchor.constraint(equalTo: self.keypadView.trailingAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
-            self.displayView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            self.displayView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         } else {
-            self.displayView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+            self.displayView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
         }
         self.displayView.bottomAnchor.constraint(equalTo: self.keypadView.topAnchor).with(priority: .required).isActive = true
         
@@ -60,9 +62,9 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         
         self.keypadView.topAnchor.constraint(equalTo: self.displayView.bottomAnchor).isActive = true
         if #available(iOS 11.0, *) {
-            self.keypadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            self.keypadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         } else {
-            self.keypadView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            self.keypadView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
         }
     }
     

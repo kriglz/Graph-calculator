@@ -28,6 +28,16 @@ class DisplayView: UIView {
         
         super.init(frame: frame)
         
+        let topLayoutGuide = UILayoutGuide()
+        let centerTopLayoutGuide = UILayoutGuide()
+        let centerBottomLayoutGuide = UILayoutGuide()
+        let bottomLayoutGuide = UILayoutGuide()
+        
+        self.addLayoutGuide(topLayoutGuide)
+        self.addLayoutGuide(centerTopLayoutGuide)
+        self.addLayoutGuide(centerBottomLayoutGuide)
+        self.addLayoutGuide(bottomLayoutGuide)
+        
         self.addSubview(self.entryLabel)
         self.addSubview(self.descriptionLabel)
         self.addSubview(self.memoryLabel)
@@ -36,20 +46,43 @@ class DisplayView: UIView {
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.memoryLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        self.entryLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 33).isActive = true
-        self.entryLabel.bottomAnchor.constraint(equalTo: self.descriptionLabel.topAnchor, constant: -18).with(priority: .defaultHigh).isActive = true
-        self.entryLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.entryLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        centerBottomLayoutGuide.heightAnchor.constraint(greaterThanOrEqualToConstant: 1).isActive = true
+        centerTopLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor).isActive = true
+        bottomLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 1.5).isActive = true
+        topLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 0.1).isActive = true
         
-        self.descriptionLabel.topAnchor.constraint(equalTo: self.entryLabel.bottomAnchor, constant: 18).isActive = true
-        self.descriptionLabel.bottomAnchor.constraint(equalTo: self.memoryLabel.topAnchor, constant: -18).with(priority: .defaultHigh).isActive = true
-        self.descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    
-        self.memoryLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 18).isActive = true
-        self.memoryLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.memoryLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.memoryLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        topLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
+        topLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+        
+        self.entryLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
+        self.entryLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
+        
+        self.descriptionLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
+        self.descriptionLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
+        
+        self.memoryLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
+        self.memoryLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
+        
+        topLayoutGuide.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        topLayoutGuide.bottomAnchor.constraint(equalTo: self.entryLabel.topAnchor).isActive = true
+        
+        self.entryLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        self.entryLabel.bottomAnchor.constraint(equalTo: centerTopLayoutGuide.topAnchor).isActive = true
+        
+        centerTopLayoutGuide.topAnchor.constraint(equalTo: self.entryLabel.bottomAnchor).isActive = true
+        centerTopLayoutGuide.bottomAnchor.constraint(equalTo: self.descriptionLabel.topAnchor).isActive = true
+        
+        self.descriptionLabel.topAnchor.constraint(equalTo: centerTopLayoutGuide.bottomAnchor).isActive = true
+        self.descriptionLabel.bottomAnchor.constraint(equalTo: centerBottomLayoutGuide.topAnchor).isActive = true
+       
+        centerBottomLayoutGuide.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor).isActive = true
+        centerBottomLayoutGuide.bottomAnchor.constraint(equalTo: self.memoryLabel.topAnchor).isActive = true
+        
+        self.memoryLabel.topAnchor.constraint(equalTo: centerBottomLayoutGuide.bottomAnchor).isActive = true
+        self.memoryLabel.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        
+        bottomLayoutGuide.topAnchor.constraint(equalTo: self.memoryLabel.bottomAnchor).isActive = true
+        bottomLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
