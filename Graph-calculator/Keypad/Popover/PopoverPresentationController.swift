@@ -14,7 +14,7 @@ class PopoverPresentationController: UIPresentationController {
     var contentSize: CGSize = .zero
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        let size = CGSize(width: self.contentSize.width + self.sourceRect.width, height: self.contentSize.height + self.sourceRect.height)
+        let size = CGSize(width: self.contentSize.width, height: self.contentSize.height)
         let origin = CGPoint(x: self.sourceRect.minX, y: self.sourceRect.minY - self.sourceRect.height)
         return CGRect(origin: origin, size: size)
     }
