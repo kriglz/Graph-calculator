@@ -62,16 +62,16 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         
         self.keypadView.topAnchor.constraint(equalTo: self.displayView.bottomAnchor).isActive = true
         if #available(iOS 11.0, *) {
-            self.keypadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+            self.keypadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         } else {
-            self.keypadView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+            self.keypadView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
         }
     }
     
     // MARK: - KeypadViewDelegate
     
     func keypadView(_ view: KeypadView, didSelect keyOperation: KeyType) {
-        print(keyOperation)
+        self.displayView.enterOperation(keyOperation)
     }
     
     func keypadView(_ view: KeypadView, didSelectPresent popoverViewController: UIViewController) {

@@ -10,9 +10,42 @@ import UIKit
 
 class DisplayView: UIView {
     
+    func enterOperation(_ operation: KeyType) {
+        let value = operation.stringRepresentation
+        
+        guard self.userIsInTheMiddleOfTyping, let textCurrentlyDisplayed = self.entryLabel.text else {
+            self.entryLabel.text = value
+            self.userIsInTheMiddleOfTyping = true
+            return
+        }
+        
+        if let text = self.entryLabel.text, text.contains(".") {
+            return
+        }
+        
+        if value == "." {
+            return
+        }
+        
+        self.entryLabel.text = textCurrentlyDisplayed + value
+    }
+    
+    var entryValue: Double {
+        get {
+            if let textValue = self.entryLabel.text {
+                return Double(textValue) ?? 0
+            }
+            return 0
+        } set {
+            self.entryLabel.text = String(newValue)
+        }
+    }
+    
     private let entryLabel: UILabel
     private let descriptionLabel: UILabel
     private let memoryLabel: UILabel
+    
+    private var userIsInTheMiddleOfTyping = false
     
     override init(frame: CGRect) {
         self.entryLabel = Label(fontSize: 40, color: .white)
