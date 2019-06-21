@@ -43,7 +43,9 @@ enum KeyType: Int, CaseIterable {
     case ln
     
     case pow
+    case powN
     case sqrt
+    case sqrtN
     
     case sin
     case cos
@@ -117,9 +119,13 @@ enum KeyType: Int, CaseIterable {
             return "ln"
             
         case .pow:
-            return "xª"
+            return "x²"
+        case .powN:
+            return "xⁿ"
         case .sqrt:
             return "√"
+        case .sqrtN:
+            return "ⁿ√"
             
         case .sin:
             return "sin"
@@ -163,6 +169,10 @@ enum KeyType: Int, CaseIterable {
             return [self, .ln]
         case .pi:
             return [self, .e, .random]
+        case .sqrt:
+            return [self, .sqrtN]
+        case .pow:
+            return [self, .powN]
         default:
             return nil
         }
