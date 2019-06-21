@@ -91,7 +91,8 @@ class KeypadCell: UICollectionViewCell {
         
         super.init(frame: frame)
         
-        let rect = CGRect(origin: .zero, size: frame.size).inset(by: UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5))
+        let inset = UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5)
+        let rect = CGRect(origin: .zero, size: frame.size).inset(by: inset)
         self.cardLayer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
         self.cardLayer.frame = rect
         

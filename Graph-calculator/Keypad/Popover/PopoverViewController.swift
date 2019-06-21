@@ -20,7 +20,6 @@ class PopoverViewController: UIViewController {
 
     private let popoverPresentationDelegate: PopoverTransitioningDelegate
     private let stackView: UIStackView
-    private var sourceRect: CGRect
     private var currentSelectedButton: Button?
 
     // MARK: - Initialization
@@ -32,8 +31,7 @@ class PopoverViewController: UIViewController {
         self.stackView.alignment = .fill
         self.stackView.distribution = .fillEqually
         self.stackView.axis = .horizontal
-        
-        self.sourceRect = .zero
+        self.stackView.spacing = 0
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -41,28 +39,25 @@ class PopoverViewController: UIViewController {
     convenience init(sourceRect: CGRect, buttonTypes: [KeyType]) {
         self.init()
         
-        self.sourceRect = sourceRect
-        
-        self.transitioningDelegate = self.popoverPresentationDelegate
-        self.modalPresentationStyle = .custom
-        
-        self.setupView(for: buttonTypes)
+        self.setupView(with: sourceRect.size, for: buttonTypes)
         
         self.view.addSubview(stackView)
         self.stackView.constraint(edgesTo: self.view)
 
-        let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        self.preferredContentSize = contentSize
+        let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
         
         self.popoverPresentationDelegate.sourceRect = sourceRect
         self.popoverPresentationDelegate.contentSize = contentSize
+        
+        self.transitioningDelegate = self.popoverPresentationDelegate
+        self.modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(for buttonTypes: [KeyType]) {
+    private func setupView(with size: CGSize, for buttonTypes: [KeyType]) {
         for type in buttonTypes {
             let button = Button()
             button.operation = type
@@ -75,8 +70,8 @@ class PopoverViewController: UIViewController {
             self.stackView.addArrangedSubview(button)
             
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(greaterThanOrEqualToConstant: self.sourceRect.height).isActive = true
-            button.widthAnchor.constraint(greaterThanOrEqualToConstant: self.sourceRect.width).isActive = true
+            button.heightAnchor.constraint(greaterThanOrEqualToConstant: size.height.rounded() - 1.5).isActive = true
+            button.widthAnchor.constraint(greaterThanOrEqualToConstant: size.width.rounded() - 1.5).isActive = true
         }
     }
     

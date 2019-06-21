@@ -14,9 +14,8 @@ class PopoverPresentationController: UIPresentationController {
     var contentSize: CGSize = .zero
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        let size = CGSize(width: self.contentSize.width, height: self.contentSize.height)
         let origin = CGPoint(x: self.sourceRect.minX, y: self.sourceRect.minY - self.sourceRect.height)
-        return CGRect(origin: origin, size: size)
+        return CGRect(origin: origin, size: self.contentSize)
     }
 
     override func containerViewWillLayoutSubviews() {
@@ -48,34 +47,4 @@ class PopoverTransitioningDelegate: NSObject, UIViewControllerTransitioningDeleg
         controller.contentSize = self.contentSize
         return controller
     }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PopoverPresentationAnimationController()
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PopoverPresentationAnimationController()
-    }
 }
-
-class PopoverPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
-    }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toViewController = transitionContext.viewController(forKey: .to) else {
-            return
-        }
-
-        let containerView = transitionContext.containerView
-
-        toViewController.view.backgroundColor = .red
-        toViewController.view.alpha = 0.5
-        
-        containerView.addSubview(toViewController.view)
-    }
-}
-
-
