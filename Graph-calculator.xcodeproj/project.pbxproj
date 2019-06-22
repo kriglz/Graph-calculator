@@ -30,6 +30,7 @@
 		89D58A5E228B59F200438AAF /* KeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5D228B59F200438AAF /* KeyType.swift */; };
 		89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A61228B5A6400438AAF /* PopoverViewController.swift */; };
 		89E878EE1FCFE67000946F93 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */; };
+		89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECAB9322BDA8AC00FE4000 /* Calculator.swift */; };
 		89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */; };
 		89F9C7A8229AEDE800C31BF6 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9C7A7229AEDE800C31BF6 /* DisplayView.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		89D58A5D228B59F200438AAF /* KeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyType.swift; sourceTree = "<group>"; };
 		89D58A61228B5A6400438AAF /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		89E878ED1FCFE67000946F93 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		89ECAB9322BDA8AC00FE4000 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
 		89F9C7A7229AEDE800C31BF6 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +202,7 @@
 			children = (
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
+				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
 				89F9C7A9229AEE0200C31BF6 /* Display */,
 				896162D12290136D00C6B477 /* Keypad */,
 				896162DD2290166F00C6B477 /* Calculator Brain */,
@@ -310,6 +313,7 @@
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
 				89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */,
 				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
+				89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */,
 				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
 				89581F6A2284A678009D8469 /* KeypadCell.swift in Sources */,

@@ -44,6 +44,7 @@ enum KeyType: Int, CaseIterable {
     
     case pow
     case powN
+    case expN
     case sqrt
     case sqrtN
     
@@ -122,6 +123,8 @@ enum KeyType: Int, CaseIterable {
             return "x²"
         case .powN:
             return "xⁿ"
+        case .expN:
+            return "eⁿ"
         case .sqrt:
             return "√"
         case .sqrtN:
@@ -133,8 +136,6 @@ enum KeyType: Int, CaseIterable {
             return "cos"
         case .tan:
             return "tan"
-        case .cot:
-            return "cot"
             
         case .sinh:
             return "sinh"
@@ -142,8 +143,6 @@ enum KeyType: Int, CaseIterable {
             return "cosh"
         case .tanh:
             return "tanh"
-        case .coth:
-            return "coth"
             
         case .pi:
             return "π"
