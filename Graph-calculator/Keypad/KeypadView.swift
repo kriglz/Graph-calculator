@@ -84,7 +84,7 @@ extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     // MARK: - UICollectionViewDelegateFlowLayout implementation
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = self.frame.size.width * 0.2
+        let size = self.frame.size.width * 0.2 - 1
         return CGSize(width: size, height: size)
     }
 
