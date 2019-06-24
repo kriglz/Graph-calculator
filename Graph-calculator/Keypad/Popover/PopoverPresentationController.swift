@@ -13,6 +13,14 @@ class PopoverPresentationController: UIPresentationController {
     var sourceRect: CGRect = .zero
     var contentSize: CGSize = .zero
 
+    private var isDarkMode: Bool {
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
+    
     override var frameOfPresentedViewInContainerView: CGRect {
         let origin = CGPoint(x: self.sourceRect.minX, y: self.sourceRect.minY - self.sourceRect.height)
         return CGRect(origin: origin, size: self.contentSize)
@@ -30,7 +38,7 @@ class PopoverPresentationController: UIPresentationController {
         layer.path = UIBezierPath.superellipse(in: self.frameOfPresentedViewInContainerView, cornerRadius: 4).cgPath
         layer.lineWidth = 0.5
         layer.strokeColor = UIColor.white.cgColor
-        layer.fillColor = UIColor.highlightColor.cgColor
+        layer.fillColor = GCColor.highlight(forDarkMode: self.isDarkMode).cgColor
         
         self.containerView?.layer.insertSublayer(layer, at: 0)
     }

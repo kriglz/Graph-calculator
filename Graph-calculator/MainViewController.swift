@@ -9,12 +9,16 @@
 import UIKit
 
 class MainViewController: UIViewController, KeypadViewDelegate {
-
+    
     private let keypadView: KeypadView
     private let displayView: DisplayView
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent 
+    private var isDarkMode: Bool {
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -32,8 +36,12 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        if #available(iOS 13.0, *) {
+//            self.overrideUserInterfaceStyle = .dark
+//        }
 
-        self.view.backgroundColor = UIColor(red: 0.18, green: 0.184, blue: 0.188, alpha: 1)
+        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
 
         self.view.addSubview(self.keypadView)
         self.view.addSubview(self.displayView)
@@ -57,7 +65,7 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         }
         self.displayView.bottomAnchor.constraint(equalTo: self.keypadView.topAnchor).with(priority: .required).isActive = true
         
-        self.keypadView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.97).isActive = true
+        self.keypadView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
         self.keypadView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
         self.keypadView.topAnchor.constraint(equalTo: self.displayView.bottomAnchor).isActive = true

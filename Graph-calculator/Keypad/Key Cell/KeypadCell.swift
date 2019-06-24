@@ -37,6 +37,14 @@ class KeypadCell: UICollectionViewCell {
     private let titleLabel: UILabel
     private var relatedSelectionPopoverViewController: PopoverViewController?
 
+    private var isDarkMode: Bool {
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
+    
     private var isKeyHighlighted: Bool = false {
         didSet {
             self.updateAppearance()
@@ -54,7 +62,7 @@ class KeypadCell: UICollectionViewCell {
     
     private var fillColor: CGColor {
         if self.isKeyHighlighted {
-            return UIColor.highlightColor.cgColor
+            return GCColor.highlight(forDarkMode: self.isDarkMode).cgColor
         }
 
         guard self.hasDefaultBackground else {
@@ -63,18 +71,10 @@ class KeypadCell: UICollectionViewCell {
         
         switch operation {
         case .division, .multiplication, .difference, .sum, .equal, .percentage:
-            return UIColor(red: 0.31, green: 0.424, blue: 0.443, alpha: 1).cgColor
+            return GCColor.alternativeKey(forDarkMode: self.isDarkMode).cgColor
         default:
-            return UIColor.keyColor.cgColor
+            return GCColor.key(forDarkMode: self.isDarkMode).cgColor
         }
-    }
-    
-    private var strokeColor: CGColor {
-        guard self.hasDefaultBackground else {
-            return UIColor.clear.cgColor
-        }
-
-        return (self.isKeyHighlighted ? UIColor.white.cgColor : UIColor.keyBorderColor.cgColor)
     }
     
     private var textColor: UIColor {
@@ -120,7 +120,7 @@ class KeypadCell: UICollectionViewCell {
         self.updateAppearance()
 
         if self.hasDefaultBackground {
-            self.cardLayer.strokeColor = self.strokeColor
+            self.cardLayer.strokeColor = GCColor.keyBorder(forDarkMode: self.isDarkMode).cgColor
             self.cardLayer.lineWidth = 0.5
             
             return
@@ -136,7 +136,7 @@ class KeypadCell: UICollectionViewCell {
     
     private func updateAppearance() {
         self.cardLayer.fillColor = self.fillColor
-        self.cardLayer.strokeColor = self.strokeColor
+        self.cardLayer.strokeColor = GCColor.keyBorder(forDarkMode: self.isDarkMode).cgColor
         self.titleLabel.textColor = self.textColor
     }
     
