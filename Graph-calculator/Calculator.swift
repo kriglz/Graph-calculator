@@ -10,7 +10,12 @@ import Foundation
 
 struct Calculator {
     
-    private var descriptionArray: [String] = []
+    enum Value {
+        case numeric(Double)
+        case nonNumeric(String)
+    }
+    
+    private var descriptionArray: [KeyType] = []
     
     private enum Operation {
         case constant(Double)
@@ -38,7 +43,6 @@ struct Calculator {
         KeyType.tan: Operation.unaryOperation(tan),
         KeyType.tanh: Operation.unaryOperation(tanh),
         
-        
         KeyType.ln: Operation.unaryOperation(log),
         KeyType.log: Operation.unaryOperation(log),
         
@@ -52,4 +56,17 @@ struct Calculator {
         
         KeyType.equal: Operation.equals
     ]
+    
+    private var canAppendOperand = true
+
+    mutating func setOperand (_ operand: KeyType){
+//        let valueToCheck = Value.numeric(operand)
+//        compareOldElement(with: valueToCheck)
+        
+        if operand.isNumeric || self.canAppendOperand {
+            self.descriptionArray.append(operand)
+        } else if !self.canAppendOperand {
+            self.canAppendOperand = true
+        }
+    }
 }

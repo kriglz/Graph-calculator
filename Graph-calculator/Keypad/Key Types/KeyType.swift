@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum KeyType: Int, CaseIterable {
-    case zero = 0
+enum KeyType: CaseIterable {
+    case zero
     case one
     case two
     case three
@@ -51,16 +51,23 @@ enum KeyType: Int, CaseIterable {
     case sin
     case cos
     case tan
-    case cot
     
     case sinh
     case cosh
     case tanh
-    case coth
     
     case pi
     case e
     case random
+    
+    var isNumeric: Bool {
+        switch self {
+        case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine:
+            return true
+        default:
+            return false
+        }
+    }
     
     var stringRepresentation: String {
         switch self {
@@ -161,9 +168,9 @@ enum KeyType: Int, CaseIterable {
     var relatedOperations: [KeyType]? {
         switch self {
         case .sin:
-            return [self, .cos, .tan, .cot]
+            return [self, .cos, .tan]
         case .sinh:
-            return [self, .coth, .tanh, .coth]
+            return [self, .cosh, .tanh]
         case .log:
             return [self, .ln]
         case .pi:
@@ -171,7 +178,7 @@ enum KeyType: Int, CaseIterable {
         case .sqrt:
             return [self, .sqrtN]
         case .pow:
-            return [self, .powN]
+            return [self, .powN, .expN]
         default:
             return nil
         }
