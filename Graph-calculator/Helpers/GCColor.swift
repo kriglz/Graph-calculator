@@ -20,6 +20,30 @@ struct GCColor {
         }
     }
     
+    static func title(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return UIColor(r: 237, g: 237, b: 237, alpha: 1)
+        }
+        
+        return self.highlight(forDarkMode: darkMode)
+    }
+    
+    static func subtitle(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return self.alternativeKeyText(forDarkMode: darkMode)
+        }
+        
+        return self.alternativeKey(forDarkMode: darkMode)
+    }
+    
+    static func footnote(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return self.alternativeKey(forDarkMode: darkMode)
+        }
+        
+        return self.key(forDarkMode: darkMode)
+    }
+    
     static func highlight(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
             return UIColor(r: 138, g: 159, b: 162, alpha: 1)
@@ -50,5 +74,13 @@ struct GCColor {
         }
         
         return .white
+    }
+    
+    static func alternativeKeyText(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return UIColor(r: 144, g: 144, b: 144, alpha: 1)
+        }
+        
+        return self.alternativeKey(forDarkMode: darkMode)
     }
 }

@@ -82,11 +82,11 @@ extension PopoverViewController {
             return rect.contains(point)
         }
         
-        // MARK: - Appearnace
+        // MARK: - Appearance
         
         private func updateAppearance() {
-            self.label.textColor = self.isSelected ? UIColor(red: 0.078, green: 0.216, blue: 0.247, alpha: 1) : .white
-            self.backgroundLayer.fillColor = self.isSelected ? UIColor(red: 0.917, green: 0.945, blue: 0.953, alpha: 1).cgColor : UIColor.clear.cgColor
+            self.label.textColor = self.isSelected ? UIColor(r: 20, g: 55, b: 63, alpha: 1) : .white
+            self.backgroundLayer.fillColor = self.isSelected ? UIColor(r: 234, g: 241, b: 243, alpha: 1).cgColor : UIColor.clear.cgColor
         }
     }
 }

@@ -41,25 +41,35 @@ class DisplayView: UIView {
         }
     }
     
-    private let entryLabel: UILabel
-    private let descriptionLabel: UILabel
-    private let memoryLabel: UILabel
+    private let entryLabel: Label
+    private let descriptionLabel: Label
+    private let memoryLabel: Label
     
     private var userIsInTheMiddleOfTyping = false
     
+    private var isDarkMode: Bool {
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
+    
     override init(frame: CGRect) {
-        self.entryLabel = Label(fontSize: 40, color: .white)
+        self.entryLabel = Label(fontSize: 40)
         self.entryLabel.text = "123"
         
-        let descriptionLabelColor = UIColor(red: 0.514, green: 0.514, blue: 0.514, alpha: 1)
-        self.descriptionLabel = Label(fontSize: 40, color: descriptionLabelColor)
+        self.descriptionLabel = Label(fontSize: 40)
         self.descriptionLabel.text = "1+123"
 
-        let memoryLabelColor = UIColor(red: 0.502, green: 0.533, blue: 0.537, alpha: 1)
-        self.memoryLabel = Label(fontSize: 20, color: memoryLabelColor)
+        self.memoryLabel = Label(fontSize: 20)
         self.memoryLabel.text = "12"
         
         super.init(frame: frame)
+        
+        self.entryLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
+        self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
+        self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
         
         let topLayoutGuide = UILayoutGuide()
         let centerTopLayoutGuide = UILayoutGuide()
@@ -123,7 +133,18 @@ class DisplayView: UIView {
     }
     
     class Label: UILabel {
-        convenience init(fontSize: CGFloat, color: UIColor) {
+        
+        var color: UIColor? {
+            didSet {
+                guard let color = self.color else {
+                    return
+                }
+                
+                self.textColor = color
+            }
+        }
+        
+        convenience init(fontSize: CGFloat, color: UIColor? = nil) {
             self.init()
             
             self.font = UIFont.systemFont(ofSize: fontSize)

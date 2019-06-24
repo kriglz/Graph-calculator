@@ -78,7 +78,7 @@ class KeypadCell: UICollectionViewCell {
     }
     
     private var textColor: UIColor {
-        return self.isKeyHighlighted || self.hasDefaultBackground ? .white : UIColor(red: 0.444, green: 0.584, blue: 0.6, alpha: 1)
+        return self.isKeyHighlighted || self.hasDefaultBackground ? .white : GCColor.alternativeKeyText(forDarkMode: self.isDarkMode)
     }
 
     // MARK: - Initialization
