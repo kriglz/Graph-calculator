@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
 		8931C88422C18395009C94C9 /* GCColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88322C18395009C94C9 /* GCColor.swift */; };
+		8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88522C2A5E9009C94C9 /* HighlightView.swift */; };
 		89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */; };
 		89581F6A2284A678009D8469 /* KeypadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F692284A678009D8469 /* KeypadCell.swift */; };
 		89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F6B2284A6D9009D8469 /* UIView+Extension.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		8931C88322C18395009C94C9 /* GCColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCColor.swift; sourceTree = "<group>"; };
+		8931C88522C2A5E9009C94C9 /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
 		89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		89581F692284A678009D8469 /* KeypadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadCell.swift; sourceTree = "<group>"; };
 		89581F6B2284A6D9009D8469 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8931C88722C2A60D009C94C9 /* Highlight */ = {
+			isa = PBXGroup;
+			children = (
+				8931C88522C2A5E9009C94C9 /* HighlightView.swift */,
+			);
+			path = Highlight;
+			sourceTree = "<group>";
+		};
 		896162D12290136D00C6B477 /* Keypad */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 			children = (
 				89D58A61228B5A6400438AAF /* PopoverViewController.swift */,
 				89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */,
+				8931C88722C2A60D009C94C9 /* Highlight */,
 				896162D3229013CA00C6B477 /* Button */,
 			);
 			path = Popover;
@@ -307,6 +318,7 @@
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
 				89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */,
+				8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */,
 				89F9C7A8229AEDE800C31BF6 /* DisplayView.swift in Sources */,
 				899E3F63228F1D20005265E7 /* Keypad.swift in Sources */,
 				8931C88422C18395009C94C9 /* GCColor.swift in Sources */,

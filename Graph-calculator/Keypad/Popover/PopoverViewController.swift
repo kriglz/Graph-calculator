@@ -20,8 +20,11 @@ class PopoverViewController: UIViewController {
 
     private let popoverPresentationDelegate: PopoverTransitioningDelegate
     private let stackView: UIStackView
+    private var highlightView: HighlightView
     private var currentSelectedButton: Button?
 
+    private var activeHighlightViewXPositionConstraints = [NSLayoutConstraint]()
+    
     // MARK: - Initialization
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -33,15 +36,33 @@ class PopoverViewController: UIViewController {
         self.stackView.axis = .horizontal
         self.stackView.spacing = 0
         
+        self.highlightView = HighlightView()
+        
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     convenience init(sourceRect: CGRect, buttonTypes: [KeyType]) {
         self.init()
         
-        self.setupView(with: sourceRect.size, for: buttonTypes)
+        let length = sourceRect.size.width.rounded() - 1.5
+        let buttonSize = CGSize(width: length, height: length)
+
+        self.setupButtonStackView(with: buttonSize, for: buttonTypes)
         
-        self.view.addSubview(stackView)
+        self.view.addSubview(self.highlightView)
+        self.view.addSubview(self.stackView)
+        
+        self.highlightView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let firstButton = self.stackView.arrangedSubviews.first {
+            self.highlightView.widthAnchor.constraint(equalTo: firstButton.widthAnchor, multiplier: 0.75).isActive = true
+            self.highlightView.heightAnchor.constraint(equalTo: firstButton.heightAnchor, multiplier: 0.65).isActive = true
+
+            self.highlightView.centerYAnchor.constraint(equalTo: firstButton.centerYAnchor).isActive = true
+            
+            self.moveHighlight(to: firstButton)
+        }
+        
         self.stackView.constraint(edgesTo: self.view)
 
         let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
@@ -51,31 +72,54 @@ class PopoverViewController: UIViewController {
         
         self.transitioningDelegate = self.popoverPresentationDelegate
         self.modalPresentationStyle = .custom
+        
+        self.selectDefaultButton(for: buttonTypes)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(with size: CGSize, for buttonTypes: [KeyType]) {
+    private func setupButtonStackView(with size: CGSize, for buttonTypes: [KeyType]) {
         for type in buttonTypes {
             let button = Button()
             button.operation = type
-            button.isSelected = type == buttonTypes.first
-            
-            if type == buttonTypes.first {
-                self.currentSelectedButton = button
-            }
             
             self.stackView.addArrangedSubview(button)
             
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(greaterThanOrEqualToConstant: size.height.rounded() - 1.5).isActive = true
-            button.widthAnchor.constraint(greaterThanOrEqualToConstant: size.width.rounded() - 1.5).isActive = true
+            button.heightAnchor.constraint(greaterThanOrEqualToConstant: size.height).isActive = true
+            button.widthAnchor.constraint(greaterThanOrEqualToConstant: size.width).isActive = true
         }
+    }
+
+    // MARK: - Layout
+
+    private func moveHighlight(to view: UIView) {
+        NSLayoutConstraint.deactivate(self.activeHighlightViewXPositionConstraints)
+        self.activeHighlightViewXPositionConstraints.removeAll()
+        
+        defer {
+            NSLayoutConstraint.activate(self.activeHighlightViewXPositionConstraints)
+        }
+        
+        self.activeHighlightViewXPositionConstraints.append(self.highlightView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
     }
     
     // MARK: - Button highlight
+    
+    func selectDefaultButton(for buttonTypes: [KeyType]) {
+        guard let buttons = self.stackView.arrangedSubviews as? [Button], buttons.count > 0, buttonTypes.count > 0 else {
+            return
+        }
+        
+        guard let firstButton = buttons.first(where: { $0.operation == buttonTypes[0] }) else {
+            return
+        }
+        
+        firstButton.isSelected = true
+        self.currentSelectedButton = firstButton
+    }
     
     func selectButton(at location: CGPoint) {
         guard let buttons = self.stackView.arrangedSubviews as? [Button] else {
@@ -92,6 +136,11 @@ class PopoverViewController: UIViewController {
 
         self.currentSelectedButton = selectedButton
 
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.1, options: .allowUserInteraction, animations: {
+            self.moveHighlight(to: selectedButton)
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
         buttons.forEach { button in
             button.isSelected = button == selectedButton
         }
