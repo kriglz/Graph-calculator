@@ -149,6 +149,8 @@ class DisplayView: UIView {
             
             self.font = UIFont.systemFont(ofSize: fontSize)
             self.textColor = color
+            
+            self.configureDefaultShadow()
         }
         
         override init(frame: CGRect) {

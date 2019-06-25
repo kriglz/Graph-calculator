@@ -93,7 +93,9 @@ class KeypadCell: UICollectionViewCell {
         
         let inset = UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5)
         let rect = CGRect(origin: .zero, size: frame.size).inset(by: inset)
-        self.cardLayer.path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
+        let path = UIBezierPath.superellipse(in: rect, cornerRadius: 4).cgPath
+
+        self.cardLayer.path = path
         self.cardLayer.frame = rect
         
         self.layer.addSublayer(cardLayer)
@@ -120,6 +122,8 @@ class KeypadCell: UICollectionViewCell {
         self.updateAppearance()
 
         if self.hasDefaultBackground {
+            self.configureDefaultShadow(offset: .zero)
+
             self.cardLayer.strokeColor = GCColor.keyBorder(forDarkMode: self.isDarkMode).cgColor
             self.cardLayer.lineWidth = 0.5
             
@@ -129,9 +133,7 @@ class KeypadCell: UICollectionViewCell {
         self.cardLayer.lineWidth = 0
         
         self.titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .medium)
-        
-        self.titleLabel.shadowOffset = .zero
-        self.titleLabel.shadowColor = UIColor(red: 0.67, green: 0.67, blue: 0.67, alpha: 0.5)
+        self.titleLabel.configureDefaultShadow()
     }
     
     private func updateAppearance() {

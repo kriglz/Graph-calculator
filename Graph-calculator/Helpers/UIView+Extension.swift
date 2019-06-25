@@ -10,7 +10,7 @@
 import UIKit
 
 extension UIView {
-    public func constraint(edgesTo view: UIView, constant: CGFloat = 0) {
+    func constraint(edgesTo view: UIView, constant: CGFloat = 0) {
         var constraints = [NSLayoutConstraint]()
         
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -28,5 +28,13 @@ extension UIView {
         }
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func configureDefaultShadow(path: CGPath? = nil, opacity: Float = 0.2, radius: CGFloat = 1, offset: CGSize = CGSize(width: 0, height: 1)) {
+        self.layer.masksToBounds = false
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+        self.layer.shadowOffset = offset
+        self.layer.shadowPath = path
     }
 }
