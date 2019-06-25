@@ -41,6 +41,10 @@ class PopoverPresentationController: UIPresentationController {
         layer.fillColor = GCColor.highlight(forDarkMode: self.isDarkMode).cgColor
         
         self.containerView?.layer.insertSublayer(layer, at: 0)
+        
+        self.containerView?.layer.shadowOpacity = 0.3
+        self.containerView?.layer.shadowRadius = 4
+        self.containerView?.layer.shadowOffset = CGSize(width: 0, height: 1)
     }
 }
 
