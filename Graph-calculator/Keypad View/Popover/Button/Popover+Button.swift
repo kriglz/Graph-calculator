@@ -15,7 +15,7 @@ extension PopoverViewController {
         
         var operation: KeyType = .zero {
             didSet {
-                self.label.text = Keypad.masterList[self.operation]?.description
+                self.label.text = Keypad.keyList[self.operation]?.description
             }
         }
         

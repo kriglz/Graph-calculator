@@ -24,7 +24,7 @@ class KeypadCell: UICollectionViewCell {
 
     var operation: KeyType = .zero {
         didSet {
-            self.titleLabel.text = Keypad.masterList[self.operation]?.description
+            self.titleLabel.text = Keypad.keyList[self.operation]?.description
             self.setupAppearance()
         }
     }
@@ -154,7 +154,7 @@ class KeypadCell: UICollectionViewCell {
             self.scaleDown()
             self.isKeyHighlighted = true
 
-            guard let relatedOperation = Keypad.masterList[self.operation]?.relatedOperations else {
+            guard let relatedOperation = Keypad.keyList[self.operation]?.relatedKeyTypes else {
                 return
             }
             

@@ -62,7 +62,7 @@ extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     // MARK: - UICollectionViewDelegate implementation
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Keypad.dataSource.count
+        return Keypad.displayKeyList.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -75,7 +75,7 @@ extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeypadCell.identifier, for: indexPath) as! KeypadCell
         
         cell.delegate = self
-        cell.operation = Keypad.dataSource[indexPath.item]
+        cell.operation = Keypad.displayKeyList[indexPath.item]
         cell.offset = self.frame.origin
         
         return cell

@@ -15,13 +15,13 @@ struct Calculator {
             return ""
         }
         
-        return Keypad.masterList[lastOperation]?.description ?? ""
+        return Keypad.keyList[lastOperation]?.description ?? ""
     }
     
     var description: String {
         var text = ""
         self.operationQueue.forEach { operation in
-            if let description = Keypad.masterList[operation]?.description {
+            if let description = Keypad.keyList[operation]?.description {
                 text.append(description)
             }
         }

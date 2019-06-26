@@ -7,6 +7,7 @@
 //
 
 enum KeyType: Int {
+    
     case zero = 0
     case one
     case two

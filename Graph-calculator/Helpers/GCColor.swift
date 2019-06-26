@@ -11,9 +11,10 @@ import UIKit
 struct GCColor {
     
     static func background(forDarkMode darkMode: Bool) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemBackground
-        } else if darkMode {
+//        if #available(iOS 13.0, *) {
+//            return .systemBackground
+//        } else
+        if darkMode {
             return .black
         } else {
             return .white
