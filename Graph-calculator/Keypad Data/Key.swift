@@ -8,17 +8,7 @@
 
 import Foundation
 
-extension Keypad {
-    enum OperationType {
-        
-        case numeric(Int)
-        case constant(Double)
-        case unary((Double) -> Double)
-        case binary((Double, Double) -> Double)
-        case equals
-        case other
-    }
-    
+extension Keypad {    
     struct Key {
         
         let keyType: KeyType
@@ -37,7 +27,4 @@ extension Keypad {
             self.description = description
         }
     }
-    
-
-    
 }

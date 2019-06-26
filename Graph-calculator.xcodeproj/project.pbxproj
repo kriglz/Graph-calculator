@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		892181EA22C42B0100EEFCD8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181E922C42B0100EEFCD8 /* Key.swift */; };
+		892181EC22C42CCB00EEFCD8 /* OperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181EB22C42CCB00EEFCD8 /* OperationType.swift */; };
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
 		8931C88422C18395009C94C9 /* GCColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88322C18395009C94C9 /* GCColor.swift */; };
 		8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88522C2A5E9009C94C9 /* HighlightView.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		892181E922C42B0100EEFCD8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		892181EB22C42CCB00EEFCD8 /* OperationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationType.swift; sourceTree = "<group>"; };
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		8931C88322C18395009C94C9 /* GCColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCColor.swift; sourceTree = "<group>"; };
 		8931C88522C2A5E9009C94C9 /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
@@ -88,17 +90,8 @@
 			children = (
 				899E3F62228F1D20005265E7 /* Keypad.swift */,
 				892181E922C42B0100EEFCD8 /* Key.swift */,
-				892181E822C42AE800EEFCD8 /* Key Type */,
 			);
 			path = "Keypad Data";
-			sourceTree = "<group>";
-		};
-		892181E822C42AE800EEFCD8 /* Key Type */ = {
-			isa = PBXGroup;
-			children = (
-				89D58A5D228B59F200438AAF /* KeyType.swift */,
-			);
-			path = "Key Type";
 			sourceTree = "<group>";
 		};
 		8931C88722C2A60D009C94C9 /* Highlight */ = {
@@ -219,6 +212,8 @@
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
 				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
+				89D58A5D228B59F200438AAF /* KeyType.swift */,
+				892181EB22C42CCB00EEFCD8 /* OperationType.swift */,
 				892181E722C42AB100EEFCD8 /* Keypad Data */,
 				89F9C7A9229AEE0200C31BF6 /* Display View */,
 				896162D12290136D00C6B477 /* Keypad View */,
@@ -317,6 +312,7 @@
 				89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */,
 				899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */,
 				89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */,
+				892181EC22C42CCB00EEFCD8 /* OperationType.swift in Sources */,
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
 				89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */,
