@@ -89,9 +89,17 @@
 			isa = PBXGroup;
 			children = (
 				899E3F62228F1D20005265E7 /* Keypad.swift */,
-				892181E922C42B0100EEFCD8 /* Key.swift */,
+				892181ED22C42D1800EEFCD8 /* Key */,
 			);
 			path = "Keypad Data";
+			sourceTree = "<group>";
+		};
+		892181ED22C42D1800EEFCD8 /* Key */ = {
+			isa = PBXGroup;
+			children = (
+				892181E922C42B0100EEFCD8 /* Key.swift */,
+			);
+			path = Key;
 			sourceTree = "<group>";
 		};
 		8931C88722C2A60D009C94C9 /* Highlight */ = {
