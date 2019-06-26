@@ -10,63 +10,43 @@ import Foundation
 
 struct Calculator {
     
-    enum Value {
-        case numeric(Double)
-        case nonNumeric(String)
-    }
-    
-    private var descriptionArray: [KeyType] = []
-    
-    private enum Operation {
-        case constant(Double)
-        case unaryOperation((Double) -> Double)
-        case binaryOperation((Double, Double) -> Double)
-        case equals
-    }
-    
-    private var operations: Dictionary<KeyType, Operation> = [
-        KeyType.pi: Operation.constant(Double.pi),
-        KeyType.e: Operation.constant(M_E),
-        KeyType.random: Operation.constant(Double.random(in: -1000...1000)),
-        
-        KeyType.sqrt: Operation.unaryOperation(sqrt),
-        KeyType.sqrtN: Operation.unaryOperation(sqrt),
-        
-        KeyType.pow: Operation.binaryOperation({ pow($0, $1)}),
-        KeyType.pow: Operation.binaryOperation({ pow($0, $1)}),
-        KeyType.expN: Operation.unaryOperation(exp),
-        
-        KeyType.cos: Operation.unaryOperation(cos),
-        KeyType.cosh: Operation.unaryOperation(cosh),
-        KeyType.sin: Operation.unaryOperation(sin),
-        KeyType.sinh: Operation.unaryOperation(sinh),
-        KeyType.tan: Operation.unaryOperation(tan),
-        KeyType.tanh: Operation.unaryOperation(tanh),
-        
-        KeyType.ln: Operation.unaryOperation(log),
-        KeyType.log: Operation.unaryOperation(log),
-        
-        KeyType.signChange: Operation.unaryOperation({ -$0}),
-        KeyType.percentage: Operation.unaryOperation({ $0 / 100}),
-        
-        KeyType.multiplication: Operation.binaryOperation({ $0 * $1}),
-        KeyType.division: Operation.binaryOperation({ $0 / $1}),
-        KeyType.sum: Operation.binaryOperation({ $0 + $1}),
-        KeyType.difference: Operation.binaryOperation({ $0 - $1}),
-        
-        KeyType.equal: Operation.equals
-    ]
-    
-    private var canAppendOperand = true
-
-    mutating func setOperand (_ operand: KeyType){
-//        let valueToCheck = Value.numeric(operand)
-//        compareOldElement(with: valueToCheck)
-        
-        if operand.isNumeric || self.canAppendOperand {
-            self.descriptionArray.append(operand)
-        } else if !self.canAppendOperand {
-            self.canAppendOperand = true
+    var currentOperation: String {
+        guard let lastOperation = self.operationQueue.last else {
+            return ""
         }
+        
+        return Keypad.masterList[lastOperation]?.description ?? ""
+    }
+    
+    var description: String {
+        var text = ""
+        self.operationQueue.forEach { operation in
+            if let description = Keypad.masterList[operation]?.description {
+                text.append(description)
+            }
+        }
+        
+        return text
+    }
+    
+    var memory: String {
+        return ""
+    }
+    
+    private var operationQueue: [KeyType] = []
+    private var isInTheMiddleOfTyping = false
+    
+    
+    mutating func setOperand(_ operand: KeyType) {
+        if self.operationQueue.isEmpty {
+            self.operationQueue.append(operand)
+            return
+        }
+        
+//        guard let lastOperation = self.operationQueue.last else {
+//            return
+//        }
+        
+        self.operationQueue.append(operand)
     }
 }

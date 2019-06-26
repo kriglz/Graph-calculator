@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController, KeypadViewDelegate {
     
+    private var calculator: Calculator
     private let keypadView: KeypadView
     private let displayView: DisplayView
     
@@ -22,6 +23,7 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.calculator = Calculator()
         self.keypadView = KeypadView()
         self.displayView = DisplayView()
         
@@ -79,7 +81,11 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     // MARK: - KeypadViewDelegate
     
     func keypadView(_ view: KeypadView, didSelect keyOperation: KeyType) {
-        self.displayView.enterOperation(keyOperation)
+        self.calculator.setOperand(keyOperation)
+        
+        self.displayView.currentOperationText = self.calculator.currentOperation
+        self.displayView.descriptionText = self.calculator.description
+        self.displayView.memoryText = self.calculator.memory
     }
     
     func keypadView(_ view: KeypadView, didSelectPresent popoverViewController: UIViewController) {

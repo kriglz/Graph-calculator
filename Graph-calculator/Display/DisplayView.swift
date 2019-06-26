@@ -10,38 +10,25 @@ import UIKit
 
 class DisplayView: UIView {
     
-    func enterOperation(_ operation: KeyType) {
-        let value = operation.stringRepresentation
-        
-        guard self.userIsInTheMiddleOfTyping, let textCurrentlyDisplayed = self.entryLabel.text else {
-            self.entryLabel.text = value
-            self.userIsInTheMiddleOfTyping = true
-            return
-        }
-        
-        if let text = self.entryLabel.text, text.contains(".") {
-            return
-        }
-        
-        if value == "." {
-            return
-        }
-        
-        self.entryLabel.text = textCurrentlyDisplayed + value
-    }
-    
-    var entryValue: Double {
-        get {
-            if let textValue = self.entryLabel.text {
-                return Double(textValue) ?? 0
-            }
-            return 0
-        } set {
-            self.entryLabel.text = String(newValue)
+    var currentOperationText: String = "" {
+        didSet {
+            self.currentOperationLabel.text = self.currentOperationText
         }
     }
     
-    private let entryLabel: Label
+    var descriptionText: String = "" {
+        didSet {
+            self.descriptionLabel.text = self.descriptionText
+        }
+    }
+    
+    var memoryText: String = "" {
+        didSet {
+            self.memoryLabel.text = self.memoryText
+        }
+    }
+    
+    private let currentOperationLabel: Label
     private let descriptionLabel: Label
     private let memoryLabel: Label
     
@@ -56,8 +43,8 @@ class DisplayView: UIView {
     }
     
     override init(frame: CGRect) {
-        self.entryLabel = Label(fontSize: 40)
-        self.entryLabel.text = "123"
+        self.currentOperationLabel = Label(fontSize: 40)
+        self.currentOperationLabel.text = "123"
         
         self.descriptionLabel = Label(fontSize: 40)
         self.descriptionLabel.text = "1+123"
@@ -67,7 +54,7 @@ class DisplayView: UIView {
         
         super.init(frame: frame)
         
-        self.entryLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
+        self.currentOperationLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
         self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
         self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
         
@@ -81,11 +68,11 @@ class DisplayView: UIView {
         self.addLayoutGuide(centerBottomLayoutGuide)
         self.addLayoutGuide(bottomLayoutGuide)
         
-        self.addSubview(self.entryLabel)
+        self.addSubview(self.currentOperationLabel)
         self.addSubview(self.descriptionLabel)
         self.addSubview(self.memoryLabel)
         
-        self.entryLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.currentOperationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.memoryLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -97,8 +84,8 @@ class DisplayView: UIView {
         topLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         topLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
         
-        self.entryLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
-        self.entryLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
+        self.currentOperationLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
+        self.currentOperationLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
         
         self.descriptionLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
         self.descriptionLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
@@ -107,12 +94,12 @@ class DisplayView: UIView {
         self.memoryLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
         
         topLayoutGuide.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        topLayoutGuide.bottomAnchor.constraint(equalTo: self.entryLabel.topAnchor).isActive = true
+        topLayoutGuide.bottomAnchor.constraint(equalTo: self.currentOperationLabel.topAnchor).isActive = true
         
-        self.entryLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-        self.entryLabel.bottomAnchor.constraint(equalTo: centerTopLayoutGuide.topAnchor).isActive = true
+        self.currentOperationLabel.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        self.currentOperationLabel.bottomAnchor.constraint(equalTo: centerTopLayoutGuide.topAnchor).isActive = true
         
-        centerTopLayoutGuide.topAnchor.constraint(equalTo: self.entryLabel.bottomAnchor).isActive = true
+        centerTopLayoutGuide.topAnchor.constraint(equalTo: self.currentOperationLabel.bottomAnchor).isActive = true
         centerTopLayoutGuide.bottomAnchor.constraint(equalTo: self.descriptionLabel.topAnchor).isActive = true
         
         self.descriptionLabel.topAnchor.constraint(equalTo: centerTopLayoutGuide.bottomAnchor).isActive = true

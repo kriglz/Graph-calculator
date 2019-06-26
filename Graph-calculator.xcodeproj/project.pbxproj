@@ -93,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				89246F1A2284A46B009416E5 /* KeypadView.swift */,
-				896162DA229015FF00C6B477 /* Key Types */,
-				896162D82290156400C6B477 /* Data Source */,
 				896162D72290153C00C6B477 /* Key Cell */,
 				896162D6229014CB00C6B477 /* Popover */,
 			);
@@ -151,22 +149,6 @@
 			path = "Key Cell";
 			sourceTree = "<group>";
 		};
-		896162D82290156400C6B477 /* Data Source */ = {
-			isa = PBXGroup;
-			children = (
-				899E3F62228F1D20005265E7 /* Keypad.swift */,
-			);
-			path = "Data Source";
-			sourceTree = "<group>";
-		};
-		896162DA229015FF00C6B477 /* Key Types */ = {
-			isa = PBXGroup;
-			children = (
-				89D58A5D228B59F200438AAF /* KeyType.swift */,
-			);
-			path = "Key Types";
-			sourceTree = "<group>";
-		};
 		896162DB2290162500C6B477 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +199,8 @@
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
 				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
+				89D58A5D228B59F200438AAF /* KeyType.swift */,
+				899E3F62228F1D20005265E7 /* Keypad.swift */,
 				89F9C7A9229AEE0200C31BF6 /* Display */,
 				896162D12290136D00C6B477 /* Keypad */,
 				896162DD2290166F00C6B477 /* Calculator Brain */,
