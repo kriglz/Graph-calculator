@@ -29,6 +29,7 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
+        self.calculator.delegate = self
         self.keypadView.delegate = self
     }
     
@@ -82,10 +83,6 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     
     func keypadView(_ view: KeypadView, didSelect keyOperation: KeyType) {
         self.calculator.setOperand(keyOperation)
-        
-        self.displayView.currentOperationText = self.calculator.currentOperation
-        self.displayView.descriptionText = self.calculator.description
-        self.displayView.memoryText = self.calculator.memory
     }
     
     func keypadView(_ view: KeypadView, didSelectPresent popoverViewController: UIViewController) {
@@ -94,5 +91,19 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     
     func keypadView(_ view: KeypadView, didDeselect popoverViewController: UIViewController) {
         popoverViewController.dismiss(animated: false, completion: nil)
+    }
+}
+
+extension MainViewController: CalculatorDelegate {
+    func calculator(_ calculator: Calculator, didUpdateLastOperation operation: String) {
+        self.displayView.currentOperationText = operation
+    }
+    
+    func calculator(_ calculator: Calculator, didUpdateDescription description: String) {
+        self.displayView.descriptionText = description
+    }
+    
+    func calculator(_ calculator: Calculator, didUpdateMemory memory: String) {
+        self.displayView.memoryText = memory
     }
 }

@@ -8,45 +8,58 @@
 
 import Foundation
 
-struct Calculator {
+protocol CalculatorDelegate: class {
+    func calculator(_ calculator: Calculator, didUpdateLastOperation operation: String)
+    func calculator(_ calculator: Calculator, didUpdateDescription description: String)
+    func calculator(_ calculator: Calculator, didUpdateMemory memory: String)
+}
+
+class Calculator: NSObject {
     
-    var currentOperation: String {
-        guard let lastOperation = self.operationQueue.last else {
-            return ""
-        }
-        
-        return Keypad.keyList[lastOperation]?.description ?? ""
-    }
+    weak var delegate: CalculatorDelegate?
     
-    var description: String {
-        var text = ""
-        self.operationQueue.forEach { operation in
-            if let description = Keypad.keyList[operation]?.description {
-                text.append(description)
-            }
-        }
-        
-        return text
-    }
+    private let operationQueue = OperationQueue()
     
-    var memory: String {
-        return ""
-    }
-    
-    private var operationQueue: [KeyType] = []
     private var isInTheMiddleOfTyping = false
+    private var currentNumericOperandValue: String?
     
+    private func containsInCurrentValue(_ value: String) -> Bool {
+        if let currentNumeric = self.currentNumericOperandValue {
+            return currentNumeric.contains(value)
+        }
+        
+        return false
+    }
     
-    mutating func setOperand(_ operand: KeyType) {
-        if self.operationQueue.isEmpty {
-            self.operationQueue.append(operand)
+    func setOperand(_ operand: KeyType) {
+        if KeyType.numbers.contains(operand) {
+            self.currentNumericOperandValue = (self.currentNumericOperandValue ?? "") + "\(operand.numericValue)"
+            self.delegate?.calculator(self, didUpdateLastOperation: self.currentNumericOperandValue ?? "")
             return
         }
         
-//        guard let lastOperation = self.operationQueue.last else {
-//            return
-//        }
+        if operand == .comma, let description = Keypad.keyList[operand]?.description, !self.containsInCurrentValue(description) {
+            self.currentNumericOperandValue = (self.currentNumericOperandValue ?? "0") + description
+            self.delegate?.calculator(self, didUpdateLastOperation: self.currentNumericOperandValue ?? "")
+            return
+        } else if operand == .comma {
+            return
+        }
         
+        if let stringValue = self.currentNumericOperandValue, let value = Double(stringValue) {
+            self.operationQueue.append(numeric: value)
+            self.currentNumericOperandValue = nil
+        }
+        
+        
+        
+        // check if is not repetetive
+        // return and ignore
+        
+        // check if it not constant
+        
+        // add operand to queue
         self.operationQueue.append(operand)
+        self.delegate?.calculator(self, didUpdateDescription: self.operationQueue.description)
     }
 }

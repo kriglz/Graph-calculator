@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kristina Gelzinyte. All rights reserved.
 //
 
-enum KeyType: Int {
+enum KeyType: Int, Equatable {
     
     case zero = 0
     case one
@@ -58,4 +58,12 @@ enum KeyType: Int {
     case pi
     case e
     case rand
+    
+    var numericValue: Int {
+        return self.rawValue
+    }
+    
+    public static var numbers: [KeyType] {
+        return [.zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine]
+    }
 }

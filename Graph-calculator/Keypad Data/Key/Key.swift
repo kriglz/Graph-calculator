@@ -17,7 +17,7 @@ extension Keypad {
         let description: String
         
         init(number type: KeyType) {
-            self.init(keyType: type, operationType: .numeric(type.rawValue), description: "\(type.rawValue)")
+            self.init(keyType: type, operationType: .numeric(Double(type.numericValue)), description: "\(type.rawValue)")
         }
         
         init(keyType: KeyType, operationType: OperationType, relatedKeyTypes: [KeyType]? = nil, description: String) {

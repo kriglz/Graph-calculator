@@ -10,7 +10,7 @@ import Foundation
 
 enum OperationType {
     
-    case numeric(Int)
+    case numeric(Double)
     case constant(Double)
     case unary((Double) -> Double)
     case binary((Double, Double) -> Double)
