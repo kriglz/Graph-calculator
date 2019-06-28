@@ -21,6 +21,7 @@
 		89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */; };
 		8959519922C571A8003D73C3 /* CalculatorBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519822C571A8003D73C3 /* CalculatorBrains.swift */; };
 		8959519B22C571B9003D73C3 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519A22C571B9003D73C3 /* OperationQueue.swift */; };
+		8959519D22C5A8B3003D73C3 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */; };
 		89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E1D1F4C238700B3A58D /* AppDelegate.swift */; };
 		89998E251F4C238700B3A58D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89998E241F4C238700B3A58D /* Assets.xcassets */; };
 		89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */; };
@@ -56,6 +57,7 @@
 		89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicContentSizeCollectionView.swift; sourceTree = "<group>"; };
 		8959519822C571A8003D73C3 /* CalculatorBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrains.swift; sourceTree = "<group>"; };
 		8959519A22C571B9003D73C3 /* OperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
+		8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		89998E1A1F4C238700B3A58D /* Graph-calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graph-calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89998E1D1F4C238700B3A58D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89998E241F4C238700B3A58D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
 				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
 				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
+				8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				892181EC22C42CCB00EEFCD8 /* OperationType.swift in Sources */,
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
+				8959519D22C5A8B3003D73C3 /* CGPoint+Extension.swift in Sources */,
 				89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */,
 				8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */,
 				89F9C7A8229AEDE800C31BF6 /* DisplayView.swift in Sources */,

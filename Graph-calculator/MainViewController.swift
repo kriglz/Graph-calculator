@@ -52,7 +52,9 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         self.keypadView.translatesAutoresizingMaskIntoConstraints = false
         self.displayView.translatesAutoresizingMaskIntoConstraints = false
         
-       self.makeConstraints()
+        self.makeConstraints()
+        
+        self.registerForPreviewing(with: self, sourceView: self.displayView)
     }
 
     private func makeConstraints() {
@@ -105,5 +107,28 @@ extension MainViewController: CalculatorDelegate {
     
     func calculator(_ calculator: Calculator, didUpdateMemory memory: String) {
         self.displayView.memoryText = memory
+    }
+}
+
+extension MainViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let popViewController = UIViewController()
+        popViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+        
+        let view = self.displayView.subview(at: location)
+
+        popViewController.view.addSubview(view)
+        
+        let margin: CGFloat = 20
+        view.constraint(edgesTo: popViewController.view, constant: margin)
+
+        popViewController.preferredContentSize = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + margin * 2)
+        previewingContext.sourceRect = view.frame
+        
+        return popViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        return
     }
 }

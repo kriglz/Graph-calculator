@@ -37,4 +37,8 @@ extension UIView {
         self.layer.shadowOffset = offset
         self.layer.shadowPath = path
     }
+    
+    func copyView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
+    }
 }
