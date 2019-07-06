@@ -8,7 +8,16 @@
 
 import UIKit
 
-class DisplayView: UIView {
+protocol DisplayViewDelegate: class {
+    func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController)
+    func displayView(_ view: DisplayView, didSelectClose viewController: UIViewController)
+}
+
+class DisplayView: UIView, PreviewViewControllerDelegate {
+    
+    // MARK: - Public properties
+    
+    weak var delegate: DisplayViewDelegate?
     
     var currentOperationText: String = "" {
         didSet {
@@ -28,11 +37,13 @@ class DisplayView: UIView {
         }
     }
     
+    // MARK: - Private properties
+
     private let currentOperationLabel: Label
     private let descriptionLabel: Label
     private let memoryLabel: Label
     
-    private var userIsInTheMiddleOfTyping = false
+    private var previewViewController: PreviewViewController?
     
     private var isDarkMode: Bool {
         if #available(iOS 12.0, *) {
@@ -42,14 +53,16 @@ class DisplayView: UIView {
         }
     }
     
+    // MARK: - Initialization
+
     override init(frame: CGRect) {
-        self.currentOperationLabel = Label(fontSize: 40)
+        self.currentOperationLabel = Label(title: "Current operation", fontSize: 40)
         self.currentOperationLabel.text = "123"
         
-        self.descriptionLabel = Label(fontSize: 40)
+        self.descriptionLabel = Label(title: "Description", fontSize: 40)
         self.descriptionLabel.text = "1+123"
 
-        self.memoryLabel = Label(fontSize: 20)
+        self.memoryLabel = Label(title: "Memory", fontSize: 20)
         self.memoryLabel.text = "12"
         
         super.init(frame: frame)
@@ -58,6 +71,17 @@ class DisplayView: UIView {
         self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
         self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openPreview(_:)))
+        self.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.makeConstrints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func makeConstrints() {
         let topLayoutGuide = UILayoutGuide()
         let centerTopLayoutGuide = UILayoutGuide()
         let centerBottomLayoutGuide = UILayoutGuide()
@@ -75,14 +99,14 @@ class DisplayView: UIView {
         self.currentOperationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.memoryLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         centerBottomLayoutGuide.heightAnchor.constraint(greaterThanOrEqualToConstant: 1).isActive = true
         centerTopLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor).isActive = true
         bottomLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 1.5).isActive = true
         topLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 0.1).isActive = true
         
-        topLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
-        topLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+        topLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        topLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         self.currentOperationLabel.leadingAnchor.constraint(equalTo: topLayoutGuide.leadingAnchor).isActive = true
         self.currentOperationLabel.trailingAnchor.constraint(equalTo: topLayoutGuide.trailingAnchor).isActive = true
@@ -104,7 +128,7 @@ class DisplayView: UIView {
         
         self.descriptionLabel.topAnchor.constraint(equalTo: centerTopLayoutGuide.bottomAnchor).isActive = true
         self.descriptionLabel.bottomAnchor.constraint(equalTo: centerBottomLayoutGuide.topAnchor).isActive = true
-       
+        
         centerBottomLayoutGuide.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor).isActive = true
         centerBottomLayoutGuide.bottomAnchor.constraint(equalTo: self.memoryLabel.topAnchor).isActive = true
         
@@ -115,19 +139,45 @@ class DisplayView: UIView {
         bottomLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func subview(at location: CGPoint) -> UIView {
+    // MARK: - Subviews
+
+    private func subview(at location: CGPoint) -> Label {
         var distance = CGFloat.greatestFiniteMagnitude
-        var targetView = UIView()
+        var targetView = Label()
         
         for view in self.subviews where view.center.distance(to: location) < distance {
             distance = view.center.distance(to: location)
-            targetView = view.copyView()
+            targetView = view.copyView() as Label
         }
         
         return targetView
+    }
+    
+    // MARK: - Actions
+
+    @objc private func openPreview(_ gesture: UITapGestureRecognizer) {
+        let view = self.subview(at: gesture.location(in: self))
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
+        view.backgroundColor = .white
+        
+        guard view.intrinsicContentSize.width > view.bounds.width else {
+            return
+        }
+        
+        self.previewViewController = PreviewViewController(with: view)
+        self.previewViewController?.delegate = self
+        if let previewController = self.previewViewController {
+            self.delegate?.displayView(self, didSelectPresent: previewController)
+        }
+    }
+    
+    // MARK: - PreviewViewControllerDelegate
+    
+    func previewViewControllerDisSelectClose(_ viewController: PreviewViewController) {
+        if let previewController = self.previewViewController {
+            self.delegate?.displayView(self, didSelectClose: previewController)
+            self.previewViewController = nil
+        }
     }
 }

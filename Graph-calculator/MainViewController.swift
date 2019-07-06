@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, KeypadViewDelegate {
+class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelegate, DisplayViewDelegate {
     
     private var calculator: Calculator
     private let keypadView: KeypadView
@@ -31,6 +31,7 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         
         self.calculator.delegate = self
         self.keypadView.delegate = self
+        self.displayView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,15 +50,13 @@ class MainViewController: UIViewController, KeypadViewDelegate {
         self.view.addSubview(self.keypadView)
         self.view.addSubview(self.displayView)
         
-        self.keypadView.translatesAutoresizingMaskIntoConstraints = false
-        self.displayView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.makeConstraints()
-        
-        self.registerForPreviewing(with: self, sourceView: self.displayView)
     }
 
     private func makeConstraints() {
+        self.keypadView.translatesAutoresizingMaskIntoConstraints = false
+        self.displayView.translatesAutoresizingMaskIntoConstraints = false
+        
         self.keypadView.setContentHuggingPriority(.required, for: .vertical)
         
         self.displayView.leadingAnchor.constraint(equalTo: self.keypadView.leadingAnchor).isActive = true
@@ -94,9 +93,9 @@ class MainViewController: UIViewController, KeypadViewDelegate {
     func keypadView(_ view: KeypadView, didDeselect popoverViewController: UIViewController) {
         popoverViewController.dismiss(animated: false, completion: nil)
     }
-}
-
-extension MainViewController: CalculatorDelegate {
+    
+    // MARK: - CalculatorDelegate
+    
     func calculator(_ calculator: Calculator, didUpdateLastOperation operation: String) {
         self.displayView.currentOperationText = operation
     }
@@ -108,27 +107,14 @@ extension MainViewController: CalculatorDelegate {
     func calculator(_ calculator: Calculator, didUpdateMemory memory: String) {
         self.displayView.memoryText = memory
     }
-}
-
-extension MainViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        let popViewController = UIViewController()
-        popViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
-        
-        let view = self.displayView.subview(at: location)
-
-        popViewController.view.addSubview(view)
-        
-        let margin: CGFloat = 20
-        view.constraint(edgesTo: popViewController.view, constant: margin)
-
-        popViewController.preferredContentSize = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + margin * 2)
-        previewingContext.sourceRect = view.frame
-        
-        return popViewController
+    
+    // MARK: - DisplayViewDelegate
+    
+    func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController) {
+        self.present(viewController, animated: true, completion: nil)
     }
     
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        return
+    func displayView(_ view: DisplayView, didSelectClose viewController: UIViewController) {
+        viewController.dismiss(animated: false, completion: nil)
     }
 }

@@ -132,7 +132,7 @@ class KeypadCell: UICollectionViewCell {
         
         self.cardLayer.lineWidth = 0
         
-        self.titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .medium)
+        self.titleLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         self.titleLabel.configureDefaultShadow()
     }
     

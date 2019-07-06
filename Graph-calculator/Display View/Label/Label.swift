@@ -15,6 +15,10 @@ extension DisplayView {
         static private let fontKey = "DisplayViewLabelFont"
         static private let textKey = "DisplayViewLabelText"
         static private let frameKey = "DisplayViewLabelFrame"
+        static private let titleKey = "DisplayViewLabelTitle"
+        static private let originKey = "DisplayViewOriginKey"
+        
+        var title: String?
         
         var color: UIColor? {
             didSet {
@@ -26,10 +30,23 @@ extension DisplayView {
             }
         }
         
-        convenience init(fontSize: CGFloat, color: UIColor? = nil) {
+        var absoluteOrigin: CGPoint {
+            get {
+                return CGPoint(x: self.frame.origin.x + (self.superview?.frame.origin.x ?? 0),
+                               y: self.frame.origin.y + (self.superview?.frame.origin.y ?? 0))
+            }
+            set {
+                self.origin = newValue
+            }
+        }
+        
+        private var origin: CGPoint = .zero
+        
+        convenience init(title: String? = nil, fontSize: CGFloat, color: UIColor? = nil) {
             self.init()
             
-            self.font = UIFont.systemFont(ofSize: fontSize)
+            self.title = title
+            self.font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
             self.textColor = color
             
             self.configureDefaultShadow()
@@ -46,21 +63,30 @@ extension DisplayView {
             super.init(frame: .zero)
             
             let color = aDecoder.decodeObject(forKey: Label.textColorKey)
-            let font = aDecoder.decodeObject(forKey: Label.fontKey)
             let text = aDecoder.decodeObject(forKey: Label.textKey)
             let frame = aDecoder.decodeCGRect(forKey: Label.frameKey)
-            
-            self.font = font as? UIFont
+            let absoluteOrigin = aDecoder.decodeCGPoint(forKey: Label.originKey)
+            let title = aDecoder.decodeObject(forKey: Label.titleKey)
+            let font = aDecoder.decodeObject(forKey: Label.fontKey)
+
             self.text = text as? String
             self.frame = frame
             self.textColor = color as? UIColor
+            self.title = title as? String
+            self.font = font as? UIFont
+            self.absoluteOrigin = absoluteOrigin
         }
         
         override func encode(with aCoder: NSCoder) {
             aCoder.encode(self.textColor, forKey: Label.textColorKey)
             aCoder.encode(self.font, forKey: Label.fontKey)
+            aCoder.encode(self.absoluteOrigin, forKey: Label.originKey)
             aCoder.encode(self.text, forKey: Label.textKey)
             aCoder.encode(self.frame, forKey: Label.frameKey)
+            
+            if let title = self.title {
+                aCoder.encode(title, forKey: Label.titleKey)
+            }
         }
     }
 }
