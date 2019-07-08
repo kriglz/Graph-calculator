@@ -63,6 +63,7 @@ class PopoverViewController: UIViewController {
             self.moveHighlight(to: firstButton)
         }
         
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.constraint(edgesTo: self.view)
 
         let contentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)

@@ -49,6 +49,7 @@ class KeypadView: UIView, KeypadCellDelegate {
         super.layoutSubviews()
         
         self.addSubview(self.gridCollectionView)
+        self.gridCollectionView.translatesAutoresizingMaskIntoConstraints = false
         self.gridCollectionView.constraint(edgesTo: self)
     }
     

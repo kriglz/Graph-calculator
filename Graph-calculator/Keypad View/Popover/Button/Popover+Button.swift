@@ -38,6 +38,7 @@ extension PopoverViewController {
             super.init(frame: frame)
             
             self.addSubview(self.label)
+            self.label.translatesAutoresizingMaskIntoConstraints = false
             self.label.constraint(edgesTo: self)
 
             self.updateAppearance(animated: false)

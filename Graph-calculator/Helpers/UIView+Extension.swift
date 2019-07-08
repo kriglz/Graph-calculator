@@ -13,8 +13,6 @@ extension UIView {
     func constraint(edgesTo view: UIView, constant: CGFloat = 0) {
         var constraints = [NSLayoutConstraint]()
         
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
         if #available(iOS 11.0, *) {
             constraints.append(self.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: constant))
             constraints.append(self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -constant))
