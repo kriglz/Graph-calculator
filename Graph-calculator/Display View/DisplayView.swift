@@ -174,7 +174,7 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     // MARK: - PreviewViewControllerDelegate
     
-    func previewViewControllerDisSelectClose(_ viewController: PreviewViewController) {
+    func previewViewControllerDidSelectClose(_ viewController: PreviewViewController) {
         if let previewController = self.previewViewController {
             self.delegate?.displayView(self, didSelectClose: previewController)
             self.previewViewController = nil

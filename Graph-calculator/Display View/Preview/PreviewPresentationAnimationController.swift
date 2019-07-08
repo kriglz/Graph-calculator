@@ -39,6 +39,8 @@ class PreviewPresentationAnimationController: NSObject, UIViewControllerAnimated
                        animations: {
                             self.transitionAnimation?()
                        },
-                       completion: nil)
+                       completion: { completed in
+                            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                       })
     }
 }

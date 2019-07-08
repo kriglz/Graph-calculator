@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PreviewViewControllerDelegate: class {
-    func previewViewControllerDisSelectClose(_ viewController: PreviewViewController)
+    func previewViewControllerDidSelectClose(_ viewController: PreviewViewController)
 }
 
 class PreviewViewController: UIViewController {
@@ -35,9 +35,10 @@ class PreviewViewController: UIViewController {
         
         let shadowView = UIView(frame: frame)
         shadowView.backgroundColor = view.backgroundColor
-        shadowView.layer.shadowOpacity = 1
+        shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        shadowView.layer.shadowRadius = 5
         
-        let cornerRadius: CGFloat = 4
+        let cornerRadius: CGFloat = 8
         scrollView.layer.cornerRadius = cornerRadius
         shadowView.layer.cornerRadius = cornerRadius
         
@@ -64,7 +65,7 @@ class PreviewViewController: UIViewController {
             scrollView.frame.size.height = viewContentHeight < maxAllowedHeight ? viewContentHeight : maxAllowedHeight
             
             shadowView.frame = scrollView.frame
-            shadowView.layer.shadowOpacity = 1
+            shadowView.layer.shadowOpacity = 0.2
         }
     }
     
@@ -82,6 +83,6 @@ class PreviewViewController: UIViewController {
     }
     
     @objc func close(_ gesture: UITapGestureRecognizer) {
-        self.delegate?.previewViewControllerDisSelectClose(self)
+        self.delegate?.previewViewControllerDidSelectClose(self)
     }
 }
