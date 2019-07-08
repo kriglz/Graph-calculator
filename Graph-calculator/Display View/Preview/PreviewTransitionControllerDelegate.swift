@@ -10,11 +10,11 @@ import UIKit
 
 class PreviewTransitionControllerDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
-    var originFrame = CGRect.zero
-    var animation: (() -> Void)?
+    var transitionAnimation: (() -> Void)?
+    var duration: TimeInterval?
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PreviewPresentationAnimationController(duration: 0.5, originFrame: self.originFrame, animation: animation)
+        return PreviewPresentationAnimationController(duration: self.duration, transitionAnimation: self.transitionAnimation)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {

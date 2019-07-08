@@ -10,38 +10,35 @@ import UIKit
 
 class PreviewPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
-    private var duration: TimeInterval = 0.5
-    private var transitionFrame: CGRect = .zero
-    private var animation: (() -> Void)?
+    private var duration: TimeInterval?
+    private var transitionAnimation: (() -> Void)?
     
-    convenience init(duration: TimeInterval, originFrame: CGRect, animation: (() -> Void)? = nil) {
+    convenience init(duration: TimeInterval? = nil, transitionAnimation: (() -> Void)? = nil) {
         self.init()
         
         self.duration = duration
-        self.transitionFrame = originFrame
-        self.animation = animation
+        self.transitionAnimation = transitionAnimation
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        return self.duration ?? 0
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toViewController = transitionContext.viewController(forKey: .to) else { return }
+        guard let toViewController = transitionContext.viewController(forKey: .to) else {
+            return
+        }
         
-        let containerView = transitionContext.containerView
-        //        toViewController.view.frame = self.transitionFrame
-        containerView.addSubview(toViewController.view)
+        transitionContext.containerView.addSubview(toViewController.view)
         
-        
-                UIView.animate(withDuration: duration,
-                               delay: 0,
-                               options: [.allowUserInteraction, .curveEaseIn],
-                               animations: {
-                                    self.animation?()
-                               }, completion: { completed in
-                                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                               })
-        
+        UIView.animate(withDuration: self.duration ?? 0,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.01,
+                       options: [.allowUserInteraction, .curveEaseIn, .beginFromCurrentState],
+                       animations: {
+                            self.transitionAnimation?()
+                       },
+                       completion: nil)
     }
 }
