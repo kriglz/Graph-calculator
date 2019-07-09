@@ -24,8 +24,6 @@ class PreviewViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.close(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-       
         let frame = CGRect(origin: CGPoint(x: view.frame.origin.x, y: view.frame.origin.y + self.view.frame.origin.y), size: view.bounds.size)
         
         let scrollView = UIScrollView(frame: frame)
@@ -58,6 +56,8 @@ class PreviewViewController: UIViewController {
         
         self.transitionDelegate.duration = 0.4
         self.transitionDelegate.transitionAnimation = {
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+
             view.sizeToFit()
             
             let viewContentHeight = view.bounds.size.height
