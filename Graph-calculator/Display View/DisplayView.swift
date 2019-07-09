@@ -156,16 +156,16 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     // MARK: - Actions
 
     @objc private func openPreview(_ gesture: UITapGestureRecognizer) {
-        let view = self.subview(at: gesture.location(in: self))
-        view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
-        view.backgroundColor = .white
+        let label = self.subview(at: gesture.location(in: self))
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
         
-        guard view.intrinsicContentSize.width > view.bounds.width else {
+        guard label.intrinsicContentSize.width > label.bounds.width else {
             return
         }
         
-        self.previewViewController = PreviewViewController(with: view)
+        self.previewViewController = PreviewViewController(with: label)
         self.previewViewController?.delegate = self
         if let previewController = self.previewViewController {
             self.delegate?.displayView(self, didSelectPresent: previewController)

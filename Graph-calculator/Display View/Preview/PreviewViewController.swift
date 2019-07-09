@@ -18,21 +18,21 @@ class PreviewViewController: UIViewController {
     
     private let transitionDelegate: PreviewTransitionControllerDelegate
     
-    convenience init(with view: DisplayView.Label) {
+    convenience init(with label: DisplayView.Label) {
         self.init()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.close(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        let frame = CGRect(origin: CGPoint(x: view.frame.origin.x, y: view.frame.origin.y + self.view.frame.origin.y), size: view.bounds.size)
+        let frame = CGRect(origin: CGPoint(x: label.frame.origin.x, y: label.frame.origin.y + self.view.frame.origin.y), size: label.bounds.size)
         
         let scrollView = UIScrollView(frame: frame)
-        scrollView.backgroundColor = view.backgroundColor
+        scrollView.backgroundColor = label.backgroundColor
         scrollView.alwaysBounceVertical = true
         scrollView.delaysContentTouches = false
         
         let shadowView = UIView(frame: frame)
-        shadowView.backgroundColor = view.backgroundColor
+        shadowView.backgroundColor = label.backgroundColor
         shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
         shadowView.layer.shadowRadius = 5
         
@@ -43,24 +43,24 @@ class PreviewViewController: UIViewController {
         self.view.addSubview(shadowView)
         self.view.addSubview(scrollView)
 
-        scrollView.addSubview(view)
+        scrollView.addSubview(label)
         
-        view.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        view.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         
-        view.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        label.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
         self.transitionDelegate.duration = 0.4
         self.transitionDelegate.transitionAnimation = {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
 
-            view.sizeToFit()
+            label.sizeToFit()
             
-            let viewContentHeight = view.bounds.size.height
+            let viewContentHeight = label.bounds.size.height
             let maxAllowedHeight = self.view.frame.height * 0.3
             scrollView.frame.size.height = viewContentHeight < maxAllowedHeight ? viewContentHeight : maxAllowedHeight
             

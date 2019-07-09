@@ -32,15 +32,15 @@ extension DisplayView {
         
         var absoluteOrigin: CGPoint {
             get {
-                return CGPoint(x: self.frame.origin.x + (self.superview?.frame.origin.x ?? 0),
-                               y: self.frame.origin.y + (self.superview?.frame.origin.y ?? 0))
+                return self.origin ?? CGPoint(x: self.frame.origin.x + (self.superview?.frame.origin.x ?? 0),
+                                              y: self.frame.origin.y + (self.superview?.frame.origin.y ?? 0))
             }
             set {
                 self.origin = newValue
             }
         }
         
-        private var origin: CGPoint = .zero
+        private var origin: CGPoint?
         
         convenience init(title: String? = nil, fontSize: CGFloat, color: UIColor? = nil) {
             self.init()
