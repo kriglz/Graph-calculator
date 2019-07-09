@@ -12,7 +12,6 @@ struct CalculatorMemory {
     var storage: Dictionary<String, Double>?
 }
 
-
 struct CalculatorBrain {
     
 //Description string made out of description array

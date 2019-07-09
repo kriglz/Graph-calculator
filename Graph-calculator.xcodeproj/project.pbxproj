@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		892181EA22C42B0100EEFCD8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181E922C42B0100EEFCD8 /* Key.swift */; };
-		892181EC22C42CCB00EEFCD8 /* OperationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181EB22C42CCB00EEFCD8 /* OperationType.swift */; };
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
 		8931C88422C18395009C94C9 /* GCColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88322C18395009C94C9 /* GCColor.swift */; };
 		8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8931C88522C2A5E9009C94C9 /* HighlightView.swift */; };
@@ -19,8 +18,6 @@
 		89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */; };
 		89581F742284CDC0009D8469 /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */; };
 		89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */; };
-		8959519922C571A8003D73C3 /* CalculatorBrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519822C571A8003D73C3 /* CalculatorBrains.swift */; };
-		8959519B22C571B9003D73C3 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519A22C571B9003D73C3 /* OperationQueue.swift */; };
 		8959519D22C5A8B3003D73C3 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */; };
 		8959519F22C5A92A003D73C3 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8959519E22C5A92A003D73C3 /* Label.swift */; };
 		8969629722D0117000549E78 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969629622D0117000549E78 /* PreviewViewController.swift */; };
@@ -48,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		892181E922C42B0100EEFCD8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
-		892181EB22C42CCB00EEFCD8 /* OperationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationType.swift; sourceTree = "<group>"; };
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		8931C88322C18395009C94C9 /* GCColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCColor.swift; sourceTree = "<group>"; };
 		8931C88522C2A5E9009C94C9 /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
@@ -59,8 +55,6 @@
 		89581F712284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSpacingCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		89581F752284D112009D8469 /* IntrinsicContentSizeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicContentSizeCollectionView.swift; sourceTree = "<group>"; };
-		8959519822C571A8003D73C3 /* CalculatorBrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrains.swift; sourceTree = "<group>"; };
-		8959519A22C571B9003D73C3 /* OperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		8959519E22C5A92A003D73C3 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		8969629622D0117000549E78 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -253,10 +247,7 @@
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
 				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
-				8959519A22C571B9003D73C3 /* OperationQueue.swift */,
-				8959519822C571A8003D73C3 /* CalculatorBrains.swift */,
 				89D58A5D228B59F200438AAF /* KeyType.swift */,
-				892181EB22C42CCB00EEFCD8 /* OperationType.swift */,
 				892181E722C42AB100EEFCD8 /* Keypad Data */,
 				89F9C7A9229AEE0200C31BF6 /* Display View */,
 				896162D12290136D00C6B477 /* Keypad View */,
@@ -355,10 +346,8 @@
 			files = (
 				89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */,
 				89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */,
-				8959519922C571A8003D73C3 /* CalculatorBrains.swift in Sources */,
 				899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */,
 				89581F762284D112009D8469 /* IntrinsicContentSizeCollectionView.swift in Sources */,
-				892181EC22C42CCB00EEFCD8 /* OperationType.swift in Sources */,
 				89581F702284C547009D8469 /* MainViewController.swift in Sources */,
 				89516A5B1F4D671E0014CEF2 /* GraphViewController.swift in Sources */,
 				8959519D22C5A8B3003D73C3 /* CGPoint+Extension.swift in Sources */,
@@ -379,7 +368,6 @@
 				89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */,
 				8969629922D0122700549E78 /* PreviewTransitionControllerDelegate.swift in Sources */,
 				8969629722D0117000549E78 /* PreviewViewController.swift in Sources */,
-				8959519B22C571B9003D73C3 /* OperationQueue.swift in Sources */,
 				89581F722284CC3D009D8469 /* FixedSpacingCollectionViewFlowLayout.swift in Sources */,
 				89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */,
 				89581F6A2284A678009D8469 /* KeypadCell.swift in Sources */,
