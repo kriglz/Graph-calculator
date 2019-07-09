@@ -58,7 +58,7 @@ class PreviewViewController: UIViewController {
         
         self.transitionDelegate.duration = 0.4
         self.transitionDelegate.transitionAnimation = {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.25)
 
             label.sizeToFit()
             
@@ -67,7 +67,7 @@ class PreviewViewController: UIViewController {
             scrollView.frame.size.height = viewContentHeight < maxAllowedHeight ? viewContentHeight : maxAllowedHeight
             
             shadowView.frame = scrollView.frame
-            shadowView.layer.shadowOpacity = 0.2
+            shadowView.layer.shadowOpacity = 0.25
         }
     }
     

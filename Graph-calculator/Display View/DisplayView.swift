@@ -158,7 +158,7 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     @objc private func openPreview(_ gesture: UITapGestureRecognizer) {
         let label = self.subview(at: gesture.location(in: self))
         label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+        label.lineBreakMode = .byCharWrapping
         label.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
         
         guard label.intrinsicContentSize.width > label.bounds.width else {
