@@ -33,7 +33,7 @@ extension DisplayView {
         var absoluteOrigin: CGPoint {
             get {
                 return self.origin ?? CGPoint(x: self.frame.origin.x + (self.superview?.frame.origin.x ?? 0),
-                                              y: self.frame.origin.y + (self.superview?.frame.origin.y ?? 0))
+                                              y: self.frame.origin.y)
             }
             set {
                 self.origin = newValue
