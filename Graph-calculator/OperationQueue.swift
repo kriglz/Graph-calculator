@@ -20,10 +20,17 @@ class OperationQueue {
     private var descriptionQueue: [String] = []
     
     func append(_ element: KeyType) {
-        if let operation = Keypad.keyList[element] {
-            self.queue.append(operation.operationType)
-            self.descriptionQueue.append(operation.description)
+        guard let operation = Keypad.keyList[element] else {
+            return
         }
+        
+        if let lastOperation = self.queue.last, lastOperation == operation.operationType, !lastOperation.canRepeat {
+            self.queue.removeLast()
+            self.descriptionQueue.removeLast()
+        }
+        
+        self.queue.append(operation.operationType)
+        self.descriptionQueue.append(operation.description)
     }
     
     func append(numeric value: Double) {

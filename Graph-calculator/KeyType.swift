@@ -63,7 +63,12 @@ enum KeyType: Int, Equatable {
         return self.rawValue
     }
     
-    public static var numbers: [KeyType] {
-        return [.zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine]
+    var isNumber: Bool {
+        switch self {
+        case .zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine:
+            return true
+        default:
+            return false
+        }
     }
 }

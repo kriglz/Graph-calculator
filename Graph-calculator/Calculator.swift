@@ -32,7 +32,7 @@ class Calculator: NSObject {
     }
     
     func setOperand(_ operand: KeyType) {
-        if KeyType.numbers.contains(operand) {
+        if operand.isNumber {
             self.currentNumericOperandValue = (self.currentNumericOperandValue ?? "") + "\(operand.numericValue)"
             self.delegate?.calculator(self, didUpdateLastOperation: self.currentNumericOperandValue ?? "")
             return
@@ -51,14 +51,6 @@ class Calculator: NSObject {
             self.currentNumericOperandValue = nil
         }
         
-        
-        
-        // check if is not repetetive
-        // return and ignore
-        
-        // check if it not constant
-        
-        // add operand to queue
         self.operationQueue.append(operand)
         self.delegate?.calculator(self, didUpdateDescription: self.operationQueue.description)
     }
