@@ -24,7 +24,8 @@ class PreviewViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.close(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        let frame = CGRect(origin: CGPoint(x: label.absoluteOrigin.x, y: label.absoluteOrigin.y + self.view.frame.origin.y),
+        let frame = CGRect(origin: CGPoint(x: label.absoluteOrigin.x,
+                                           y: label.absoluteOrigin.y - self.view.frame.origin.y),
                            size: label.bounds.size)
         
         let scrollView = UIScrollView(frame: frame)
