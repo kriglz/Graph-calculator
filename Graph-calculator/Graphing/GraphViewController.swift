@@ -76,7 +76,7 @@ class GraphViewController: UIViewController {
             self.cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: margin).isActive = true
         } else {
             self.functionTitleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            self.functionTitleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.67).isActive = true
+            self.functionTitleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
             self.functionTitleLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -margin).isActive = true
             
             self.cancelButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: margin).isActive = true

@@ -18,6 +18,16 @@ class PreviewViewController: UIViewController {
     
     private let transitionDelegate: PreviewTransitionControllerDelegate
     
+    private var isDarkMode: Bool {
+        return true
+        
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
+    
     convenience init(with label: DisplayView.Label) {
         self.init()
         
@@ -58,7 +68,7 @@ class PreviewViewController: UIViewController {
         
         self.transitionDelegate.duration = 0.4
         self.transitionDelegate.transitionAnimation = {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.25)
+            self.view.backgroundColor = GCColor.previewOverlay(forDarkMode: self.isDarkMode)
 
             label.sizeToFit()
             

@@ -20,6 +20,18 @@ struct GCColor {
             return .white
         }
     }
+   
+    static func previewBackground(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return UIColor(r: 66, g: 66, b: 66, alpha: 1)
+        }
+        
+        return .white
+    }
+    
+    static func previewOverlay(forDarkMode darkMode: Bool) -> UIColor {
+        return UIColor.black.withAlphaComponent(0.25)
+    }
     
     static func title(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
@@ -47,7 +59,7 @@ struct GCColor {
     
     static func highlight(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 138, g: 159, b: 162, alpha: 1)
+            return UIColor(r: 108, g: 124, b: 126, alpha: 1)
         }
         
         return UIColor(r: 13, g: 62, b: 73, alpha: 1)
@@ -55,7 +67,7 @@ struct GCColor {
     
     static func key(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 76, g: 76, b: 76, alpha: 1)
+            return UIColor(r: 66, g: 66, b: 66, alpha: 1)
         }
         
         return UIColor(r: 138, g: 159, b: 162, alpha: 1)
@@ -63,7 +75,7 @@ struct GCColor {
     
     static func alternativeKey(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 110, g: 110, b: 110, alpha: 1)
+            return UIColor(r: 90, g: 90, b: 90, alpha: 1)
         }
         
         return UIColor(r: 100, g: 133, b: 140, alpha: 1)
@@ -71,7 +83,15 @@ struct GCColor {
     
     static func keyBorder(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 128, g: 128, b: 128, alpha: 1)
+            return UIColor(r: 118, g: 118, b: 118, alpha: 1)
+        }
+        
+        return .white
+    }
+    
+    static func popoverBorder(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return UIColor(r: 190, g: 190, b: 190, alpha: 1)
         }
         
         return .white
@@ -79,7 +99,7 @@ struct GCColor {
     
     static func alternativeKeyText(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 144, g: 144, b: 144, alpha: 1)
+            return UIColor(r: 124, g: 124, b: 124, alpha: 1)
         }
         
         return self.alternativeKey(forDarkMode: darkMode)
