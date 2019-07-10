@@ -90,7 +90,12 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         if keyOperation == .graph {
             self.calculator.graphData { [weak self] result in
                 if case .failure = result {
-                    return
+                    let alert = UIAlertController(title: "Graphing Calculator", message: "Please enter valid function.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                        alert.dismiss(animated: true, completion: nil)
+                    })
+                    alert.addAction(okAction)
+                    self?.present(alert, animated: true, completion: nil)
                 } else if case .success(let data) = result {
                     guard let self = self else {
                         return
