@@ -150,6 +150,8 @@ class KeypadCell: UICollectionViewCell {
         
         self.titleLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         self.titleLabel.configureDefaultShadow()
+        
+        self.imageView.configureDefaultShadow()
     }
     
     private func updateAppearance() {
