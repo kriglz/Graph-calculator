@@ -14,6 +14,8 @@ protocol GraphViewControllerDelegate: class {
 
 class GraphViewController: UIViewController {
     
+    weak var delegate: GraphViewControllerDelegate?
+    
     var yResult: ((_ xArgument: Double) -> Double)? {
         didSet {
             self.graphView.functionY = self.yResult
@@ -26,7 +28,9 @@ class GraphViewController: UIViewController {
         }
     }
     
-    weak var delegate: GraphViewControllerDelegate?
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     @IBOutlet weak var graphView: GraphView! {
         didSet {
