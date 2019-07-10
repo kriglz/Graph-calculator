@@ -14,7 +14,11 @@ protocol GraphViewControllerDelegate: class {
 
 class GraphViewController: UIViewController {
     
-    var yResult: ((_ xArgument: Double) -> Double)?
+    var yResult: ((_ xArgument: Double) -> Double)? {
+        didSet {
+            self.graphView.functionY = self.yResult
+        }
+    }
     
     var functionTitle: String = "" {
         didSet {
@@ -26,8 +30,6 @@ class GraphViewController: UIViewController {
     
     @IBOutlet weak var graphView: GraphView! {
         didSet {
-            graphView.functionY = yResult
-            
             let scaleHandler = #selector(graphView.changeScale(byReactingTo:))
             let pinchRecognizer = UIPinchGestureRecognizer(target: graphView, action: scaleHandler)
             graphView.addGestureRecognizer(pinchRecognizer)

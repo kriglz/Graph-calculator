@@ -22,7 +22,7 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         }
     }
     
-    private lazy var graphViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+    private var graphViewController: GraphViewController?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.calculator = Calculator()
@@ -96,6 +96,14 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
                         return
                     }
                     
+                    if self.graphViewController == nil {
+                        self.graphViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as? GraphViewController
+                    }
+                    
+                    guard let graphViewController = self.graphViewController else {
+                        return
+                    }
+                    
                     graphViewController.delegate = self
                     graphViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
                     graphViewController.functionTitle = data.title
@@ -151,6 +159,8 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     
     func graphViewControllerDidSelectClose(_ controller: GraphViewController) {
         //            calculatorVC.memory.storage?.removeValue(forKey: "x")
-        self.graphViewController.dismiss(animated: true, completion: nil)
+      
+        self.graphViewController?.dismiss(animated: true, completion: nil)
+        self.graphViewController = nil
     }
 }
