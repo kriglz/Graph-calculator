@@ -153,19 +153,36 @@ class Calculator: NSObject {
         self.displayDescription()
     }
     
-    func displayDescription() {
+    private func displayDescription() {
         if self.brain.evaluate().isPending {
             self.descriptionDisplayText = self.brain.description + "..."
-//            self.changeGraphButtonStatusToNotReady()
         } else {
             if !self.brain.description.isEmpty {
                 self.descriptionDisplayText = self.brain.description + "="
-//                self.changeGraphButtonStatusToReady()
             } else {
                 self.displayValue = 0
                 self.descriptionDisplayText = "0"
-//                self.changeGraphButtonStatusToNotReady()
             }
         }
+    }
+    
+    func graphData(data: (Result<(title: String, yFunction: (Double) -> Double), Error>) -> Void) {
+        if self.brain.evaluate().isPending || self.brain.description.isEmpty {
+            return data(.failure(NSError(domain: "Calculator.graphData", code: 0001, userInfo: [:])))
+        }
+        
+        let title = "f(x) = " + self.brain.description
+        
+        let yFunction = { (xArgument: Double) -> Double in
+            if self.memory.storage != nil {
+                self.memory.storage!["x"] = xArgument
+            } else {
+                self.memory.storage = ["x": xArgument]
+            }
+            
+            return self.brain.evaluate(using: self.memory.storage).result!
+        }
+        
+        return data(.success((title, yFunction)))
     }
 }
