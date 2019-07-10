@@ -12,7 +12,7 @@ extension Keypad {
     struct Key {
         
         let keyType: KeyType
-        let operationType: OperationType
+        let operationType: CalculatorBrain.OperationType
         let relatedKeyTypes: [KeyType]?
         let description: String
         
@@ -20,7 +20,7 @@ extension Keypad {
             self.init(keyType: type, operationType: .numeric(Double(type.numericValue)), description: "\(type.rawValue)")
         }
         
-        init(keyType: KeyType, operationType: OperationType, relatedKeyTypes: [KeyType]? = nil, description: String) {
+        init(keyType: KeyType, operationType: CalculatorBrain.OperationType, relatedKeyTypes: [KeyType]? = nil, description: String) {
             self.keyType = keyType
             self.operationType = operationType
             self.relatedKeyTypes = relatedKeyTypes

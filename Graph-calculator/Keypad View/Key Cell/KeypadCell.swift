@@ -53,7 +53,7 @@ class KeypadCell: UICollectionViewCell {
     
     private var hasDefaultBackground: Bool {
         switch self.operation {
-        case .allClear, .undo, .redo, .memoryIn, .memoryOut:
+        case .allClear, .undo, .memoryIn, .memoryOut:
             return false
         default:
             return true
@@ -70,7 +70,7 @@ class KeypadCell: UICollectionViewCell {
         }
         
         switch operation {
-        case .division, .multiplication, .difference, .sum, .equal, .percentage:
+        case .division, .multiplication, .difference, .sum, .equal:
             return GCColor.alternativeKey(forDarkMode: self.isDarkMode).cgColor
         default:
             return GCColor.key(forDarkMode: self.isDarkMode).cgColor

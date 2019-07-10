@@ -210,6 +210,7 @@
 		896162DD2290166F00C6B477 /* Calculator Brain */ = {
 			isa = PBXGroup;
 			children = (
+				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
 				89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */,
 			);
 			path = "Calculator Brain";
@@ -246,12 +247,11 @@
 			children = (
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
-				89ECAB9322BDA8AC00FE4000 /* Calculator.swift */,
 				89D58A5D228B59F200438AAF /* KeyType.swift */,
+				896162DD2290166F00C6B477 /* Calculator Brain */,
 				892181E722C42AB100EEFCD8 /* Keypad Data */,
 				89F9C7A9229AEE0200C31BF6 /* Display View */,
 				896162D12290136D00C6B477 /* Keypad View */,
-				896162DD2290166F00C6B477 /* Calculator Brain */,
 				896162DC2290165F00C6B477 /* Graphing */,
 				896162D4229013E300C6B477 /* Helpers */,
 				896162D5229013F800C6B477 /* Supporting Files */,

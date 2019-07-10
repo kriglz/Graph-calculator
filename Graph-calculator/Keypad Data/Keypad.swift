@@ -11,8 +11,8 @@ import UIKit
 class Keypad {
     
     static var displayKeyList: [KeyType] {
-        return [.allClear,      .undo,      .redo,          .memoryIn,      .memoryOut,
-                .sqrt,          .pi,        .lParenthesis,  .rParenthesis,  .percentage,
+        return [.allClear,      .undo,      .memoryIn,      .memoryOut,     .placeholder,
+                .sqrt,          .pi,        .placeholder,    .percentage,    .division,
                 .pow,           .seven,     .eight,         .nine,          .multiplication,
                 .sin,           .four,      .five,          .six,           .difference,
                 .sinh,          .one,       .two,           .three,         .sum,
@@ -21,6 +21,8 @@ class Keypad {
     
     static var keyList: Dictionary<KeyType, Key> {
         return [
+            .placeholder: Key(keyType: .placeholder, operationType: .other, description: ""),
+            
             .pi: Key(keyType: .pi, operationType: .constant(Double.pi), relatedKeyTypes: [.pi, .e, .rand], description: "π"),
             .e: Key(keyType: .e, operationType: .constant(M_E), description: "e"),
             .rand: Key(keyType: .rand, operationType: .constant(Double.random(in: -1000...1000)), description: "rand"),
@@ -30,7 +32,7 @@ class Keypad {
             
             .pow: Key(keyType: .pow, operationType: .binary({ pow($0, $1)}), relatedKeyTypes: [.pow, .powN, .expN], description: "x²"),
             .powN: Key(keyType: .pow, operationType: .binary({ pow($0, $1)}), description: "xⁿ"),
-            .expN: Key(keyType: .pow, operationType: .unary(exp), description: "xⁿ"),
+            .expN: Key(keyType: .pow, operationType: .unary(exp), description: "eˣ"),
             
             .sin: Key(keyType: .sin, operationType: .unary(sin), relatedKeyTypes: [.sin, .cos, .tan], description: "sin"),
             .cos: Key(keyType: .cos, operationType: .unary(cos), description: "cos"),
@@ -73,7 +75,6 @@ class Keypad {
             .comma: Key(keyType: .comma, operationType: .other, description: "."),
             .allClear: Key(keyType: .allClear, operationType: .other, description: "AC"),
             .undo: Key(keyType: .undo, operationType: .other, description: "↩︎"),
-            .redo: Key(keyType: .redo, operationType: .other, description: "↪︎"),
         ]
     }
 }

@@ -119,9 +119,7 @@ class Calculator: NSObject {
     }
     
     private func randomGenerationButton() {
-        let maxNumber = Double(UInt32.max)
-        let randomNumber = Double(arc4random())
-        self.displayValue = randomNumber / maxNumber
+        self.displayValue = Double.random(in: -1000...1000)
         self.userIsInTheMiddleOfTyping = true
     }
     

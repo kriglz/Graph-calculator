@@ -17,30 +17,48 @@ struct CalculatorBrain {
 //Description string made out of description array
     private var descriptionArray: [String] = []
     
-    private enum Operation{
+    enum OperationType {
+        case numeric(Double)
         case constant(Double)
-        case unaryOperation((Double) -> Double)
-        case binaryOperation((Double, Double) -> Double)
+        case unary((Double) -> Double)
+        case binary((Double, Double) -> Double)
         case equals
+        case other
     }
 
-    private var operations: Dictionary<String, Operation> = [
-        "π": Operation.constant(Double.pi),
-        "√": Operation.unaryOperation(sqrt),
-        "cos": Operation.unaryOperation(cos),
-        "sin": Operation.unaryOperation(sin),
-        "tan": Operation.unaryOperation(tan),
-        "exp": Operation.unaryOperation(exp),
-        "x⁻¹": Operation.unaryOperation({ 1 / $0 }),
-        "ln": Operation.unaryOperation(log),
-        "±": Operation.unaryOperation({ -$0}),
-        "×": Operation.binaryOperation({ $0 * $1}),
-        "÷": Operation.binaryOperation({ $0 / $1}),
-        "+": Operation.binaryOperation({ $0 + $1}),
-        "-": Operation.binaryOperation({ $0 - $1}),
-        "=": Operation.equals
+    private var operations: Dictionary<String, OperationType> = [
+        "π": OperationType.constant(Double.pi),
+        "e": .constant(M_E),
+        
+        "√": OperationType.unary(sqrt),
+        // sqrt n
+        
+        "cos": OperationType.unary(cos),
+        "sin": OperationType.unary(sin),
+        "tan": OperationType.unary(tan),
+        
+        "cosh": OperationType.unary(cosh),
+        "sinh": OperationType.unary(sinh),
+        "tanh": OperationType.unary(tanh),
+        
+        "x²": OperationType.unary({ pow($0, 2)}),
+        "xⁿ": OperationType.binary({ pow($0, $1)}),
+        "eˣ": OperationType.unary(exp),
+
+        "log": OperationType.unary(log),
+        // fix this ln
+        "ln": OperationType.unary(log),
+
+        "±": OperationType.unary({ -$0}),
+        "％": OperationType.unary({ $0 / 100}),
+
+        "×": OperationType.binary({ $0 * $1}),
+        "÷": OperationType.binary({ $0 / $1}),
+        "+": OperationType.binary({ $0 + $1}),
+        "-": OperationType.binary({ $0 - $1}),
+        
+        "=": OperationType.equals
     ]
- 
     
     //set operand for ViewController
     mutating func setOperand (_ operand: Double){
@@ -156,7 +174,7 @@ struct CalculatorBrain {
                             resultIsPending = false
                         }
                     
-                    case .unaryOperation (let function):
+                    case .unary (let function):
                         accumulation = function(accumulation ?? 0)
                         if pendingBindingOperation != nil {
                             resultIsPending = true
@@ -164,7 +182,7 @@ struct CalculatorBrain {
                             resultIsPending = false
                         }
                         
-                    case .binaryOperation(let function):
+                    case .binary(let function):
                         if pendingBindingOperation != nil {
                             performPendingBinaryOperation()
                             pendingBindingOperation = nil
@@ -178,6 +196,9 @@ struct CalculatorBrain {
                             pendingBindingOperation = nil
                         }
                         resultIsPending = false
+                        
+                    default:
+                        break
                     }
                 }
             }
@@ -272,12 +293,14 @@ struct CalculatorBrain {
             switch op {
             case .constant:
                 return "constant"
-            case .unaryOperation:
+            case .unary:
                 return "unaryOperation"
-            case .binaryOperation:
+            case .binary:
                 return "binaryOperation"
             case .equals:
                 return "equals"
+            default:
+                break
             }
         }
         return "Can't found"
@@ -331,10 +354,10 @@ struct CalculatorBrain {
                     case "=":
                         break
                         
-                    case "x⁻¹":
+                    case "x²":
                         if lastOperationName == "equals" {
                             displayArray.insert("(", at: displayArray.startIndex)
-                            displayArray.append(")" + "⁻¹")
+                            displayArray.append(")" + "²")
                             
                         } else if lastOperationName == "unaryOperation" {
                             displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
@@ -342,7 +365,7 @@ struct CalculatorBrain {
                         } else {
                             displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex))
                         }
-                        displayArray.append(")" + "⁻¹")
+                        displayArray.append(")" + "²")
    
                     case "±":
                         if performOperation(with: partialArray).result! < 0 {
@@ -371,26 +394,23 @@ struct CalculatorBrain {
                         if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
                             displayArray.append(element)
                         } else {
-                        
-                        if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
-                            displayArray.insert("(", at: displayArray.startIndex)
-                            displayArray.append(")" + element)
-                            
-                        } else if lastOperationName == "equals" {
-                            
-                            displayArray.insert(element + "(", at: displayArray.startIndex)
-                            displayArray.append(")")
-                            
-                            
-                        } else {
-                            if lastOperationName == "unaryOperation" &&  newOperationName == "unaryOperation" {
-                                displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
-                                repetetiveNumber += 2
+                            if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
+                                displayArray.insert("(", at: displayArray.startIndex)
+                                displayArray.append(")" + element)
+                                
+                            } else if lastOperationName == "equals" {
+                                displayArray.insert(element + "(", at: displayArray.startIndex)
+                                displayArray.append(")")
                                 
                             } else {
-                                displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex))
-                            }
-                            displayArray.append(")")
+                                if lastOperationName == "unaryOperation" &&  newOperationName == "unaryOperation" {
+                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
+                                    repetetiveNumber += 2
+                                    
+                                } else {
+                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex))
+                                }
+                                displayArray.append(")")
                             }
                         }
                     }
