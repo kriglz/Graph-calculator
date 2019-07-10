@@ -24,8 +24,16 @@ class KeypadCell: UICollectionViewCell {
 
     var operation: KeyType = .zero {
         didSet {
+            defer {
+                self.setupAppearance()
+            }
+            
+            if self.operation == .graph {
+                self.imageView.image = UIImage(named: "GraphIcon")
+                return
+            }
+            
             self.titleLabel.text = Keypad.keyList[self.operation]?.description
-            self.setupAppearance()
         }
     }
     
@@ -35,6 +43,7 @@ class KeypadCell: UICollectionViewCell {
     
     private let cardLayer: CAShapeLayer
     private let titleLabel: UILabel
+    private let imageView: UIImageView
     private var relatedSelectionPopoverViewController: PopoverViewController?
 
     private var isDarkMode: Bool {
@@ -89,6 +98,9 @@ class KeypadCell: UICollectionViewCell {
         self.titleLabel = UILabel()
         self.titleLabel.textAlignment = .center
         
+        self.imageView = UIImageView()
+        self.imageView.contentMode = .center
+        
         super.init(frame: frame)
         
         let inset = UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5)
@@ -101,11 +113,15 @@ class KeypadCell: UICollectionViewCell {
         self.layer.addSublayer(cardLayer)
 
         self.addSubview(self.titleLabel)
+        self.addSubview(self.imageView)
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView.translatesAutoresizingMaskIntoConstraints = false
         
         self.titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        self.imageView.constraint(edgesTo: self)
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.showRelatedSelection(_:)))
         longPressGestureRecognizer.minimumPressDuration = 0
@@ -140,6 +156,7 @@ class KeypadCell: UICollectionViewCell {
         self.cardLayer.fillColor = self.fillColor
         self.cardLayer.strokeColor = GCColor.keyBorder(forDarkMode: self.isDarkMode).cgColor
         self.titleLabel.textColor = self.textColor
+        self.imageView.tintColor = self.textColor
     }
     
     // MARK: - Actions
