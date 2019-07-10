@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelegate, DisplayViewDelegate {
+class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelegate, DisplayViewDelegate, GraphViewControllerDelegate {
     
     private var calculator: Calculator
     private let keypadView: KeypadView
@@ -22,12 +22,16 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         }
     }
     
+    private lazy var graphViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.calculator = Calculator()
         self.keypadView = KeypadView()
         self.displayView = DisplayView()
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        self.title = "Calculator"
         
         self.calculator.delegate = self
         self.keypadView.delegate = self
@@ -83,6 +87,27 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     // MARK: - KeypadViewDelegate
     
     func keypadView(_ view: KeypadView, didSelect keyOperation: KeyType) {
+        if keyOperation == .graph {
+            self.calculator.graphData { [weak self] result in
+                if case .failure = result {
+                    return
+                } else if case .success(let data) = result {
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    graphViewController.delegate = self
+                    graphViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+                    graphViewController.functionTitle = data.title
+                    graphViewController.yResult = data.yFunction
+                    
+                    self.present(graphViewController, animated: true, completion: nil)
+                }
+            }
+            
+            return
+        }
+        
         self.calculator.setOperand(keyOperation)
     }
     
@@ -108,6 +133,10 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         self.displayView.memoryText = memory
     }
     
+    func calculator(_ calculator: Calculator, didUpdateGraphEnabled isEnabled: Bool) {        
+        print("Graph - \(isEnabled)")
+    }
+    
     // MARK: - DisplayViewDelegate
     
     func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController) {
@@ -116,5 +145,12 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     
     func displayView(_ view: DisplayView, didSelectClose viewController: UIViewController) {
         viewController.dismiss(animated: false, completion: nil)
+    }
+    
+    // MARK: - GraphViewControllerDelegate
+    
+    func graphViewControllerDidSelectClose(_ controller: GraphViewController) {
+        //            calculatorVC.memory.storage?.removeValue(forKey: "x")
+        self.graphViewController.dismiss(animated: true, completion: nil)
     }
 }

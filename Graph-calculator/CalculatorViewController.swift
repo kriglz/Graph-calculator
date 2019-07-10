@@ -188,7 +188,7 @@ class CalculatorViewController: UIViewController {
                 if !brain.description.isEmpty {
                     destinationViewController.navigationItem.title = "f(x) = " + brain.description
                     
-                    destinationViewController.calculatorVC = self
+//                    destinationViewController.calculatorVC = self
                     
                     destinationViewController.yResult = { (xArgument: Double) -> Double in
                         
