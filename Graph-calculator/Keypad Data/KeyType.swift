@@ -31,9 +31,12 @@ enum KeyType: Int, Equatable {
     case comma
     case allClear
     case undo
-    case redo
     case signChange
     case percentage
+    
+    case secondKeypad
+    case graph
+    case variableX
     
     case lParenthesis
     case rParenthesis

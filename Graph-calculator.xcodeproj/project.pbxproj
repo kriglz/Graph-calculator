@@ -96,6 +96,7 @@
 		892181E722C42AB100EEFCD8 /* Keypad Data */ = {
 			isa = PBXGroup;
 			children = (
+				89D58A5D228B59F200438AAF /* KeyType.swift */,
 				899E3F62228F1D20005265E7 /* Keypad.swift */,
 				892181ED22C42D1800EEFCD8 /* Key */,
 			);
@@ -247,7 +248,6 @@
 			children = (
 				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
-				89D58A5D228B59F200438AAF /* KeyType.swift */,
 				896162DD2290166F00C6B477 /* Calculator Brain */,
 				892181E722C42AB100EEFCD8 /* Keypad Data */,
 				89F9C7A9229AEE0200C31BF6 /* Display View */,

@@ -11,8 +11,8 @@ import UIKit
 class Keypad {
     
     static var displayKeyList: [KeyType] {
-        return [.allClear,      .undo,      .memoryIn,      .memoryOut,     .placeholder,
-                .sqrt,          .pi,        .placeholder,    .percentage,    .division,
+        return [.allClear,      .undo,      .secondKeypad,  .variableX,     .graph,
+                .sqrt,          .pi,        .percentage,    .memoryIn,      .division,
                 .pow,           .seven,     .eight,         .nine,          .multiplication,
                 .sin,           .four,      .five,          .six,           .difference,
                 .sinh,          .one,       .two,           .three,         .sum,
@@ -21,8 +21,6 @@ class Keypad {
     
     static var keyList: Dictionary<KeyType, Key> {
         return [
-            .placeholder: Key(keyType: .placeholder, operationType: .other, description: ""),
-            
             .pi: Key(keyType: .pi, operationType: .constant(Double.pi), relatedKeyTypes: [.pi, .e, .rand], description: "π"),
             .e: Key(keyType: .e, operationType: .constant(M_E), description: "e"),
             .rand: Key(keyType: .rand, operationType: .constant(Double.random(in: -1000...1000)), description: "rand"),
@@ -66,7 +64,7 @@ class Keypad {
             .eight: Key(number: .eight),
             .nine: Key(number: .nine),
             
-            .memoryIn: Key(keyType: .memoryIn, operationType: .other, description: "M+"),
+            .memoryIn: Key(keyType: .memoryIn, operationType: .other, relatedKeyTypes: [.memoryIn, .memoryOut], description: "M+"),
             .memoryOut: Key(keyType: .memoryOut, operationType: .other, description: "M-"),
             
             .lParenthesis: Key(keyType: .lParenthesis, operationType: .other, description: "("),
@@ -75,6 +73,10 @@ class Keypad {
             .comma: Key(keyType: .comma, operationType: .other, description: "."),
             .allClear: Key(keyType: .allClear, operationType: .other, description: "AC"),
             .undo: Key(keyType: .undo, operationType: .other, description: "↩︎"),
+            .graph: Key(keyType: .graph, operationType: .other, description: "G"),
+            
+            .secondKeypad: Key(keyType: .secondKeypad, operationType: .other, description: "2nd"),
+            .variableX: Key(keyType: .variableX, operationType: .other, description: "x")
         ]
     }
 }
