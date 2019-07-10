@@ -159,9 +159,13 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         let label = self.subview(at: gesture.location(in: self))
         label.numberOfLines = 0
         label.lineBreakMode = .byCharWrapping
-        label.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+        label.backgroundColor = GCColor.previewBackground(forDarkMode: self.isDarkMode)
         
-        guard label.intrinsicContentSize.width > label.bounds.width else {
+        if self.isDarkMode {
+            label.textColor = GCColor.title(forDarkMode: self.isDarkMode)
+        }
+        
+        guard label.isTruncated else {
             return
         }
         

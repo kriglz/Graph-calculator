@@ -37,7 +37,7 @@ class PopoverPresentationController: UIPresentationController {
         let layer = CAShapeLayer()
         layer.path = UIBezierPath.superellipse(in: self.frameOfPresentedViewInContainerView, cornerRadius: 4).cgPath
         layer.lineWidth = 0.5
-        layer.strokeColor = UIColor.white.cgColor
+        layer.strokeColor = GCColor.popoverBorder(forDarkMode: self.isDarkMode).cgColor
         layer.fillColor = GCColor.highlight(forDarkMode: self.isDarkMode).cgColor
         
         self.containerView?.layer.insertSublayer(layer, at: 0)
