@@ -40,6 +40,32 @@ extension DisplayView {
             }
         }
         
+        var isTruncated: Bool {
+            guard let text = self.text else {
+                return false
+            }
+            
+            return self.maximumTextLength < text.count
+        }
+        
+        var maximumTextLength: Int {
+            let testLabel = UILabel()
+            testLabel.text = "99999"
+            
+            var testLabelHight: CGFloat = 0
+            
+            while self.bounds.height >= testLabelHight {
+                testLabel.text!.append("9")
+                testLabelHight = (testLabel.text?.boundingRect(with: CGSize(width: self.bounds.width,
+                                                                            height: .greatestFiniteMagnitude),
+                                                               options: .usesLineFragmentOrigin,
+                                                               attributes: [.font: self.font!],
+                                                               context: nil).size.height ?? 0).rounded()
+            }
+            
+            return testLabel.text!.count - 1
+        }
+        
         private var origin: CGPoint?
         
         convenience init(title: String? = nil, fontSize: CGFloat, color: UIColor? = nil) {
