@@ -9,7 +9,7 @@
 import Foundation
 
 extension Double {
-    var roundedString: String {
+    var roundedToIntIfNeededString: String {
         if floor(self) == self {
             return String(format: "%.0f", self)
         }

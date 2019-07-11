@@ -27,7 +27,7 @@ class Calculator: NSObject {
         get {
             return Double(self.displayText) ?? 0
         } set {
-            self.displayText = String(newValue.roundedString)
+            self.displayText = String(newValue.roundedToIntIfNeededString)
         }
     }
     
