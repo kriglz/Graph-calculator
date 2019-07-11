@@ -337,8 +337,8 @@ struct CalculatorBrain {
                 
                 
                 //element is a number
-                if Double(element) != nil {
-                    displayArray.append(element)
+                if let value = Double(element) {
+                    displayArray.append(value.roundedString)
                  
                 //element is not a number
                 } else {

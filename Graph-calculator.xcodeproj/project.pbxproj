@@ -34,6 +34,7 @@
 		89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */; };
 		89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F771F51A3CB0063FDE2 /* GraphView.swift */; };
 		89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */; };
+		89BF927622D7EAA5000080A0 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BF927522D7EAA5000080A0 /* Double+Extension.swift */; };
 		89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */; };
 		89D58A5E228B59F200438AAF /* KeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A5D228B59F200438AAF /* KeyType.swift */; };
 		89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D58A61228B5A6400438AAF /* PopoverViewController.swift */; };
@@ -73,6 +74,7 @@
 		89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		89A61F771F51A3CB0063FDE2 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDrawer.swift; sourceTree = "<group>"; };
+		89BF927522D7EAA5000080A0 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		89D58A5D228B59F200438AAF /* KeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyType.swift; sourceTree = "<group>"; };
 		89D58A61228B5A6400438AAF /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				89D328EE228C97BF00867C51 /* UIBezierPath+Extension.swift */,
 				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
 				8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */,
+				89BF927522D7EAA5000080A0 /* Double+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
 				89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */,
 				8969629B22D0123B00549E78 /* PreviewPresentationAnimationController.swift in Sources */,
+				89BF927622D7EAA5000080A0 /* Double+Extension.swift in Sources */,
 				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
 				89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */,
 				8969629922D0122700549E78 /* PreviewTransitionControllerDelegate.swift in Sources */,

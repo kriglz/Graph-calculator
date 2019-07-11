@@ -25,9 +25,9 @@ class Calculator: NSObject {
     
     private var displayValue: Double {
         get {
-            return Double(self.displayText) ?? 0.0
+            return Double(self.displayText) ?? 0
         } set {
-            self.displayText = String(newValue)
+            self.displayText = String(newValue.roundedString)
         }
     }
     
