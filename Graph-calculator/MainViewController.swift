@@ -121,6 +121,14 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
             return
         }
         
+        if keyOperation == .secondKeypad {
+            // present second keyboard
+        }
+        
+        if !self.displayView.canAppendNewOperandsToCurrentOperation, self.calculator.userIsInTheMiddleOfTyping && (keyOperation.isNumber || keyOperation == .comma) {
+            return
+        }
+        
         self.calculator.setOperand(keyOperation)
     }
     
@@ -163,9 +171,9 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     // MARK: - GraphViewControllerDelegate
     
     func graphViewControllerDidSelectClose(_ controller: GraphViewController) {
-        //            calculatorVC.memory.storage?.removeValue(forKey: "x")
-      
-        self.graphViewController?.dismiss(animated: true, completion: nil)
-        self.graphViewController = nil
+        self.graphViewController?.dismiss(animated: true, completion: {
+            self.calculator.resetMemory()
+            self.graphViewController = nil
+        })
     }
 }

@@ -21,7 +21,7 @@ class Calculator: NSObject {
     private var brain = CalculatorBrain()
     private var memory = CalculatorMemory()
     
-    private var userIsInTheMiddleOfTyping = false
+    private(set) var userIsInTheMiddleOfTyping = false
     
     private var displayValue: Double {
         get {
@@ -136,6 +136,10 @@ class Calculator: NSObject {
     private func getMemory() {
         self.brain.setOperand(variable: "M")
         self.displayValue = memory.storage?["M"] ?? 0
+    }
+    
+    func resetMemory() {
+        self.memory.storage?.removeValue(forKey: "x")
     }
     
     private func addMathematicalSymbol(_ symbol: String) {

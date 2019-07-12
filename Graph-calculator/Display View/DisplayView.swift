@@ -19,8 +19,18 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     weak var delegate: DisplayViewDelegate?
     
+    var canAppendNewOperandsToCurrentOperation: Bool {
+        return self.currentOperationText.count < self.currentOperationLabel.maximumTextLength
+    }
+    
     var currentOperationText: String = "" {
         didSet {
+            if self.currentOperationText.count >= self.currentOperationLabel.maximumTextLength {
+                let substring = self.currentOperationText.prefix(self.currentOperationLabel.maximumTextLength)
+                self.currentOperationLabel.text = String(substring)
+                return
+            }
+            
             self.currentOperationLabel.text = self.currentOperationText
         }
     }
