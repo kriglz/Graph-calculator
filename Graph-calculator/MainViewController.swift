@@ -150,6 +150,10 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         self.displayView.memoryText = memory
     }
     
+    func calculator(_ calculator: Calculator, isTyping: Bool) {
+        self.keypadView.updateKey(isTyping ? .allClear : .clear, with: isTyping ? .clear : .allClear)
+    }
+    
     // MARK: - DisplayViewDelegate
     
     func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController) {

@@ -12,6 +12,7 @@ protocol CalculatorDelegate: class {
     func calculator(_ calculator: Calculator, didUpdateLastOperation operation: String)
     func calculator(_ calculator: Calculator, didUpdateDescription description: String)
     func calculator(_ calculator: Calculator, didUpdateMemory memory: String)
+    func calculator(_ calculator: Calculator, isTyping: Bool)
 }
 
 class Calculator: NSObject {
@@ -21,7 +22,11 @@ class Calculator: NSObject {
     private var brain = CalculatorBrain()
     private var memory = CalculatorMemory()
     
-    private(set) var userIsInTheMiddleOfTyping = false
+    private(set) var userIsInTheMiddleOfTyping = false {
+        didSet {
+            self.delegate?.calculator(self, isTyping: self.userIsInTheMiddleOfTyping)
+        }
+    }
     
     private var displayValue: Double {
         get {
@@ -59,6 +64,8 @@ class Calculator: NSObject {
             self.undoButton()
         case .allClear:
             self.allClearButton()
+        case .clear:
+            self.clearButton()
         case .rand:
             self.randomGenerationButton()
         case .memoryPlus:
@@ -115,6 +122,11 @@ class Calculator: NSObject {
         self.memory.storage = nil
         self.memoryDisplayText = " "
         self.displayDescription()
+        self.userIsInTheMiddleOfTyping = false
+    }
+    
+    private func clearButton() {
+        self.displayValue = 0
         self.userIsInTheMiddleOfTyping = false
     }
     

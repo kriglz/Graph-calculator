@@ -62,7 +62,7 @@ class KeypadCell: UICollectionViewCell {
     
     private var hasDefaultBackground: Bool {
         switch self.operation {
-        case .allClear, .undo, .degrees, .variableX, .graph:
+        case .allClear, .clear, .undo, .degrees, .radians, .variableX, .graph:
             return false
         default:
             return true

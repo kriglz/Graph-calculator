@@ -56,6 +56,11 @@ class KeypadView: UIView, KeypadCellDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func updateKey(_ key: KeyType, with newKey: KeyType) {
+        let cell = (self.gridCollectionView.visibleCells as! [KeypadCell]).first(where: { $0.operation == key })
+        cell?.operation = newKey
+    }
 }
 
 extension KeypadView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

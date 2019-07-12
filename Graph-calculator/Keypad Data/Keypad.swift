@@ -73,6 +73,7 @@ class Keypad {
 
             .comma: Key(keyType: .comma, operationType: .other, description: "."),
             .allClear: Key(keyType: .allClear, operationType: .other, description: "AC"),
+            .clear: Key(keyType: .clear, operationType: .other, description: "C"),
             .undo: Key(keyType: .undo, operationType: .other, description: "↩︎"),
             .graph: Key(keyType: .graph, operationType: .other, description: "G"),
             
