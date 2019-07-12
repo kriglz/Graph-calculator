@@ -16,4 +16,16 @@ extension Double {
         
         return "\(self)"
     }
+    
+    var factorial: Double {
+        let value = Int(self)
+        var result = NSDecimalNumber(value: 1)
+        
+        for i in (1...value).reversed() {
+            let behavior = NSDecimalNumberHandler.init(roundingMode: .plain, scale: 17, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+            result = result.multiplying(by: NSDecimalNumber(value: i), withBehavior: behavior)
+        }
+        
+        return result.doubleValue
+    }
 }
