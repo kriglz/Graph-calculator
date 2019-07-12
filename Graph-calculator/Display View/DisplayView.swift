@@ -25,13 +25,24 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     var currentOperationText: String = "" {
         didSet {
-            if self.currentOperationText.count >= self.currentOperationLabel.maximumTextLength {
+            if self.currentOperationText.count < self.currentOperationLabel.maximumTextLength {
+                self.currentOperationLabel.text = self.currentOperationText
+                return
+            }
+            
+            if self.currentOperationText.contains(Keypad.keyList[.comma]?.description.first ?? ".") {
                 let substring = self.currentOperationText.prefix(self.currentOperationLabel.maximumTextLength)
                 self.currentOperationLabel.text = String(substring)
                 return
             }
             
-            self.currentOperationLabel.text = self.currentOperationText
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .scientific
+            formatter.exponentSymbol = "e"
+            
+            if let scientificFormatted = formatter.string(for: NSNumber(value: Double(self.currentOperationText) ?? 0)) {
+                self.currentOperationLabel.text = String(scientificFormatted)
+            }
         }
     }
     
