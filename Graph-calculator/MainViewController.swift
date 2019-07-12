@@ -154,10 +154,6 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         self.displayView.memoryText = memory
     }
     
-    func calculator(_ calculator: Calculator, didUpdateGraphEnabled isEnabled: Bool) {        
-        print("Graph - \(isEnabled)")
-    }
-    
     // MARK: - DisplayViewDelegate
     
     func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController) {
