@@ -46,8 +46,7 @@ struct CalculatorBrain {
         "eˣ": OperationType.unary(exp),
 
         "log": OperationType.unary(log),
-        // fix this ln
-        "ln": OperationType.unary(log),
+        "ln": OperationType.unary({ log($0) / log(M_E)}),
 
         "±": OperationType.unary({ -$0}),
         "％": OperationType.unary({ $0 / 100}),
