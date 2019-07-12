@@ -31,7 +31,7 @@ struct CalculatorBrain {
         "e": .constant(M_E),
         
         "√": OperationType.unary(sqrt),
-        // sqrt n
+        "ⁿ√": OperationType.binary({ pow($0, (1 / $1))}),
         
         "cos": OperationType.unary(cos),
         "sin": OperationType.unary(sin),
