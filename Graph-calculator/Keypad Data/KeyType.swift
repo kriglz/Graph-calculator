@@ -25,16 +25,23 @@ enum KeyType: Int, Equatable {
     case multiplication
     case division
     
-    case memoryIn
-    case memoryOut
+    case memoryPlus // Memory+ - add current value to memory
+    case memoryMinus // Memory- - subtract current value from the memory
+    case memoryClear
+    case memoryRetain
     
     case comma
     case allClear
+    case clear
+    
     case undo
     case signChange
     case percentage
+    case factorial
     
-    case secondKeypad
+    case degrees
+    case radians
+    
     case graph
     case variableX
     
@@ -43,6 +50,7 @@ enum KeyType: Int, Equatable {
     
     case log
     case ln
+    case logY
     
     case pow
     case powN

@@ -61,9 +61,9 @@ class Calculator: NSObject {
             self.allClearButton()
         case .rand:
             self.randomGenerationButton()
-        case .memoryIn:
+        case .memoryPlus:
             self.setMemory()
-        case .memoryOut:
+        case .memoryMinus:
             self.getMemory()
             
         default:

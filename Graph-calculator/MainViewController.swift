@@ -120,11 +120,7 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
             
             return
         }
-        
-        if keyOperation == .secondKeypad {
-            // present second keyboard
-        }
-        
+
         if !self.displayView.canAppendNewOperandsToCurrentOperation, self.calculator.userIsInTheMiddleOfTyping && (keyOperation.isNumber || keyOperation == .comma) {
             return
         }

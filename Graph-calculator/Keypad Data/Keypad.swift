@@ -11,8 +11,8 @@ import UIKit
 class Keypad {
     
     static var displayKeyList: [KeyType] {
-        return [.allClear,      .undo,      .secondKeypad,  .variableX,     .graph,
-                .sqrt,          .pi,        .percentage,    .memoryIn,      .division,
+        return [.allClear,      .undo,      .degrees,       .variableX,     .graph,
+                .sqrt,          .factorial, .pi,            .memoryPlus,    .division,
                 .pow,           .seven,     .eight,         .nine,          .multiplication,
                 .sin,           .four,      .five,          .six,           .difference,
                 .sinh,          .one,       .two,           .three,         .sum,
@@ -40,12 +40,14 @@ class Keypad {
             .cosh: Key(keyType: .cosh, operationType: .unary(cosh), description: "cosh"),
             .tanh: Key(keyType: .tanh, operationType: .unary(tanh), description: "tanh"),
             
-            .log: Key(keyType: .log, operationType: .unary(log), relatedKeyTypes: [.log, .ln], description: "log"),
+            .log: Key(keyType: .log, operationType: .unary(log), relatedKeyTypes: [.log, .ln, .logY], description: "log"),
             .ln: Key(keyType: .ln, operationType: .unary(log), description: "ln"),
-            
+            .logY: Key(keyType: .logY, operationType: .unary(log), description: "logʸ"),
+
             .signChange: Key(keyType: .signChange, operationType: .unary({ -$0}), description: "±"),
             .percentage: Key(keyType: .percentage, operationType: .unary({ $0 / 100}), description: "％"),
-            
+            .factorial: Key(keyType: .factorial, operationType: .unary({ $0 / 100}), relatedKeyTypes: [.factorial, .percentage], description: "x!"),
+
             .sum: Key(keyType: .sum, operationType: .binary({ $0 + $1}), description: "+"),
             .difference: Key(keyType: .difference, operationType: .binary({ $0 - $1}), description: "-"),
             .multiplication: Key(keyType: .multiplication, operationType: .binary({ $0 * $1}), description: "×"),
@@ -64,19 +66,36 @@ class Keypad {
             .eight: Key(number: .eight),
             .nine: Key(number: .nine),
             
-            .memoryIn: Key(keyType: .memoryIn, operationType: .other, relatedKeyTypes: [.memoryIn, .memoryOut], description: "M+"),
-            .memoryOut: Key(keyType: .memoryOut, operationType: .other, description: "M-"),
-            
-            .lParenthesis: Key(keyType: .lParenthesis, operationType: .other, description: "("),
-            .rParenthesis: Key(keyType: .rParenthesis, operationType: .other, description: ")"),
-            
+            .memoryPlus: Key(keyType: .memoryPlus, operationType: .other, relatedKeyTypes: [.memoryPlus, .memoryMinus, .memoryRetain, .memoryClear], description: "m+"),
+            .memoryMinus: Key(keyType: .memoryMinus, operationType: .other, description: "m-"),
+            .memoryClear: Key(keyType: .memoryClear, operationType: .other, description: "mc"),
+            .memoryRetain: Key(keyType: .memoryRetain, operationType: .other, description: "mr"),
+
             .comma: Key(keyType: .comma, operationType: .other, description: "."),
             .allClear: Key(keyType: .allClear, operationType: .other, description: "AC"),
             .undo: Key(keyType: .undo, operationType: .other, description: "↩︎"),
             .graph: Key(keyType: .graph, operationType: .other, description: "G"),
             
-            .secondKeypad: Key(keyType: .secondKeypad, operationType: .other, description: "2nd"),
+            .degrees: Key(keyType: .degrees, operationType: .other, description: "deg"),
+            .radians: Key(keyType: .radians, operationType: .other, description: "rad"),
+
             .variableX: Key(keyType: .variableX, operationType: .other, description: "x")
         ]
     }
 }
+
+//extension UILabel {
+//
+//    func superscripted(in ranges: [NSRange]) -> NSAttributedString {
+//        guard let text = self.text else {
+//            return NSAttributedString()
+//        }
+//
+//        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: self.font!])
+//        ranges.forEach {
+//            attributedString.setAttributes([.baselineOffset: -self.font.pointSize * 0.5], range: $0)
+//        }
+//
+//        return attributedString
+//    }
+//}

@@ -47,9 +47,11 @@ struct CalculatorBrain {
 
         "log": OperationType.unary(log),
         "ln": OperationType.unary({ log($0) / log(M_E)}),
+        "logY": OperationType.binary({ log($0) / log($1)}),
 
         "±": OperationType.unary({ -$0}),
         "％": OperationType.unary({ $0 / 100}),
+        "x!": OperationType.unary({ $0.factorial}),
 
         "×": OperationType.binary({ $0 * $1}),
         "÷": OperationType.binary({ $0 / $1}),
