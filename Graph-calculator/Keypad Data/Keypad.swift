@@ -16,7 +16,7 @@ class Keypad {
                 .pow,           .seven,     .eight,         .nine,          .multiplication,
                 .sin,           .four,      .five,          .six,           .difference,
                 .sinh,          .one,       .two,           .three,         .sum,
-                .log,           .zero,      .comma,         .signChange,    .equal]
+                .log10,         .zero,      .comma,         .signChange,    .equal]
     }
     
     static var keyList: Dictionary<KeyType, Key> {
@@ -40,7 +40,7 @@ class Keypad {
             .cosh: Key(keyType: .cosh, operationType: .unary(cosh), description: "cosh"),
             .tanh: Key(keyType: .tanh, operationType: .unary(tanh), description: "tanh"),
             
-            .log: Key(keyType: .log, operationType: .unary(log), relatedKeyTypes: [.log, .ln, .logY], description: "log"),
+            .log10: Key(keyType: .log10, operationType: .unary(log), relatedKeyTypes: [.log10, .ln, .logY], description: "log10"),
             .ln: Key(keyType: .ln, operationType: .unary(log), description: "ln"),
             .logY: Key(keyType: .logY, operationType: .unary(log), description: "logʸ"),
 

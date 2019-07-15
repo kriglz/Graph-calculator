@@ -48,7 +48,7 @@ enum KeyType: Int, Equatable {
     case lParenthesis
     case rParenthesis
     
-    case log
+    case log10
     case ln
     case logY
     
