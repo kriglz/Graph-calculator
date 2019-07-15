@@ -25,7 +25,16 @@ struct CalculatorBrain {
         case equals
         case other
     }
-
+    
+    enum AngleUnit {
+        case radian
+        case degree
+        
+        var multiplier: Double {
+            return self == .degree ? Double.pi / 180 : 1
+        }
+    }
+    
     private var operations: Dictionary<String, OperationType> = [
         "π": OperationType.constant(Double.pi),
         "e": .constant(M_E),
@@ -33,9 +42,9 @@ struct CalculatorBrain {
         "√": OperationType.unary(sqrt),
         "ⁿ√": OperationType.binary({ pow($0, (1 / $1))}),
         
-        "cos": OperationType.unary(cos),
-        "sin": OperationType.unary(sin),
-        "tan": OperationType.unary(tan),
+        "cos": OperationType.unary({ cos($0).rounded(to: 15)}),
+        "sin": OperationType.unary({ sin($0).rounded(to: 15)}),
+        "tan": OperationType.unary({ sin($0).rounded(to: 15) / cos($0).rounded(to: 15)}),
         
         "cosh": OperationType.unary(cosh),
         "sinh": OperationType.unary(sinh),
@@ -78,6 +87,10 @@ struct CalculatorBrain {
         }
     }
     
+    private var currentAngleUnit = AngleUnit.radian
+    mutating func switchAngleUnit(to unit: AngleUnit) {
+        self.currentAngleUnit = unit
+    }
     
     //calculating CalculatorBrain result by substituting values for those variables found in a supplied Dictionary
     func evaluate(using variables: Dictionary<String,Double>? = nil)
@@ -175,8 +188,12 @@ struct CalculatorBrain {
                             resultIsPending = false
                         }
                     
-                    case .unary (let function):
-                        accumulation = function(accumulation ?? 0)
+                    case .unary(let function):
+                        var angleUnitMultiplier: Double? {
+                            return element == "sin" || element == "cos" || element == "tan" ? self.currentAngleUnit.multiplier : nil
+                        }
+                        
+                        accumulation = function((accumulation ?? 0) * (angleUnitMultiplier ?? 1))
                         if pendingBindingOperation != nil {
                             resultIsPending = true
                         } else {
@@ -404,8 +421,8 @@ struct CalculatorBrain {
                                 displayArray.append(")")
                                 
                             } else {
-                                if lastOperationName == "unaryOperation" &&  newOperationName == "unaryOperation" {
-                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
+                                if lastOperationName == "unaryOperation" && newOperationName == "unaryOperation" {
+                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber + 1))
                                     repetetiveNumber += 2
                                     
                                 } else {
