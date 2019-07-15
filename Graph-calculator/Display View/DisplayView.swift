@@ -30,18 +30,41 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
                 return
             }
             
-            if self.currentOperationText.contains(Keypad.keyList[.comma]?.description.first ?? ".") {
-                let substring = self.currentOperationText.prefix(self.currentOperationLabel.maximumTextLength)
-                self.currentOperationLabel.text = String(substring)
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.minimumFractionDigits = self.currentOperationLabel.maximumTextLength
+            formatter.decimalSeparator = Keypad.keyList[.comma]!.description
+
+            guard let currentOperation = formatter.string(from: NSNumber(value: Double(self.currentOperationText) ?? 0)) else {
                 return
             }
             
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .scientific
-            formatter.exponentSymbol = "e"
+            if currentOperation.count < self.currentOperationLabel.maximumTextLength {
+                self.currentOperationLabel.text = currentOperation
+                return
+            }
             
-            if let scientificFormatted = formatter.string(for: NSNumber(value: Double(self.currentOperationText) ?? 0)) {
-                self.currentOperationLabel.text = String(scientificFormatted)
+            guard let value = Double(self.currentOperationText) else {
+                self.currentOperationLabel.text = "\(Double.nan)"
+                return
+            }
+            
+            if value < 1, value > 0 {
+                self.currentOperationLabel.text = String(value.rounded(to: self.currentOperationLabel.maximumTextLength - 2))
+            }
+            
+            if value < 0, value > -1 {
+                self.currentOperationLabel.text = String(value.rounded(to: self.currentOperationLabel.maximumTextLength - 3))
+            }
+            
+            let digitCount = String(format: "%.0f", value.rounded()).count
+            if digitCount >= self.currentOperationLabel.maximumTextLength {
+                formatter.numberStyle = .scientific
+                formatter.exponentSymbol = "e"
+                formatter.maximumFractionDigits -= String(digitCount).count + 2
+                self.currentOperationLabel.text = formatter.string(for: NSNumber(value: value)) ?? "\(Double.nan)"
+            } else {
+                self.currentOperationLabel.text = String(value.rounded(to: self.currentOperationLabel.maximumTextLength - digitCount - 1))
             }
         }
     }
