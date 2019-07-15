@@ -11,7 +11,7 @@ import UIKit
 class Keypad {
     
     static var displayKeyList: [KeyType] {
-        return [.allClear,      .undo,      .degrees,       .variableX,     .graph,
+        return [.allClear,      .undo,      .radians,       .variableX,     .graph,
                 .sqrt,          .factorial, .pi,            .memoryPlus,    .division,
                 .pow,           .seven,     .eight,         .nine,          .multiplication,
                 .sin,           .four,      .five,          .six,           .difference,

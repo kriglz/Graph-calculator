@@ -13,6 +13,7 @@ protocol CalculatorDelegate: class {
     func calculator(_ calculator: Calculator, didUpdateDescription description: String)
     func calculator(_ calculator: Calculator, didUpdateMemory memory: String)
     func calculator(_ calculator: Calculator, isTyping: Bool)
+    func calculator(_ calculator: Calculator, angleUnit: CalculatorBrain.AngleUnit)
 }
 
 class Calculator: NSObject {
@@ -72,6 +73,10 @@ class Calculator: NSObject {
             self.setMemory()
         case .memoryMinus:
             self.getMemory()
+        case .radians:
+            self.switchAngleUnit(to: .degree)
+        case .degrees:
+            self.switchAngleUnit(to: .radian)
             
         default:
             if operand.isNumber || operand == .comma {
@@ -167,6 +172,11 @@ class Calculator: NSObject {
         }
         
         self.displayDescription()
+    }
+    
+    private func switchAngleUnit(to unit: CalculatorBrain.AngleUnit) {
+        self.brain.switchAngleUnit(to: unit)
+        self.delegate?.calculator(self, angleUnit: unit)
     }
     
     private func displayDescription() {

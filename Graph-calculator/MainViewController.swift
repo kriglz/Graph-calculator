@@ -154,6 +154,10 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         self.keypadView.updateKey(isTyping ? .allClear : .clear, with: isTyping ? .clear : .allClear)
     }
     
+    func calculator(_ calculator: Calculator, angleUnit: CalculatorBrain.AngleUnit) {
+        self.keypadView.updateKey(angleUnit == .degree ? .radians : .degrees, with: angleUnit == .degree ? .degrees : .radians)
+    }
+    
     // MARK: - DisplayViewDelegate
     
     func displayView(_ view: DisplayView, didSelectPresent viewController: UIViewController) {
