@@ -18,14 +18,28 @@ extension Double {
     }
     
     var factorial: Double {
+        if self == 0 {
+            return 1
+        }
+        
+        if self.rounded() != self {
+            return Double.nan
+        }
+        
         let value = Int(self)
         var result = NSDecimalNumber(value: 1)
         
-        for i in (1...value).reversed() {
+        let range: ClosedRange = self < 0 ? (value...(-1)) : (1...value)
+        for i in range.reversed() {
             let behavior = NSDecimalNumberHandler.init(roundingMode: .plain, scale: 17, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
             result = result.multiplying(by: NSDecimalNumber(value: i), withBehavior: behavior)
         }
         
         return result.doubleValue
+    }
+    
+    func rounded(to decimalPlaces: Int) -> Double {
+        let multiplier = pow(10.0, Double(decimalPlaces))
+        return (self * multiplier).rounded() / multiplier
     }
 }
