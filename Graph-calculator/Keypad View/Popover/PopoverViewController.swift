@@ -145,5 +145,8 @@ class PopoverViewController: UIViewController {
         buttons.forEach { button in
             button.isSelected = button == selectedButton
         }
+        
+        let feedback = UISelectionFeedbackGenerator()
+        feedback.selectionChanged()
     }
 }
