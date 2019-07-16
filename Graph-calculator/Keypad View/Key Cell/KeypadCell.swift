@@ -33,8 +33,7 @@ class KeypadCell: UICollectionViewCell {
                 return
             }
             
-            self.alternativeKeyButton.setTitle(self.alternativeKey == nil ? "" : "✽", for: .normal)
-            
+            self.alternativeKeyLabel.text = self.alternativeKey == nil ? "" : "✽"
             self.titleLabel.text = Keypad.keyList[self.operation]?.description
         }
     }
@@ -47,7 +46,7 @@ class KeypadCell: UICollectionViewCell {
     private let titleLabel: UILabel
     private let imageView: UIImageView
     private var relatedSelectionPopoverViewController: PopoverViewController?
-    private let alternativeKeyButton: UIButton
+    private let alternativeKeyLabel: UILabel
     
     private var alternativeKey: KeyType? {
         return Keypad.keyList[self.operation]?.alternativeKeyType
@@ -112,8 +111,8 @@ class KeypadCell: UICollectionViewCell {
         self.imageView = UIImageView()
         self.imageView.contentMode = .center
         
-        self.alternativeKeyButton = UIButton(type: .custom)
-        self.alternativeKeyButton.isUserInteractionEnabled = false
+        self.alternativeKeyLabel = UILabel()
+        self.alternativeKeyLabel.textAlignment = .center
         
         super.init(frame: frame)
         
@@ -128,21 +127,21 @@ class KeypadCell: UICollectionViewCell {
 
         self.addSubview(self.titleLabel)
         self.addSubview(self.imageView)
-        self.addSubview(self.alternativeKeyButton)
+        self.addSubview(self.alternativeKeyLabel)
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.alternativeKeyButton.translatesAutoresizingMaskIntoConstraints = false
+        self.alternativeKeyLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         self.imageView.constraint(edgesTo: self)
         
-        self.alternativeKeyButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.alternativeKeyButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.alternativeKeyButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4).isActive = true
-        self.alternativeKeyButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+        self.alternativeKeyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.alternativeKeyLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.alternativeKeyLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4).isActive = true
+        self.alternativeKeyLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handlePressGesture))
         longPressGestureRecognizer.minimumPressDuration = 0
@@ -179,6 +178,7 @@ class KeypadCell: UICollectionViewCell {
         self.cardLayer.fillColor = self.fillColor
         self.cardLayer.strokeColor = GCColor.keyBorder(forDarkMode: self.isDarkMode).cgColor
         self.titleLabel.textColor = self.textColor
+        self.alternativeKeyLabel.textColor = self.textColor
         self.imageView.tintColor = self.textColor
     }
     
@@ -187,15 +187,15 @@ class KeypadCell: UICollectionViewCell {
     @objc func handlePressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
-            if let newKey = self.alternativeKey, self.alternativeKeyButton.frame.contains(gestureRecognizer.location(in: self)) {
-                self.alternativeKeyButton.isSelected = true
+            if let newKey = self.alternativeKey, self.alternativeKeyLabel.frame.contains(gestureRecognizer.location(in: self)) {
+                self.alternativeKeyLabel.isHighlighted = true
 
                 let feedback = UIImpactFeedbackGenerator(style: .light)
                 feedback.impactOccurred()
 
                 self.operation = newKey
                 
-                self.alternativeKeyButton.setTitleColor(self.alternativeKeyHighlightColor, for: .normal)
+                self.alternativeKeyLabel.textColor = self.alternativeKeyHighlightColor
                 self.titleLabel.textColor = self.alternativeKeyHighlightColor
                 
                 return
@@ -218,7 +218,7 @@ class KeypadCell: UICollectionViewCell {
             self.delegate?.keypadCell(self, didSelectPresent: self.relatedSelectionPopoverViewController!)
             
         case .changed:
-            guard let keyView = self.relatedSelectionPopoverViewController?.view, !self.alternativeKeyButton.isSelected else {
+            guard let keyView = self.relatedSelectionPopoverViewController?.view, !self.alternativeKeyLabel.isHighlighted else {
                 return
             }
             
@@ -226,10 +226,10 @@ class KeypadCell: UICollectionViewCell {
             self.relatedSelectionPopoverViewController?.selectButton(at: location)
 
         case .ended, .failed, .cancelled:
-            if self.alternativeKeyButton.isSelected {
-                self.alternativeKeyButton.isSelected = false
+            if self.alternativeKeyLabel.isHighlighted {
+                self.alternativeKeyLabel.isHighlighted = false
                 
-                self.alternativeKeyButton.setTitleColor(self.textColor, for: .normal)
+                self.alternativeKeyLabel.textColor = self.textColor
                 self.titleLabel.textColor = self.textColor
                 
                 return
