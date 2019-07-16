@@ -21,39 +21,39 @@ class Keypad {
     
     static var keyList: Dictionary<KeyType, Key> {
         return [
-            .pi: Key(keyType: .pi, operationType: .constant(Double.pi), relatedKeyTypes: [.pi, .e, .rand], description: "π"),
-            .e: Key(keyType: .e, operationType: .constant(M_E), description: "e"),
-            .rand: Key(keyType: .rand, operationType: .constant(Double.random(in: -1000...1000)), description: "rand"),
+            .pi: Key(keyType: .pi, relatedKeyTypes: [.pi, .e, .rand], description: "π"),
+            .e: Key(keyType: .e, description: "e"),
+            .rand: Key(keyType: .rand, description: "rand"),
             
-            .sqrt: Key(keyType: .sqrt, operationType: .unary(sqrt), relatedKeyTypes: [.sqrt, .sqrtN], description: "√"),
-            .sqrtN: Key(keyType: .sqrtN, operationType: .unary(sqrt), description: "ⁿ√"),
+            .sqrt: Key(keyType: .sqrt, relatedKeyTypes: [.sqrt, .sqrtN], description: "√"),
+            .sqrtN: Key(keyType: .sqrtN, description: "ⁿ√"),
             
-            .pow: Key(keyType: .pow, operationType: .binary({ pow($0, $1)}), relatedKeyTypes: [.pow, .powN, .expN], description: "x²"),
-            .powN: Key(keyType: .pow, operationType: .binary({ pow($0, $1)}), description: "xⁿ"),
-            .expN: Key(keyType: .pow, operationType: .unary(exp), description: "eˣ"),
+            .pow: Key(keyType: .pow, relatedKeyTypes: [.pow, .powN, .expN], description: "x²"),
+            .powN: Key(keyType: .powN, description: "xⁿ"),
+            .expN: Key(keyType: .expN, description: "eˣ"),
             
-            .sin: Key(keyType: .sin, operationType: .unary(sin), relatedKeyTypes: [.sin, .cos, .tan], description: "sin"),
-            .cos: Key(keyType: .cos, operationType: .unary(cos), description: "cos"),
-            .tan: Key(keyType: .tan, operationType: .unary(tan), description: "tan"),
+            .sin: Key(keyType: .sin, relatedKeyTypes: [.sin, .cos, .tan], description: "sin"),
+            .cos: Key(keyType: .cos, description: "cos"),
+            .tan: Key(keyType: .tan, description: "tan"),
             
-            .sinh: Key(keyType: .sinh, operationType: .unary(sinh), relatedKeyTypes: [.sinh, .cosh, .tanh], description: "sinh"),
-            .cosh: Key(keyType: .cosh, operationType: .unary(cosh), description: "cosh"),
-            .tanh: Key(keyType: .tanh, operationType: .unary(tanh), description: "tanh"),
+            .sinh: Key(keyType: .sinh, relatedKeyTypes: [.sinh, .cosh, .tanh], description: "sinh"),
+            .cosh: Key(keyType: .cosh, description: "cosh"),
+            .tanh: Key(keyType: .tanh, description: "tanh"),
             
-            .log10: Key(keyType: .log10, operationType: .unary(log), relatedKeyTypes: [.log10, .ln, .logY], description: "log10"),
-            .ln: Key(keyType: .ln, operationType: .unary(log), description: "ln"),
-            .logY: Key(keyType: .logY, operationType: .unary(log), description: "logʸ"),
+            .log10: Key(keyType: .log10, relatedKeyTypes: [.log10, .ln, .logY], description: "log10"),
+            .ln: Key(keyType: .ln, description: "ln"),
+            .logY: Key(keyType: .logY, description: "logʸ"),
 
-            .signChange: Key(keyType: .signChange, operationType: .unary({ -$0}), description: "±"),
-            .percentage: Key(keyType: .percentage, operationType: .unary({ $0 / 100}), description: "％"),
-            .factorial: Key(keyType: .factorial, operationType: .unary({ $0 / 100}), relatedKeyTypes: [.factorial, .percentage], description: "x!"),
+            .signChange: Key(keyType: .signChange, description: "±"),
+            .percentage: Key(keyType: .percentage, description: "％"),
+            .factorial: Key(keyType: .factorial, relatedKeyTypes: [.factorial, .percentage], description: "x!"),
 
-            .sum: Key(keyType: .sum, operationType: .binary({ $0 + $1}), description: "+"),
-            .difference: Key(keyType: .difference, operationType: .binary({ $0 - $1}), description: "-"),
-            .multiplication: Key(keyType: .multiplication, operationType: .binary({ $0 * $1}), description: "×"),
-            .division: Key(keyType: .division, operationType: .binary({ $0 / $1}), description: "÷"),
+            .sum: Key(keyType: .sum, description: "+"),
+            .difference: Key(keyType: .difference, description: "-"),
+            .multiplication: Key(keyType: .multiplication, description: "×"),
+            .division: Key(keyType: .division, description: "÷"),
             
-            .equal: Key(keyType: .equal, operationType: .equals, description: "="),
+            .equal: Key(keyType: .equal, description: "="),
             
             .zero: Key(number: .zero),
             .one: Key(number: .one),
@@ -66,21 +66,21 @@ class Keypad {
             .eight: Key(number: .eight),
             .nine: Key(number: .nine),
             
-            .memoryPlus: Key(keyType: .memoryPlus, operationType: .other, relatedKeyTypes: [.memoryPlus, .memoryMinus, .memoryRetain, .memoryClear], description: "m+"),
-            .memoryMinus: Key(keyType: .memoryMinus, operationType: .other, description: "m-"),
-            .memoryClear: Key(keyType: .memoryClear, operationType: .other, description: "mc"),
-            .memoryRetain: Key(keyType: .memoryRetain, operationType: .other, description: "mr"),
+            .memoryPlus: Key(keyType: .memoryPlus, relatedKeyTypes: [.memoryPlus, .memoryMinus], alternativeKeyType: .memoryClear, description: "m+"),
+            .memoryMinus: Key(keyType: .memoryMinus, description: "m-"),
+            .memoryClear: Key(keyType: .memoryClear, relatedKeyTypes: [.memoryClear, .memoryRetain], alternativeKeyType: .memoryPlus, description: "mc"),
+            .memoryRetain: Key(keyType: .memoryRetain, description: "mr"),
 
-            .comma: Key(keyType: .comma, operationType: .other, description: "."),
-            .allClear: Key(keyType: .allClear, operationType: .other, description: "AC"),
-            .clear: Key(keyType: .clear, operationType: .other, description: "C"),
-            .undo: Key(keyType: .undo, operationType: .other, description: "↩︎"),
-            .graph: Key(keyType: .graph, operationType: .other, description: "G"),
+            .comma: Key(keyType: .comma, description: "."),
+            .allClear: Key(keyType: .allClear, description: "AC"),
+            .clear: Key(keyType: .clear, description: "C"),
+            .undo: Key(keyType: .undo, description: "↩︎"),
+            .graph: Key(keyType: .graph, description: "G"),
             
-            .degrees: Key(keyType: .degrees, operationType: .other, description: "deg"),
-            .radians: Key(keyType: .radians, operationType: .other, description: "rad"),
+            .degrees: Key(keyType: .degrees, description: "deg"),
+            .radians: Key(keyType: .radians, description: "rad"),
 
-            .variableX: Key(keyType: .variableX, operationType: .other, description: "x")
+            .variableX: Key(keyType: .variableX, description: "x")
         ]
     }
 }
