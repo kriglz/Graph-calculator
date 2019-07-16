@@ -61,10 +61,16 @@ enum KeyType: Int, Equatable {
     case sin
     case cos
     case tan
+    case asin
+    case acos
+    case atan
     
     case sinh
     case cosh
     case tanh
+    case asinh
+    case acosh
+    case atanh
     
     case pi
     case e

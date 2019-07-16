@@ -45,10 +45,16 @@ struct CalculatorBrain {
         "cos": OperationType.unary({ cos($0).rounded(to: 15)}),
         "sin": OperationType.unary({ sin($0).rounded(to: 15)}),
         "tan": OperationType.unary({ sin($0).rounded(to: 15) / cos($0).rounded(to: 15)}),
+        "cos-1": OperationType.unary(acos),
+        "sin-1": OperationType.unary(asin),
+        "tan-1": OperationType.unary(atan),
         
         "cosh": OperationType.unary(cosh),
         "sinh": OperationType.unary(sinh),
         "tanh": OperationType.unary(tanh),
+        "cosh-1": OperationType.unary(acosh),
+        "sinh-1": OperationType.unary(asinh),
+        "tanh-1": OperationType.unary(atanh),
         
         "x²": OperationType.unary({ pow($0, 2)}),
         "xⁿ": OperationType.binary({ pow($0, $1)}),
@@ -193,7 +199,11 @@ struct CalculatorBrain {
                             return element == "sin" || element == "cos" || element == "tan" ? self.currentAngleUnit.multiplier : nil
                         }
                         
-                        accumulation = function((accumulation ?? 0) * (angleUnitMultiplier ?? 1))
+                        var inverseAngleUnitMultiplier: Double? {
+                            return element == "sin-1" || element == "cos-1" || element == "tan-1" ? 1 / self.currentAngleUnit.multiplier : nil
+                        }
+                        
+                        accumulation = function((accumulation ?? 0) * (angleUnitMultiplier ?? 1)) * (inverseAngleUnitMultiplier ?? 1)
                         if pendingBindingOperation != nil {
                             resultIsPending = true
                         } else {

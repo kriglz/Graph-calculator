@@ -32,13 +32,21 @@ class Keypad {
             .powN: Key(keyType: .powN, description: "xⁿ"),
             .expN: Key(keyType: .expN, description: "eˣ"),
             
-            .sin: Key(keyType: .sin, relatedKeyTypes: [.sin, .cos, .tan], description: "sin"),
+            .sin: Key(keyType: .sin, relatedKeyTypes: [.sin, .cos, .tan], alternativeKeyType: .asin, description: "sin"),
             .cos: Key(keyType: .cos, description: "cos"),
             .tan: Key(keyType: .tan, description: "tan"),
             
-            .sinh: Key(keyType: .sinh, relatedKeyTypes: [.sinh, .cosh, .tanh], description: "sinh"),
+            .asin: Key(keyType: .asin, relatedKeyTypes: [.asin, .acos, .atan], alternativeKeyType: .sin, description: "sin-1"),
+            .acos: Key(keyType: .acos, description: "cos-1"),
+            .atan: Key(keyType: .atan, description: "tan-1"),
+            
+            .sinh: Key(keyType: .sinh, relatedKeyTypes: [.sinh, .cosh, .tanh], alternativeKeyType: .asinh, description: "sinh"),
             .cosh: Key(keyType: .cosh, description: "cosh"),
             .tanh: Key(keyType: .tanh, description: "tanh"),
+            
+            .asinh: Key(keyType: .asinh, relatedKeyTypes: [.asinh, .acosh, .atanh], alternativeKeyType: .sinh, description: "sinh-1"),
+            .acosh: Key(keyType: .acosh, description: "cosh-1"),
+            .atanh: Key(keyType: .atanh, description: "tanh-1"),
             
             .log10: Key(keyType: .log10, relatedKeyTypes: [.log10, .ln, .logY], description: "log10"),
             .ln: Key(keyType: .ln, description: "ln"),
