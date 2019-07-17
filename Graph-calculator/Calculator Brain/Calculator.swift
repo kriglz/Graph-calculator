@@ -142,7 +142,7 @@ class Calculator: NSObject {
     
     private func setMemory() {
         self.memory.storage = ["M": self.displayValue]
-        self.memoryDisplayText = "M → " + String(self.displayValue)
+        self.memoryDisplayText = "M→ " + String(self.displayValue)
         self.userIsInTheMiddleOfTyping = false
         
         if !self.brain.description.isEmpty {

@@ -100,14 +100,14 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     // MARK: - Initialization
 
     override init(frame: CGRect) {
-        self.currentOperationLabel = Label(title: "Current operation", fontSize: 40)
-        self.currentOperationLabel.text = "123"
+        self.currentOperationLabel = Label(fontSize: 40)
+        self.currentOperationLabel.text = "0"
         
-        self.descriptionLabel = Label(title: "Description", fontSize: 40)
-        self.descriptionLabel.text = "1+123"
+        self.descriptionLabel = Label(fontSize: 40)
+        self.descriptionLabel.text = "0"
 
-        self.memoryLabel = Label(title: "Memory", fontSize: 20)
-        self.memoryLabel.text = "12"
+        self.memoryLabel = Label(fontSize: 20)
+        self.memoryLabel.text = ""
         
         super.init(frame: frame)
         

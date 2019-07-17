@@ -18,8 +18,6 @@ extension DisplayView {
         static private let titleKey = "DisplayViewLabelTitle"
         static private let originKey = "DisplayViewOriginKey"
         
-        var title: String?
-        
         var color: UIColor? {
             didSet {
                 guard let color = self.color else {
@@ -68,10 +66,9 @@ extension DisplayView {
         
         private var origin: CGPoint?
         
-        convenience init(title: String? = nil, fontSize: CGFloat, color: UIColor? = nil) {
+        convenience init(fontSize: CGFloat, color: UIColor? = nil) {
             self.init()
             
-            self.title = title
             self.font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
             self.textColor = color
             
@@ -92,13 +89,11 @@ extension DisplayView {
             let text = aDecoder.decodeObject(forKey: Label.textKey)
             let frame = aDecoder.decodeCGRect(forKey: Label.frameKey)
             let absoluteOrigin = aDecoder.decodeCGPoint(forKey: Label.originKey)
-            let title = aDecoder.decodeObject(forKey: Label.titleKey)
             let font = aDecoder.decodeObject(forKey: Label.fontKey)
 
             self.text = text as? String
             self.frame = frame
             self.textColor = color as? UIColor
-            self.title = title as? String
             self.font = font as? UIFont
             self.absoluteOrigin = absoluteOrigin
         }
@@ -109,10 +104,6 @@ extension DisplayView {
             aCoder.encode(self.absoluteOrigin, forKey: Label.originKey)
             aCoder.encode(self.text, forKey: Label.textKey)
             aCoder.encode(self.frame, forKey: Label.frameKey)
-            
-            if let title = self.title {
-                aCoder.encode(title, forKey: Label.titleKey)
-            }
         }
     }
 }
