@@ -107,7 +107,7 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         self.descriptionLabel.text = "0"
 
         self.memoryLabel = Label(fontSize: 20)
-        self.memoryLabel.text = ""
+        self.memoryLabel.text = " "
         
         super.init(frame: frame)
         

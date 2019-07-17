@@ -74,10 +74,10 @@ class Keypad {
             .eight: Key(number: .eight),
             .nine: Key(number: .nine),
             
-            .memoryPlus: Key(keyType: .memoryPlus, relatedKeyTypes: [.memoryPlus, .memoryMinus], alternativeKeyType: .memoryClear, description: "m+"),
+            .memoryPlus: Key(keyType: .memoryPlus, relatedKeyTypes: [.memoryPlus, .memoryMinus], alternativeKeyType: .memoryRetain, description: "m+"),
             .memoryMinus: Key(keyType: .memoryMinus, description: "m-"),
-            .memoryClear: Key(keyType: .memoryClear, relatedKeyTypes: [.memoryClear, .memoryRetain], alternativeKeyType: .memoryPlus, description: "mc"),
-            .memoryRetain: Key(keyType: .memoryRetain, description: "mr"),
+            .memoryClear: Key(keyType: .memoryClear, description: "mc"),
+            .memoryRetain: Key(keyType: .memoryRetain, relatedKeyTypes: [.memoryRetain, .memoryClear], alternativeKeyType: .memoryPlus, description: "mr"),
 
             .comma: Key(keyType: .comma, description: "."),
             .allClear: Key(keyType: .allClear, description: "AC"),

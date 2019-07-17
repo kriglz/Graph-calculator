@@ -102,7 +102,6 @@ struct CalculatorBrain {
     func evaluate(using variables: Dictionary<String,Double>? = nil)
         -> (result: Double?, isPending: Bool)
     {
-        var evaluateResult: Double?
         var evaluateResultM: Double?
         var evaluateResultX: Double?
 
@@ -119,10 +118,8 @@ struct CalculatorBrain {
             }
         }
 
-        evaluateResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray).result
-
-        let resultIsPendingResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray).isPending
-        return (result: evaluateResult, isPending: resultIsPendingResult)
+        let operationResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray)
+        return (result: operationResult.result, isPending: operationResult.isPending)
     }
     
     

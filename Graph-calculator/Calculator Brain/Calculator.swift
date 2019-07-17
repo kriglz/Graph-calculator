@@ -70,9 +70,13 @@ class Calculator: NSObject {
         case .rand:
             self.randomGenerationButton()
         case .memoryPlus:
-            self.setMemory()
+            self.addMemoryButton()
         case .memoryMinus:
-            self.getMemory()
+            self.subractMemoryButton()
+        case.memoryClear:
+            self.clearMemoryButton()
+        case .memoryRetain:
+            self.retainMemoryButton()
         case .radians:
             self.switchAngleUnit(to: .degree)
         case .degrees:
@@ -124,8 +128,6 @@ class Calculator: NSObject {
     
     private func allClearButton() {
         self.brain.clearAll()
-        self.memory.storage = nil
-        self.memoryDisplayText = " "
         self.displayDescription()
         self.userIsInTheMiddleOfTyping = false
     }
@@ -140,9 +142,23 @@ class Calculator: NSObject {
         self.userIsInTheMiddleOfTyping = true
     }
     
-    private func setMemory() {
-        self.memory.storage = ["M": self.displayValue]
-        self.memoryDisplayText = "M→ " + String(self.displayValue)
+    private func addMemoryButton() {
+       self.updateMemoryWithValue(self.displayValue)
+    }
+    
+    private func subractMemoryButton() {
+        self.updateMemoryWithValue(-self.displayValue)
+    }
+    
+    private func updateMemoryWithValue(_ value: Double) {
+        let oldMemoryValue = self.memory.storage == nil ? 0 : self.memory.storage!["M"] ?? 0
+        self.memory.storage = ["M": value + oldMemoryValue]
+        
+        guard let currentMemoryValue = self.memory.storage?["M"] else {
+            return
+        }
+        
+        self.memoryDisplayText = "M→ " + String(currentMemoryValue)
         self.userIsInTheMiddleOfTyping = false
         
         if !self.brain.description.isEmpty {
@@ -150,7 +166,12 @@ class Calculator: NSObject {
         }
     }
     
-    private func getMemory() {
+    private func clearMemoryButton() {
+        self.memory.storage = nil
+        self.memoryDisplayText = " "
+    }
+    
+    private func retainMemoryButton() {
         self.brain.setOperand(variable: "M")
         self.displayValue = memory.storage?["M"] ?? 0
     }
