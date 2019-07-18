@@ -99,9 +99,7 @@ struct CalculatorBrain {
     }
     
     //calculating CalculatorBrain result by substituting values for those variables found in a supplied Dictionary
-    func evaluate(using variables: Dictionary<String,Double>? = nil)
-        -> (result: Double?, isPending: Bool)
-    {
+    func evaluate(using variables: Dictionary<String,Double>? = nil) -> (result: Double?, isPending: Bool) {
         var evaluateResultM: Double?
         var evaluateResultX: Double?
 
@@ -118,117 +116,113 @@ struct CalculatorBrain {
             }
         }
 
-        let operationResult = performOperation(ifMemorySet: evaluateResultM, ifXSet: evaluateResultX, with: descriptionArray)
+        let operationResult = performOperations(descriptionArray, memoryValue: evaluateResultM, variableXValue: evaluateResultX)
         return (result: operationResult.result, isPending: operationResult.isPending)
     }
     
+    struct BinaryOperation {
+        enum Priority: Int, Comparable {
+            case low = 1
+            case high = 2
+            
+            static func < (lhs: CalculatorBrain.BinaryOperation.Priority, rhs: CalculatorBrain.BinaryOperation.Priority) -> Bool {
+                return lhs.rawValue < rhs.rawValue
+            }
+        }
+        
+        let function: (Double, Double) -> Double
+        let description: String
+        let firstOperand: Double
+        
+        var priority: Priority {
+            return self.description == "+" || self.description == "-" ? .low : .high
+        }
+        
+        func perform (with secondOperand: Double) -> Double {
+            return function(firstOperand, secondOperand)
+        }
+    }
     
-    //performOperations using array elements
-    func performOperation(ifMemorySet withValue: Double? = nil, ifXSet withXValue: Double? = nil, with array: [String]) -> (result: Double?, isPending: Bool) {
+    func performOperations(_ operationArray: [String], memoryValue: Double? = nil, variableXValue: Double? = nil) -> (result: Double?, isPending: Bool) {
         var accumulation: Double?
         var resultIsPending = false
         
-        //data structure for BinaryOperartion calculation
-        struct PerformBinaryOperation {
-            let function: (Double, Double) -> Double
-            let firstOperand: Double
-            func perform (with secondOperand: Double) -> Double {
-                return function(firstOperand, secondOperand)
+        var pendingBinaryOperation: BinaryOperation?
+        
+        func performPendingBinaryOperationIfNeeded() {
+            guard let pendingOperation = pendingBinaryOperation else {
+                return
             }
+            
+            accumulation = pendingOperation.perform(with: accumulation ?? 0)
+            pendingBinaryOperation = nil
         }
-        //perform BinaryOperation
-        var pendingBindingOperation: PerformBinaryOperation?
-        func performPendingBinaryOperation() {
-            if pendingBindingOperation != nil {
-                accumulation = pendingBindingOperation!.perform(with: accumulation ?? 0)
-                pendingBindingOperation = nil
+        
+        for element in operationArray {
+            if Double(element) != nil {
+                accumulation = Double(element)!
+                resultIsPending = pendingBinaryOperation != nil
+                
+            } else if element == "M" {
+                accumulation = memoryValue == nil ? 0 : memoryValue!
+                resultIsPending = false
+                
+            } else if element == "x" {
+                accumulation = variableXValue == nil ? 0 : variableXValue!
+                performPendingBinaryOperationIfNeeded()
+                resultIsPending = false
+                
+            } else if let operation = operations[element] {
+                switch operation {
+                case .constant(let value):
+                    accumulation = value
+                    if pendingBinaryOperation == nil {
+                        resultIsPending = false
+                    }
+                    
+                case .unary(let function):
+                    accumulation = function((accumulation ?? 0) * self.multiplierForOperation(element)) * self.inverseMultiplierForOperation(element)
+                    resultIsPending = pendingBinaryOperation != nil
+                  
+                case .binary(let function):
+//                    let newPendingOperation = BinaryOperation(function: function, description: element, firstOperand: accumulation ?? 0)
+//
+//                    if let pendingOperation = pendingBinaryOperation {
+//                        if pendingOperation.priority > newPendingOperation.priority {
+//                            accumulation = pendingOperation.perform(with: accumulation ?? 0)
+//                        } else {
+//                            let newAccumulation = newPendingOperation.perform(with: accumulation ?? 0)
+//                            accumulation = pendingOperation.perform(with: newAccumulation)
+//                            resultIsPending = true
+//                        }
+//                    }
+//
+//                    pendingBinaryOperation = newPendingOperation
+//                    resultIsPending = true
+                    
+                    performPendingBinaryOperationIfNeeded()
+                    pendingBinaryOperation = BinaryOperation(function: function, description: element, firstOperand: accumulation ?? 0)
+                    resultIsPending = true
+                    
+                case .equals:
+                    performPendingBinaryOperationIfNeeded()
+                    resultIsPending = false
+                    
+                default:
+                    break
+                }
             }
         }
         
-        for element in array {
-            
-            if Double(element) != nil {
-                accumulation = Double(element)!
-                
-                if pendingBindingOperation != nil {
-                    resultIsPending = true
-                } else {
-                    resultIsPending = false
-                }
-                
-            } else {
-                if element == "M" {
-                    if let value = withValue {
-                        accumulation = value
-                    }
-                    else {
-                        accumulation = 0
-                    }
-
-                    resultIsPending = false
-                    
-                }
-                if element == "x" {
-                    if let value = withXValue {
-                        accumulation = value
-                    }
-                    else {
-                        accumulation = 0
-                    }
-                    if pendingBindingOperation != nil {
-                        performPendingBinaryOperation()
-                        pendingBindingOperation = nil
-                    }
-                    resultIsPending = false
-                }
-
-                if let operation = operations[element]{
-                    switch operation {
-                        
-                    case .constant(let value):
-                        accumulation = value
-                        if pendingBindingOperation == nil {
-                            resultIsPending = false
-                        }
-                    
-                    case .unary(let function):
-                        var angleUnitMultiplier: Double? {
-                            return element == "sin" || element == "cos" || element == "tan" ? self.currentAngleUnit.multiplier : nil
-                        }
-                        
-                        var inverseAngleUnitMultiplier: Double? {
-                            return element == "sin-1" || element == "cos-1" || element == "tan-1" ? 1 / self.currentAngleUnit.multiplier : nil
-                        }
-                        
-                        accumulation = function((accumulation ?? 0) * (angleUnitMultiplier ?? 1)) * (inverseAngleUnitMultiplier ?? 1)
-                        if pendingBindingOperation != nil {
-                            resultIsPending = true
-                        } else {
-                            resultIsPending = false
-                        }
-                        
-                    case .binary(let function):
-                        if pendingBindingOperation != nil {
-                            performPendingBinaryOperation()
-                            pendingBindingOperation = nil
-                        }
-                        pendingBindingOperation = PerformBinaryOperation(function: function, firstOperand: accumulation ?? 0)
-                        resultIsPending = true
-                        
-                    case .equals:
-                        if pendingBindingOperation != nil {
-                            performPendingBinaryOperation()
-                            pendingBindingOperation = nil
-                        }
-                        resultIsPending = false
-                        
-                    default:
-                        break
-                    }
-                }
-            }
-        }
         return (accumulation, resultIsPending)
+    }
+    
+    func multiplierForOperation(_ operation: String) -> Double {
+        return operation == "sin" || operation == "cos" || operation == "tan" ? self.currentAngleUnit.multiplier : 1
+    }
+    
+    func inverseMultiplierForOperation(_ operation: String) -> Double {
+        return operation == "sin-1" || operation == "cos-1" || operation == "tan-1" ? 1 / self.currentAngleUnit.multiplier : 1
     }
     
     //check if array of operations need to be modified and modify if needed
@@ -393,7 +387,7 @@ struct CalculatorBrain {
                         displayArray.append(")" + "²")
    
                     case "±":
-                        if performOperation(with: partialArray).result! < 0 {
+                        if performOperations(partialArray).result! < 0 {
                             if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
                                 displayArray.insert("-" + "(", at: descriptionArray.startIndex)
                                 displayArray.append(")")
@@ -404,7 +398,7 @@ struct CalculatorBrain {
                                     displayArray.insert("-", at: displayArray.index(before: displayArray.endIndex))
                             }
                             
-                        } else if performOperation(with: partialArray).result! > 0 {
+                        } else if performOperations(partialArray).result! > 0 {
                             if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
                                 displayArray.insert("-" + "(", at: descriptionArray.startIndex)
                                 displayArray.append(")")
@@ -429,7 +423,7 @@ struct CalculatorBrain {
                                 
                             } else {
                                 if lastOperationName == "unaryOperation" && newOperationName == "unaryOperation" {
-                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber + 1))
+                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
                                     repetetiveNumber += 2
                                     
                                 } else {
