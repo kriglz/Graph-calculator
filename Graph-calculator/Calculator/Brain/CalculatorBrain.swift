@@ -8,33 +8,12 @@
 
 import Foundation
 
-struct CalculatorMemory {
-    var storage: Dictionary<String, Double>?
-}
-
 struct CalculatorBrain {
     
-//Description string made out of description array
-    private var descriptionArray: [String] = []
-    
-    enum OperationType {
-        case numeric(Double)
-        case constant(Double)
-        case unary((Double) -> Double)
-        case binary((Double, Double) -> Double)
-        case equals
-        case other
-    }
-    
-    enum AngleUnit {
-        case radian
-        case degree
-        
-        var multiplier: Double {
-            return self == .degree ? Double.pi / 180 : 1
-        }
-    }
-    
+    private var descriptionArray = [String]()
+    private var canAppend = true
+    private var currentAngleUnit = AngleUnit.radian
+
     private var operations: Dictionary<String, OperationType> = [
         "π": OperationType.constant(Double.pi),
         "e": .constant(M_E),
@@ -76,16 +55,15 @@ struct CalculatorBrain {
         "=": OperationType.equals
     ]
     
-    //set operand for ViewController
     mutating func setOperand (_ operand: Double){
-        let valueToCheck = Value.numeric(operand)
-        compareOldElement(with: valueToCheck)
+        let valueToCheck = OperandValue.numeric(operand)
+        updateCurrentOperations(for: valueToCheck)
         descriptionArray.append(String(operand))
     }
-    private var canAppend = true
+    
     mutating func setOperand (variable named: String){
-        let valueToCheck = Value.nonNumeric(named)
-        compareOldElement(with: valueToCheck)
+        let valueToCheck = OperandValue.nonNumeric(named)
+        updateCurrentOperations(for: valueToCheck)
         if canAppend {
             descriptionArray.append(named)
         } else {
@@ -93,12 +71,10 @@ struct CalculatorBrain {
         }
     }
     
-    private var currentAngleUnit = AngleUnit.radian
     mutating func switchAngleUnit(to unit: AngleUnit) {
         self.currentAngleUnit = unit
     }
     
-    //calculating CalculatorBrain result by substituting values for those variables found in a supplied Dictionary
     func evaluate(using variables: Dictionary<String,Double>? = nil) -> (result: Double?, isPending: Bool) {
         var evaluateResultM: Double?
         var evaluateResultX: Double?
@@ -120,48 +96,16 @@ struct CalculatorBrain {
         return (result: operationResult.result, isPending: operationResult.isPending)
     }
     
-    struct BinaryOperation {
-        enum Priority: Int, Comparable {
-            case low = 1
-            case high = 2
-            
-            static func < (lhs: CalculatorBrain.BinaryOperation.Priority, rhs: CalculatorBrain.BinaryOperation.Priority) -> Bool {
-                return lhs.rawValue < rhs.rawValue
-            }
-        }
-        
-        let function: (Double, Double) -> Double
-        let description: String
-        let firstOperand: Double
-        
-        var priority: Priority {
-            return self.description == "+" || self.description == "-" ? .low : .high
-        }
-        
-        func perform (with secondOperand: Double) -> Double {
-            return function(firstOperand, secondOperand)
-        }
-    }
-    
-    func performOperations(_ operationArray: [String], memoryValue: Double? = nil, variableXValue: Double? = nil) -> (result: Double?, isPending: Bool) {
-        var accumulation: Double?
+    private func performOperations(_ operationArray: [String], memoryValue: Double? = nil, variableXValue: Double? = nil) -> (result: Double?, isPending: Bool) {
+        var accumulation: Double = 0
         var resultIsPending = false
         
-        var pendingBinaryOperation: BinaryOperation?
-        
-        func performPendingBinaryOperationIfNeeded() {
-            guard let pendingOperation = pendingBinaryOperation else {
-                return
-            }
-            
-            accumulation = pendingOperation.perform(with: accumulation ?? 0)
-            pendingBinaryOperation = nil
-        }
+        let binaryOperationQueue = BinaryOperatioQueue()
         
         for element in operationArray {
             if Double(element) != nil {
                 accumulation = Double(element)!
-                resultIsPending = pendingBinaryOperation != nil
+                resultIsPending = binaryOperationQueue.hasPendingOperations
                 
             } else if element == "M" {
                 accumulation = memoryValue == nil ? 0 : memoryValue!
@@ -169,43 +113,28 @@ struct CalculatorBrain {
                 
             } else if element == "x" {
                 accumulation = variableXValue == nil ? 0 : variableXValue!
-                performPendingBinaryOperationIfNeeded()
+                accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
                 resultIsPending = false
                 
             } else if let operation = operations[element] {
                 switch operation {
                 case .constant(let value):
                     accumulation = value
-                    if pendingBinaryOperation == nil {
+                    if !binaryOperationQueue.hasPendingOperations {
                         resultIsPending = false
                     }
                     
                 case .unary(let function):
-                    accumulation = function((accumulation ?? 0) * self.multiplierForOperation(element)) * self.inverseMultiplierForOperation(element)
-                    resultIsPending = pendingBinaryOperation != nil
+                    accumulation = function(accumulation * self.multiplierForOperation(element)) * self.inverseMultiplierForOperation(element)
+                    resultIsPending = binaryOperationQueue.hasPendingOperations
                   
                 case .binary(let function):
-//                    let newPendingOperation = BinaryOperation(function: function, description: element, firstOperand: accumulation ?? 0)
-//
-//                    if let pendingOperation = pendingBinaryOperation {
-//                        if pendingOperation.priority > newPendingOperation.priority {
-//                            accumulation = pendingOperation.perform(with: accumulation ?? 0)
-//                        } else {
-//                            let newAccumulation = newPendingOperation.perform(with: accumulation ?? 0)
-//                            accumulation = pendingOperation.perform(with: newAccumulation)
-//                            resultIsPending = true
-//                        }
-//                    }
-//
-//                    pendingBinaryOperation = newPendingOperation
-//                    resultIsPending = true
-                    
-                    performPendingBinaryOperationIfNeeded()
-                    pendingBinaryOperation = BinaryOperation(function: function, description: element, firstOperand: accumulation ?? 0)
+                    let operation = BinaryOperation(function: function, description: element, firstOperand: accumulation)
+                    binaryOperationQueue.append(operation)
                     resultIsPending = true
                     
                 case .equals:
-                    performPendingBinaryOperationIfNeeded()
+                    accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
                     resultIsPending = false
                     
                 default:
@@ -217,21 +146,16 @@ struct CalculatorBrain {
         return (accumulation, resultIsPending)
     }
     
-    func multiplierForOperation(_ operation: String) -> Double {
+    private func multiplierForOperation(_ operation: String) -> Double {
         return operation == "sin" || operation == "cos" || operation == "tan" ? self.currentAngleUnit.multiplier : 1
     }
     
-    func inverseMultiplierForOperation(_ operation: String) -> Double {
+    private func inverseMultiplierForOperation(_ operation: String) -> Double {
         return operation == "sin-1" || operation == "cos-1" || operation == "tan-1" ? 1 / self.currentAngleUnit.multiplier : 1
     }
     
-    //check if array of operations need to be modified and modify if needed
-    enum Value {
-        case numeric(Double)
-        case nonNumeric(String)
-    }
-    private mutating func compareOldElement(with newOne: Value) {
-        switch newOne {
+    private mutating func updateCurrentOperations(for operandValue: OperandValue) {
+        switch operandValue {
         case .numeric:
             /*
              TYPE NUMBER:
@@ -242,7 +166,7 @@ struct CalculatorBrain {
             if let lastElementIndex = descriptionArray.index(descriptionArray.endIndex, offsetBy: -1, limitedBy: descriptionArray.startIndex)
             {
                 let lastElement = descriptionArray[lastElementIndex]
-                let oldOperation = getOperationName(of: lastElement)
+                let oldOperation = operationType(for: lastElement)
                 
                 if Double(lastElement) != nil ||  oldOperation == "unaryOperation" || oldOperation == "constant" || oldOperation == "equals" || lastElement == "M" || lastElement == "x" {
 
@@ -270,8 +194,8 @@ struct CalculatorBrain {
             if let lastElementIndex = descriptionArray.index(descriptionArray.endIndex, offsetBy: -1, limitedBy: descriptionArray.startIndex) {
                 let lastElement = descriptionArray[lastElementIndex]
                 
-                let newOperation = getOperationName(of: symbol)
-                let oldOperation = getOperationName(of: lastElement)
+                let newOperation = operationType(for: symbol)
+                let oldOperation = operationType(for: lastElement)
                 
                 
                 if newOperation == "constant" && (Double(lastElement) != nil || oldOperation == "constant" || oldOperation == "unaryOperation" || lastElement == "M" || lastElement == "x" || oldOperation == "equals" ) {
@@ -298,7 +222,7 @@ struct CalculatorBrain {
                     canAppend = false
                 }
             } else {
-                let newOperation = getOperationName(of: symbol)
+                let newOperation = operationType(for: symbol)
                 if !(newOperation == "constant" || symbol == "M" || symbol == "x") {
                     descriptionArray.append("0.0")
                 }
@@ -306,27 +230,10 @@ struct CalculatorBrain {
         }
     }
     
-    //get operation name based on button title
-    private func getOperationName(of operation: String) -> String {
-        if let op = operations[operation]{
-            switch op {
-            case .constant:
-                return "constant"
-            case .unary:
-                return "unaryOperation"
-            case .binary:
-                return "binaryOperation"
-            case .equals:
-                return "equals"
-            default:
-                break
-            }
-        }
-        return "Can't found"
+    private func operationType(for element: String) -> String {
+        return operations[element]?.description ?? "Can't found"
     }
 
-    
-    //undo previous operation
     mutating func undoPreviousOperation() {
         if descriptionArray.last == "=" {
             descriptionArray.removeLast()
@@ -336,12 +243,10 @@ struct CalculatorBrain {
         }
     }
     
-    //clearAll description array and reset all instances
     mutating func clearAll() {
         descriptionArray.removeAll()
     }
     
-    //description for description dislay
     var description: String {
         get {
             var displayArray = [String]()
@@ -349,7 +254,6 @@ struct CalculatorBrain {
             var repetetiveNumber = 2
             var lastOperationName = ""
             var newOperationName = ""
-
             
             for element in descriptionArray {
                 partialArray.append(element)
@@ -361,7 +265,7 @@ struct CalculatorBrain {
                  
                 //element is not a number
                 } else {
-                    newOperationName = getOperationName(of: element)
+                    newOperationName = operationType(for: element)
                     switch element {
                     
                     case "M":
