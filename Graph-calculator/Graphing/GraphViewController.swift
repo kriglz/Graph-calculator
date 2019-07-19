@@ -28,12 +28,24 @@ class GraphViewController: UIViewController {
         }
     }
     
+    private var isDarkMode: Bool {
+        return true
+        
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     @IBOutlet weak var graphView: GraphView! {
         didSet {
+            self.graphView.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+
             let scaleHandler = #selector(graphView.changeScale(byReactingTo:))
             let pinchRecognizer = UIPinchGestureRecognizer(target: graphView, action: scaleHandler)
             graphView.addGestureRecognizer(pinchRecognizer)
@@ -58,12 +70,16 @@ class GraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+        
         self.functionTitleLabel.numberOfLines = 0
         self.functionTitleLabel.textAlignment = .center
+        self.functionTitleLabel.textColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
         self.functionTitleLabel.backgroundColor = self.view.backgroundColor
         
         self.cancelButton.setImage(UIImage(named: "CloseIcon"), for: .normal)
         self.cancelButton.addTarget(self, action: #selector(self.close(_:)), for: .touchUpInside)
+        self.cancelButton.tintColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
         
         self.view.addSubview(self.functionTitleLabel)
         self.view.addSubview(self.cancelButton)

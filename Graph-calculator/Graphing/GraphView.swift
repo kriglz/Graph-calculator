@@ -10,6 +10,15 @@ import UIKit
 @IBDesignable
 class GraphView: UIView {
 
+    private var isDarkMode: Bool {
+        return true
+        
+        if #available(iOS 12.0, *) {
+            return self.traitCollection.userInterfaceStyle == .dark
+        } else {
+            return true
+        }
+    }
     
     @IBInspectable
     var scaleConstant: Double = 30.0 { didSet { setNeedsDisplay()}} //use 30 pixels to make 1 unit
@@ -20,8 +29,8 @@ class GraphView: UIView {
     var sumOfTransitions: CGPoint = CGPoint(x: 0.0, y: 0.0) { didSet { setNeedsDisplay()}}
     
     
-    override func draw(_ rect: CGRect) {
-        let axe = AxesDrawer.init(color: UIColor.lightGray, contentScaleFactor: CGFloat(1))
+    override func draw(_ rect: CGRect) {        
+        let axe = AxesDrawer.init(color: GCColor.footnote(forDarkMode: self.isDarkMode), contentScaleFactor: CGFloat(1))
         var centerCoordinate: CGPoint = CGPoint(x: bounds.maxX/2, y: bounds.maxY/2)
        
 
@@ -60,7 +69,7 @@ class GraphView: UIView {
         
         
         //draw function
-        let functionGraph = GraphDrawer.init(color: UIColor.init(red: 255/225, green: 73/255, blue: 94/255, alpha: 1), contentScaleFactor: CGFloat(1))
+        let functionGraph = GraphDrawer(color: GCColor.graph(forDarkMode: self.isDarkMode), contentScaleFactor: CGFloat(1))
         
         let start = Int(-rect.maxX/2) - Int(sumOfTransitions.x)
         let end = Int(rect.maxX/2) - Int(sumOfTransitions.x)

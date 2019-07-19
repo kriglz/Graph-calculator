@@ -104,4 +104,12 @@ struct GCColor {
         
         return self.alternativeKey(forDarkMode: darkMode)
     }
+    
+    static func graph(forDarkMode darkMode: Bool) -> UIColor {
+        if darkMode {
+            return UIColor(r: 214, g: 0, b: 25, alpha: 1)
+        }
+        
+        return UIColor(r: 255, g: 73, b: 94, alpha: 1)
+    }
 }
