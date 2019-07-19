@@ -76,23 +76,7 @@ struct CalculatorBrain {
     }
     
     func evaluate(using variables: Dictionary<String,Double>? = nil) -> (result: Double?, isPending: Bool) {
-        var evaluateResultM: Double?
-        var evaluateResultX: Double?
-
-        if let dictionaryVariables = variables {
-            for k in dictionaryVariables.keys {
-                switch k {
-                case "M":
-                    evaluateResultM = variables!["M"]
-                case "x":
-                    evaluateResultX = variables!["x"]
-                default:
-                    break
-                }
-            }
-        }
-
-        let operationResult = performOperations(descriptionArray, memoryValue: evaluateResultM, variableXValue: evaluateResultX)
+        let operationResult = performOperations(descriptionArray, memoryValue: variables?["M"], variableXValue: variables?["x"])
         return (result: operationResult.result, isPending: operationResult.isPending)
     }
     
@@ -113,7 +97,9 @@ struct CalculatorBrain {
                 
             } else if element == "x" {
                 accumulation = variableXValue == nil ? 0 : variableXValue!
-                accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
+                if binaryOperationQueue.hasPendingOperations {
+                    accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
+                }
                 resultIsPending = false
                 
             } else if let operation = operations[element] {
