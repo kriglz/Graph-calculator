@@ -24,6 +24,10 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.isDarkMode ? .lightContent : .default
+    }
+    
     private var graphViewController: GraphViewController?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
