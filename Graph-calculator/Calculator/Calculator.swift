@@ -169,6 +169,10 @@ class Calculator: NSObject {
     private func clearMemoryButton() {
         self.memory.storage = nil
         self.memoryDisplayText = " "
+        
+        if !self.brain.description.isEmpty {
+            self.displayText = String(self.brain.evaluate(using: self.memory.storage).result!)
+        }
     }
     
     private func retainMemoryButton() {
@@ -221,10 +225,10 @@ class Calculator: NSObject {
         let title = "f(x) = " + self.brain.description
         
         let yFunction = { (xArgument: Double) -> Double in
-            if self.memory.storage != nil {
-                self.memory.storage!["x"] = xArgument
-            } else {
+            if self.memory.storage == nil {
                 self.memory.storage = ["x": xArgument]
+            } else {
+                self.memory.storage!["x"] = xArgument
             }
             
             return self.brain.evaluate(using: self.memory.storage).result!
