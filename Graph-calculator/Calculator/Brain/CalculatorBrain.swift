@@ -120,7 +120,9 @@ struct CalculatorBrain {
                     resultIsPending = true
                     
                 case .equals:
-                    accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
+                    if binaryOperationQueue.hasPendingOperations {
+                        accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
+                    }
                     resultIsPending = false
                     
                 default:
