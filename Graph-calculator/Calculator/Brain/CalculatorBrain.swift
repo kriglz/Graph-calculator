@@ -252,9 +252,6 @@ struct CalculatorBrain {
                  
                 } else if element == "M" || element == "x" {
                     displayArray.append(element)
-
-                } else if element == "=" {
-                    break
                     
                 } else if element == "x²" {
                     if lastOperationName == "equals" {
@@ -292,7 +289,7 @@ struct CalculatorBrain {
                         }
                     }
                 
-                } else if let newOperationName = operationType(for: element) {
+                } else if let newOperationName = operationType(for: element), newOperationN≈çame != "equals" {
                     if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
                         displayArray.append(element)
                     } else {
