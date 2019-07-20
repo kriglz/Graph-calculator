@@ -243,100 +243,86 @@ struct CalculatorBrain {
             var partialArray = [String]()
             var repetetiveNumber = 2
             var lastOperationName = ""
-            var newOperationName = ""
             
             for element in descriptionArray {
                 partialArray.append(element)
                 
-                
-                //element is a number
                 if let value = Double(element) {
                     displayArray.append(value.roundedToIntIfNeededString)
                  
-                //element is not a number
-                } else {
-                    newOperationName = operationType(for: element) ?? ""
-                    switch element {
+                } else if element == "M" || element == "x" {
+                    displayArray.append(element)
+
+                } else if element == "=" {
+                    break
                     
-                    case "M":
-                        displayArray.append(element)
+                } else if element == "x²" {
+                    if lastOperationName == "equals" {
+                        displayArray.insert("(", at: displayArray.startIndex)
                         
-                    case "x":
-                        displayArray.append(element)
-                        
-                    case "=":
-                        break
-                        
-                    case "x²":
-                        if lastOperationName == "equals" {
-                            displayArray.insert("(", at: displayArray.startIndex)
-                            displayArray.append(")" + "²")
-                            
-                        } else if lastOperationName == "unaryOperation" {
-                            displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
-                            repetetiveNumber += 2
-                        } else {
-                            displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex))
-                        }
-                        displayArray.append(")" + "²")
-   
-                    case "±":
-                        if performOperations(partialArray).result! < 0 {
-                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
-                                displayArray.insert("-" + "(", at: descriptionArray.startIndex)
-                                displayArray.append(")")
-                            } else if lastOperationName == "binaryOperation" {
-                                displayArray.insert("(" + "-", at: displayArray.index(before: displayArray.endIndex))
-                                displayArray.append(")")
-                            } else {
-                                    displayArray.insert("-", at: displayArray.index(before: displayArray.endIndex))
-                            }
-                            
-                        } else if performOperations(partialArray).result! > 0 {
-                            if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
-                                displayArray.insert("-" + "(", at: descriptionArray.startIndex)
-                                displayArray.append(")")
-                            }
-                            else {
-                                displayArray.insert("-,", at: displayArray.index(before: displayArray.endIndex))
-                            }
-                        }
-                        
-                    default:
-                        
-                        if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
-                            displayArray.append(element)
-                        } else {
-                            if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
-                                displayArray.insert("(", at: displayArray.startIndex)
-                                displayArray.append(")" + element)
-                                
-                            } else if lastOperationName == "equals" {
-                                displayArray.insert(element + "(", at: displayArray.startIndex)
-                                displayArray.append(")")
-                                
-                            } else {
-                                if lastOperationName == "unaryOperation" && newOperationName == "unaryOperation" {
-                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
-                                    repetetiveNumber += 2
-                                    
-                                } else {
-                                    displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex))
-                                }
-                                displayArray.append(")")
-                            }
-                        }
+                    } else if lastOperationName == "unaryOperation" {
+                        displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
+                        repetetiveNumber += 2
+                    
+                    } else {
+                        displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex))
                     }
                     
-                    lastOperationName = newOperationName
+                    displayArray.append(")" + "²")
+                    
+                } else if element == "±" {
+                    if performOperations(partialArray).result! < 0 {
+                        if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                            displayArray.insert("-" + "(", at: descriptionArray.startIndex)
+                            displayArray.append(")")
+                        } else if lastOperationName == "binaryOperation" {
+                            displayArray.insert("(" + "-", at: displayArray.index(before: displayArray.endIndex))
+                            displayArray.append(")")
+                        } else {
+                            displayArray.insert("-", at: displayArray.index(before: displayArray.endIndex))
+                        }
+                        
+                    } else if performOperations(partialArray).result! > 0 {
+                        if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                            displayArray.insert("-" + "(", at: descriptionArray.startIndex)
+                            displayArray.append(")")
+                        }
+                        else {
+                            displayArray.insert("-,", at: displayArray.index(before: displayArray.endIndex))
+                        }
+                    }
+                
+                } else if let newOperationName = operationType(for: element) {
+                    if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
+                        displayArray.append(element)
+                    } else {
+                        if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
+                            displayArray.insert("(", at: displayArray.startIndex)
+                            displayArray.append(")" + element)
+                            
+                        } else if lastOperationName == "equals" {
+                            displayArray.insert(element + "(", at: displayArray.startIndex)
+                            displayArray.append(")")
+                            
+                        } else {
+                            if lastOperationName == "unaryOperation" && newOperationName == "unaryOperation" {
+                                displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
+                                repetetiveNumber += 2
+                                
+                            } else {
+                                displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex))
+                            }
+                            displayArray.append(")")
+                        }
+                    }
                 }
+                
+                lastOperationName = operationType(for: element) ?? ""
             }
             
             var entireString = ""
-            for element in displayArray {
-                if element != "=" {
-                    entireString.append(element)
-                }
+            for element in displayArray where element != "=" {
+                entireString.append(element)
             }
             return entireString
         }
