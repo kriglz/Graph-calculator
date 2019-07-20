@@ -289,7 +289,7 @@ struct CalculatorBrain {
                         }
                     }
                 
-                } else if let newOperationName = operationType(for: element), newOperationN≈çame != "equals" {
+                } else if let newOperationName = operationType(for: element), newOperationName != "equals" {
                     if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
                         displayArray.append(element)
                     } else {
