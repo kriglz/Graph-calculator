@@ -17,16 +17,12 @@ extension Keypad {
         let alternativeKeyType: KeyType?
         let description: String
         
-        init(number type: KeyType) {
-            self.init(keyType: type, operationType: .numeric(Double(type.numericValue)), description: "\(type.rawValue)")
-        }
-        
-        init(keyType: KeyType, operationType: CalculatorBrain.OperationType? = nil, relatedKeyTypes: [KeyType]? = nil, alternativeKeyType: KeyType? = nil, description: String) {
+        init(_ keyType: KeyType, operationType: CalculatorBrain.OperationType? = nil, relatedKeyTypes: [KeyType]? = nil, alternativeKeyType: KeyType? = nil, description: String? = nil) {
             self.keyType = keyType
             self.operationType = operationType
             self.relatedKeyTypes = relatedKeyTypes
             self.alternativeKeyType = alternativeKeyType
-            self.description = description
+            self.description = description ?? "\(keyType.rawValue)"
         }
     }
 }
