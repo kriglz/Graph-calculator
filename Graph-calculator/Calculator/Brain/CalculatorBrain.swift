@@ -97,9 +97,6 @@ struct CalculatorBrain {
                 
             } else if element == "x" {
                 accumulation = variableXValue == nil ? 0 : variableXValue!
-                if binaryOperationQueue.hasPendingOperations {
-                    accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
-                }
                 resultIsPending = false
                 
             } else if let operation = operations[element] {
@@ -124,9 +121,6 @@ struct CalculatorBrain {
                         accumulation = binaryOperationQueue.perform(with: accumulation) ?? 0
                     }
                     resultIsPending = false
-                    
-                default:
-                    break
                 }
             }
         }
@@ -201,10 +195,18 @@ struct CalculatorBrain {
                     descriptionArray.removeAll()
                 }
                 
-                
-                if ((symbol == "M" || symbol == "x")  && (lastElement == "M" || lastElement == "x")) || (newOperation == "equals" && oldOperation == "equals") {
+                if newOperation == "equals" && oldOperation == "equals" {
                     descriptionArray.removeLast()
                 }
+                
+                if (symbol == "M" || symbol == "x") && (lastElement == "M" || lastElement == "x") {
+                    descriptionArray.removeLast()
+                }
+                
+                if symbol == "x" && oldOperation == nil && !descriptionArray.isEmpty {
+                    descriptionArray.removeLast()
+                }
+                
                 if symbol == "±" && lastElement == "±" {
                     descriptionArray.removeLast()
                     canAppend = false
@@ -218,8 +220,8 @@ struct CalculatorBrain {
         }
     }
     
-    private func operationType(for element: String) -> String {
-        return operations[element]?.description ?? "Can't found"
+    private func operationType(for element: String) -> String? {
+        return operations[element]?.description
     }
 
     mutating func undoPreviousOperation() {
@@ -253,7 +255,7 @@ struct CalculatorBrain {
                  
                 //element is not a number
                 } else {
-                    newOperationName = operationType(for: element)
+                    newOperationName = operationType(for: element) ?? ""
                     switch element {
                     
                     case "M":
