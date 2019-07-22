@@ -76,7 +76,7 @@ struct CalculatorBrain {
     }
     
     func evaluate(using variables: Dictionary<String,Double>? = nil) -> (result: Double?, isPending: Bool) {
-        let operationResult = performOperations(descriptionArray, memoryValue: variables?["M"], variableXValue: variables?["x"])
+        let operationResult = performOperations(descriptionArray, memoryValue: variables?["M"], variableXValue: variables?["𝒙"])
         return (result: operationResult.result, isPending: operationResult.isPending)
     }
     
@@ -95,7 +95,7 @@ struct CalculatorBrain {
                 accumulation = memoryValue == nil ? 0 : memoryValue!
                 resultIsPending = false
                 
-            } else if element == "x" {
+            } else if element == "𝒙" {
                 accumulation = variableXValue == nil ? 0 : variableXValue!
                 resultIsPending = false
                 
@@ -150,7 +150,7 @@ struct CalculatorBrain {
                 let lastElement = descriptionArray[lastElementIndex]
                 let oldOperation = operationType(for: lastElement)
                 
-                if Double(lastElement) != nil ||  oldOperation == "unaryOperation" || oldOperation == "constant" || oldOperation == "equals" || lastElement == "M" || lastElement == "x" {
+                if Double(lastElement) != nil ||  oldOperation == "unaryOperation" || oldOperation == "constant" || oldOperation == "equals" || lastElement == "M" || lastElement == "𝒙" {
 
                     descriptionArray.removeAll()
                 }
@@ -180,7 +180,7 @@ struct CalculatorBrain {
                 let oldOperation = operationType(for: lastElement)
                 
                 
-                if newOperation == "constant" && (Double(lastElement) != nil || oldOperation == "constant" || oldOperation == "unaryOperation" || lastElement == "M" || lastElement == "x" || oldOperation == "equals" ) {
+                if newOperation == "constant" && (Double(lastElement) != nil || oldOperation == "constant" || oldOperation == "unaryOperation" || lastElement == "M" || lastElement == "𝒙" || oldOperation == "equals" ) {
                     descriptionArray.removeAll()
                 }
                 if (newOperation == "unaryOperation" || newOperation == "binaryOperation") && oldOperation == "binaryOperation" {
@@ -191,7 +191,7 @@ struct CalculatorBrain {
                     let index = descriptionArray.endIndex
                     descriptionArray.insert(element, at: index)
                 }
-                if (oldOperation == "equals" || oldOperation == "unaryOperation" || oldOperation == "constant") && (symbol == "M" || symbol == "x") {
+                if (oldOperation == "equals" || oldOperation == "unaryOperation" || oldOperation == "constant") && (symbol == "M" || symbol == "𝒙") {
                     descriptionArray.removeAll()
                 }
                 
@@ -199,11 +199,11 @@ struct CalculatorBrain {
                     descriptionArray.removeLast()
                 }
                 
-                if (symbol == "M" || symbol == "x") && (lastElement == "M" || lastElement == "x") {
+                if (symbol == "M" || symbol == "𝒙") && (lastElement == "M" || lastElement == "𝒙") {
                     descriptionArray.removeLast()
                 }
                 
-                if symbol == "x" && oldOperation == nil && !descriptionArray.isEmpty {
+                if symbol == "𝒙" && oldOperation == nil && !descriptionArray.isEmpty {
                     descriptionArray.removeLast()
                 }
                 
@@ -213,7 +213,7 @@ struct CalculatorBrain {
                 }
             } else {
                 let newOperation = operationType(for: symbol)
-                if !(newOperation == "constant" || symbol == "M" || symbol == "x") {
+                if !(newOperation == "constant" || symbol == "M" || symbol == "𝒙") {
                     descriptionArray.append("0.0")
                 }
             }
@@ -253,7 +253,7 @@ struct CalculatorBrain {
                     displayArray.append(value.roundedToIntIfNeededString)
                     lastOperationIndex = displayArray.index(before: displayArray.endIndex)
                  
-                } else if element == "M" || element == "x" {
+                } else if element == "M" || element == "𝒙" {
                     displayArray.append(element)
                     lastOperationIndex = displayArray.index(before: displayArray.endIndex)
 

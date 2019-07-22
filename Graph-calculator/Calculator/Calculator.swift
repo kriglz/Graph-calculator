@@ -181,7 +181,7 @@ class Calculator: NSObject {
     }
     
     func resetMemory() {
-        self.memory.storage?.removeValue(forKey: "x")
+        self.memory.storage?.removeValue(forKey: "𝒙")
     }
     
     private func addMathematicalSymbol(_ symbol: String) {
@@ -222,13 +222,13 @@ class Calculator: NSObject {
             return data(.failure(NSError(domain: "Calculator.graphData", code: 0001, userInfo: [:])))
         }
         
-        let title = "f(x) = " + self.brain.description
+        let title = "f(𝒙) = " + self.brain.description
         
         let yFunction = { (xArgument: Double) -> Double in
             if self.memory.storage == nil {
-                self.memory.storage = ["x": xArgument]
+                self.memory.storage = ["𝒙": xArgument]
             } else {
-                self.memory.storage!["x"] = xArgument
+                self.memory.storage!["𝒙"] = xArgument
             }
             
             return self.brain.evaluate(using: self.memory.storage).result!

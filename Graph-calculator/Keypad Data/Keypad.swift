@@ -85,10 +85,10 @@ class Keypad {
             .undo: Key(.undo, description: "↩︎"),
             .graph: Key(.graph, description: "G"),
             
-            .degrees: Key(.degrees, description: "deg"),
-            .radians: Key(.radians, description: "rad"),
+            .degrees: Key(.degrees, description: "Deg"),
+            .radians: Key(.radians, description: "Rad"),
 
-            .variableX: Key(.variableX, description: "x")
+            .variableX: Key(.variableX, description: "𝒙")
         ]
     }
 }

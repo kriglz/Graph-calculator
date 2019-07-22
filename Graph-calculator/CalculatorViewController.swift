@@ -131,7 +131,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func setVarX(_ sender: UIButton) {
-        brain.setOperand(variable: "x")
+        brain.setOperand(variable: "𝒙")
         displayValue = 0.0
         userIsInTheMiddleOfTyping = false
         displayDescription()
@@ -186,16 +186,16 @@ class CalculatorViewController: UIViewController {
         if !brain.evaluate().isPending {
             if let destinationViewController = (segue.destination.contents as? GraphViewController) {
                 if !brain.description.isEmpty {
-                    destinationViewController.navigationItem.title = "f(x) = " + brain.description
+                    destinationViewController.navigationItem.title = "f(𝒙) = " + brain.description
                     
 //                    destinationViewController.calculatorVC = self
                     
                     destinationViewController.yResult = { (xArgument: Double) -> Double in
                         
                         if self.memory.storage != nil {
-                            self.memory.storage!["x"] = xArgument
+                            self.memory.storage!["𝒙"] = xArgument
                         } else {
-                            self.memory.storage = ["x": xArgument]
+                            self.memory.storage = ["𝒙": xArgument]
                         }
                         
                         let yResult = self.brain.evaluate(using: self.memory.storage).result!
