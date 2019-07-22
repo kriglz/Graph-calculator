@@ -274,6 +274,44 @@ struct CalculatorBrain {
                     
                     displayArray.append(")" + String(element.last!))
                     
+                } else if element == "sin-1" || element == "cos-1" || element == "tan-1" {
+                    let prefix = String(element.prefix(3)) + "⁻¹"
+
+                    if lastOperationType == "equals" {
+                        lastOperationIndex = displayArray.startIndex
+                        displayArray.insert(prefix + "(", at: displayArray.startIndex)
+                        
+                    } else if lastOperationType == "unaryOperation" {
+                        displayArray.insert(prefix + "(", at: lastOperationIndex)
+                        repetetiveNumber += 2
+                        
+                    } else {
+                        let index = displayArray.index(before: displayArray.endIndex)
+                        lastOperationIndex = index
+                        displayArray.insert(prefix + "(", at: index)
+                    }
+                    
+                    displayArray.append(")")
+                    
+                } else if element == "sinh-1" || element == "cosh-1" || element == "tanh-1" {
+                    let prefix = String(element.prefix(4)) + "⁻¹"
+                    
+                    if lastOperationType == "equals" {
+                        lastOperationIndex = displayArray.startIndex
+                        displayArray.insert(prefix + "(", at: displayArray.startIndex)
+                        
+                    } else if lastOperationType == "unaryOperation" {
+                        displayArray.insert(prefix + "(", at: lastOperationIndex)
+                        repetetiveNumber += 2
+                        
+                    } else {
+                        let index = displayArray.index(before: displayArray.endIndex)
+                        lastOperationIndex = index
+                        displayArray.insert(prefix + "(", at: index)
+                    }
+                    
+                    displayArray.append(")")
+                    
                 } else if element == "±" {
                     if performOperations(partialArray).result! < 0 {
                         if lastOperationType == "equals", displayArray.count > 1 {
