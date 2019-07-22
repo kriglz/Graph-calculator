@@ -257,7 +257,7 @@ struct CalculatorBrain {
                     displayArray.append(element)
                     lastOperationIndex = displayArray.index(before: displayArray.endIndex)
 
-                } else if element == "x²" {
+                } else if element == "x²" || element == "x!" {
                     if lastOperationType == "equals" {
                         lastOperationIndex = displayArray.startIndex
                         displayArray.insert("(", at: displayArray.startIndex)
@@ -272,7 +272,7 @@ struct CalculatorBrain {
                         displayArray.insert("(", at: index)
                     }
                     
-                    displayArray.append(")" + "²")
+                    displayArray.append(")" + String(element.last!))
                     
                 } else if element == "±" {
                     if performOperations(partialArray).result! < 0 {
