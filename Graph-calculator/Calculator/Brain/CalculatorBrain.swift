@@ -242,7 +242,7 @@ struct CalculatorBrain {
             var displayArray = [String]()
             var partialArray = [String]()
             var repetetiveNumber = 2
-            var lastOperationName = ""
+            var lastOperationType = ""
             
             for element in descriptionArray {
                 partialArray.append(element)
@@ -254,10 +254,10 @@ struct CalculatorBrain {
                     displayArray.append(element)
                     
                 } else if element == "x²" {
-                    if lastOperationName == "equals" {
+                    if lastOperationType == "equals" {
                         displayArray.insert("(", at: displayArray.startIndex)
                         
-                    } else if lastOperationName == "unaryOperation" {
+                    } else if lastOperationType == "unaryOperation" {
                         displayArray.insert("(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
                         repetetiveNumber += 2
                     
@@ -269,10 +269,10 @@ struct CalculatorBrain {
                     
                 } else if element == "±" {
                     if performOperations(partialArray).result! < 0 {
-                        if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                        if lastOperationType == "equals" || lastOperationType == "unaryOperation" {
                             displayArray.insert("-" + "(", at: descriptionArray.startIndex)
                             displayArray.append(")")
-                        } else if lastOperationName == "binaryOperation" {
+                        } else if lastOperationType == "binaryOperation" {
                             displayArray.insert("(" + "-", at: displayArray.index(before: displayArray.endIndex))
                             displayArray.append(")")
                         } else {
@@ -280,7 +280,7 @@ struct CalculatorBrain {
                         }
                         
                     } else if performOperations(partialArray).result! > 0 {
-                        if lastOperationName == "equals" || lastOperationName == "unaryOperation" {
+                        if lastOperationType == "equals" || lastOperationType == "unaryOperation" {
                             displayArray.insert("-" + "(", at: descriptionArray.startIndex)
                             displayArray.append(")")
                         }
@@ -290,19 +290,19 @@ struct CalculatorBrain {
                     }
                 
                 } else if let newOperationName = operationType(for: element), newOperationName != "equals" {
-                    if (newOperationName == "binaryOperation" && lastOperationName != "equals") || newOperationName == "constant" {
+                    if (newOperationName == "binaryOperation" && lastOperationType != "equals") || newOperationName == "constant" {
                         displayArray.append(element)
                     } else {
-                        if (newOperationName == "binaryOperation" && lastOperationName == "equals") {
+                        if (newOperationName == "binaryOperation" && lastOperationType == "equals") {
                             displayArray.insert("(", at: displayArray.startIndex)
                             displayArray.append(")" + element)
                             
-                        } else if lastOperationName == "equals" {
+                        } else if lastOperationType == "equals" {
                             displayArray.insert(element + "(", at: displayArray.startIndex)
                             displayArray.append(")")
                             
                         } else {
-                            if lastOperationName == "unaryOperation" && newOperationName == "unaryOperation" {
+                            if lastOperationType == "unaryOperation" && newOperationName == "unaryOperation" {
                                 displayArray.insert(element + "(", at: displayArray.index(before: displayArray.endIndex - repetetiveNumber))
                                 repetetiveNumber += 2
                                 
@@ -314,7 +314,7 @@ struct CalculatorBrain {
                     }
                 }
                 
-                lastOperationName = operationType(for: element) ?? ""
+                lastOperationType = operationType(for: element) ?? ""
             }
             
             var entireString = ""
