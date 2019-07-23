@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890FB41B22E79DF6004D8E4B /* Brain+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41A22E79DF6004D8E4B /* Brain+Description.swift */; };
+		890FB41D22E7A747004D8E4B /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41C22E7A747004D8E4B /* NSAttributedString+Extension.swift */; };
+		890FB41F22E7A762004D8E4B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41E22E7A762004D8E4B /* String+Extension.swift */; };
 		892181EA22C42B0100EEFCD8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181E922C42B0100EEFCD8 /* Key.swift */; };
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
 		892828DE22E135DC0010500B /* Brain+BinaryOperatioQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */; };
@@ -51,6 +54,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		890FB41A22E79DF6004D8E4B /* Brain+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+Description.swift"; sourceTree = "<group>"; };
+		890FB41C22E7A747004D8E4B /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		890FB41E22E7A762004D8E4B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		892181E922C42B0100EEFCD8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+BinaryOperatioQueue.swift"; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */,
+				890FB41A22E79DF6004D8E4B /* Brain+Description.swift */,
 				892828E322E137030010500B /* Brain+OperationType.swift */,
 				892828E722E137D80010500B /* Brain+OperandValue.swift */,
 				892828E522E137270010500B /* Brain+AngleUnit.swift */,
@@ -191,6 +198,8 @@
 				899E3F60228DF519005265E7 /* UIColor+Extension.swift */,
 				8959519C22C5A8B3003D73C3 /* CGPoint+Extension.swift */,
 				89BF927522D7EAA5000080A0 /* Double+Extension.swift */,
+				890FB41E22E7A762004D8E4B /* String+Extension.swift */,
+				890FB41C22E7A747004D8E4B /* NSAttributedString+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -398,6 +407,7 @@
 				899E3F67228FF4D1005265E7 /* Popover+Button.swift in Sources */,
 				892828E022E136090010500B /* Brain+BinaryOperation.swift in Sources */,
 				89A61F7B1F51A3CB0063FDE2 /* GraphDrawer.swift in Sources */,
+				890FB41D22E7A747004D8E4B /* NSAttributedString+Extension.swift in Sources */,
 				892828DE22E135DC0010500B /* Brain+BinaryOperatioQueue.swift in Sources */,
 				892828E622E137270010500B /* Brain+AngleUnit.swift in Sources */,
 				8959519F22C5A92A003D73C3 /* Label.swift in Sources */,
@@ -408,6 +418,7 @@
 				892828E422E137030010500B /* Brain+OperationType.swift in Sources */,
 				89BF927622D7EAA5000080A0 /* Double+Extension.swift in Sources */,
 				89D58A62228B5A6400438AAF /* PopoverViewController.swift in Sources */,
+				890FB41B22E79DF6004D8E4B /* Brain+Description.swift in Sources */,
 				89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */,
 				8969629922D0122700549E78 /* PreviewTransitionControllerDelegate.swift in Sources */,
 				892828E222E136620010500B /* CalculatorMemory.swift in Sources */,
@@ -419,6 +430,7 @@
 				892181EA22C42B0100EEFCD8 /* Key.swift in Sources */,
 				89D58A5E228B59F200438AAF /* KeyType.swift in Sources */,
 				89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */,
+				890FB41F22E7A762004D8E4B /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
