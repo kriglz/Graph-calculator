@@ -10,7 +10,7 @@ import Foundation
 
 protocol CalculatorDelegate: class {
     func calculator(_ calculator: Calculator, didUpdateLastOperation operation: String)
-    func calculator(_ calculator: Calculator, didUpdateDescription description: String)
+    func calculator(_ calculator: Calculator, didUpdateDescription description: GCStringArray)
     func calculator(_ calculator: Calculator, didUpdateMemory memory: String)
     func calculator(_ calculator: Calculator, isTyping: Bool)
     func calculator(_ calculator: Calculator, angleUnit: CalculatorBrain.AngleUnit)
@@ -43,7 +43,7 @@ class Calculator: NSObject {
         }
     }
     
-    private var descriptionDisplayText: String = "" {
+    private var descriptionDisplayText: GCStringArray = GCStringArray() {
         didSet {
             self.delegate?.calculator(self, didUpdateDescription: self.descriptionDisplayText)
         }
@@ -113,7 +113,7 @@ class Calculator: NSObject {
                 }
             }
             if self.descriptionDisplayText.isEmpty {
-                self.descriptionDisplayText = " "
+                self.descriptionDisplayText = GCStringArray(with: GCString(" "))
             }
         } else {
             brain.undoPreviousOperation()
@@ -212,12 +212,12 @@ class Calculator: NSObject {
                 self.descriptionDisplayText = self.brain.description + "="
             } else {
                 self.displayValue = 0
-                self.descriptionDisplayText = "0"
+                self.descriptionDisplayText = GCStringArray(with: GCString("0"))
             }
         }
     }
     
-    func graphData(data: (Result<(title: String, yFunction: (Double) -> Double), Error>) -> Void) {
+    func graphData(data: (Result<(title: GCStringArray, yFunction: (Double) -> Double), Error>) -> Void) {
         if self.brain.evaluate().isPending || self.brain.description.isEmpty {
             return data(.failure(NSError(domain: "Calculator.graphData", code: 0001, userInfo: [:])))
         }

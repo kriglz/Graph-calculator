@@ -69,9 +69,9 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         }
     }
     
-    var descriptionText: String = "" {
+    var descriptionText: GCStringArray = GCStringArray() {
         didSet {
-            self.descriptionLabel.text = self.descriptionText
+            self.descriptionLabel.attributedText = self.descriptionText.attributedDescription(for: self.descriptionLabel.font)
         }
     }
     

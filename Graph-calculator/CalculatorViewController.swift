@@ -165,20 +165,20 @@ class CalculatorViewController: UIViewController {
     
     //adding elipses or equal sign to the description label
     func displayDescription() {
-        if brain.evaluate().isPending {
-            descriptionDisplay.text! = brain.description + "..."
-            changeGraphButtonStatusToNotReady()
-        } else {
-            if !brain.description.isEmpty {
-                descriptionDisplay.text! = brain.description + "="
-                changeGraphButtonStatusToReady()
-                
-            } else {
-                displayValue = 0
-                descriptionDisplay.text! = "0"
-                changeGraphButtonStatusToNotReady()
-            }
-        }
+//        if brain.evaluate().isPending {
+//            descriptionDisplay.text! = brain.description + "..."
+//            changeGraphButtonStatusToNotReady()
+//        } else {
+//            if !brain.description.isEmpty {
+//                descriptionDisplay.text! = brain.description + "="
+//                changeGraphButtonStatusToReady()
+//
+//            } else {
+//                displayValue = 0
+//                descriptionDisplay.text! = "0"
+//                changeGraphButtonStatusToNotReady()
+//            }
+//        }
     }
 
     
@@ -186,7 +186,7 @@ class CalculatorViewController: UIViewController {
         if !brain.evaluate().isPending {
             if let destinationViewController = (segue.destination.contents as? GraphViewController) {
                 if !brain.description.isEmpty {
-                    destinationViewController.navigationItem.title = "f(𝒙) = " + brain.description
+//                    destinationViewController.navigationItem.title = "f(𝒙) = " + brain.description
                     
 //                    destinationViewController.calculatorVC = self
                     

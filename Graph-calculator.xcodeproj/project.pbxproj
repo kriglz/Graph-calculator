@@ -10,6 +10,8 @@
 		890FB41B22E79DF6004D8E4B /* Brain+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41A22E79DF6004D8E4B /* Brain+Description.swift */; };
 		890FB41D22E7A747004D8E4B /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41C22E7A747004D8E4B /* NSAttributedString+Extension.swift */; };
 		890FB41F22E7A762004D8E4B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB41E22E7A762004D8E4B /* String+Extension.swift */; };
+		890FB42122E7CA5B004D8E4B /* GCStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB42022E7CA5B004D8E4B /* GCStringArray.swift */; };
+		890FB42322E7CAB0004D8E4B /* GCString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB42222E7CAB0004D8E4B /* GCString.swift */; };
 		892181EA22C42B0100EEFCD8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181E922C42B0100EEFCD8 /* Key.swift */; };
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
 		892828DE22E135DC0010500B /* Brain+BinaryOperatioQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */; };
@@ -57,6 +59,8 @@
 		890FB41A22E79DF6004D8E4B /* Brain+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+Description.swift"; sourceTree = "<group>"; };
 		890FB41C22E7A747004D8E4B /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		890FB41E22E7A762004D8E4B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		890FB42022E7CA5B004D8E4B /* GCStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCStringArray.swift; sourceTree = "<group>"; };
+		890FB42222E7CAB0004D8E4B /* GCString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCString.swift; sourceTree = "<group>"; };
 		892181E922C42B0100EEFCD8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+BinaryOperatioQueue.swift"; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				8931C88322C18395009C94C9 /* GCColor.swift */,
+				890FB42222E7CAB0004D8E4B /* GCString.swift */,
+				890FB42022E7CA5B004D8E4B /* GCStringArray.swift */,
 				896162DB2290162500C6B477 /* Collection View */,
 				89581F6B2284A6D9009D8469 /* UIView+Extension.swift */,
 				89581F732284CDC0009D8469 /* NSLayoutConstraint+Extension.swift */,
@@ -402,6 +408,7 @@
 				8931C88622C2A5E9009C94C9 /* HighlightView.swift in Sources */,
 				89F9C7A8229AEDE800C31BF6 /* DisplayView.swift in Sources */,
 				899E3F63228F1D20005265E7 /* Keypad.swift in Sources */,
+				890FB42122E7CA5B004D8E4B /* GCStringArray.swift in Sources */,
 				8931C88422C18395009C94C9 /* GCColor.swift in Sources */,
 				89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */,
 				899E3F67228FF4D1005265E7 /* Popover+Button.swift in Sources */,
@@ -413,6 +420,7 @@
 				8959519F22C5A92A003D73C3 /* Label.swift in Sources */,
 				89A61F7A1F51A3CB0063FDE2 /* GraphView.swift in Sources */,
 				89A61F791F51A3CB0063FDE2 /* AxesDrawer.swift in Sources */,
+				890FB42322E7CAB0004D8E4B /* GCString.swift in Sources */,
 				89D328EF228C97BF00867C51 /* UIBezierPath+Extension.swift in Sources */,
 				8969629B22D0123B00549E78 /* PreviewPresentationAnimationController.swift in Sources */,
 				892828E422E137030010500B /* Brain+OperationType.swift in Sources */,

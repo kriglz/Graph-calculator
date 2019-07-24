@@ -148,7 +148,7 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         self.displayView.currentOperationText = operation
     }
     
-    func calculator(_ calculator: Calculator, didUpdateDescription description: String) {
+    func calculator(_ calculator: Calculator, didUpdateDescription description: GCStringArray) {
         self.displayView.descriptionText = description
     }
     

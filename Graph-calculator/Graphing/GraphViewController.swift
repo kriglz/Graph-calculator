@@ -22,9 +22,9 @@ class GraphViewController: UIViewController {
         }
     }
     
-    var functionTitle: String = "" {
+    var functionTitle: GCStringArray = GCStringArray() {
         didSet {
-            self.functionTitleLabel.text = self.functionTitle
+            self.functionTitleLabel.attributedText = self.functionTitle.attributedDescription(for: self.functionTitleLabel.font)
         }
     }
     
