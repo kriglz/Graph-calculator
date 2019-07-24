@@ -6,11 +6,11 @@
 //  Copyright © 2019 Kristina Gelzinyte. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension CalculatorBrain {
-    var description: String {
-        var displayArray = [String]()
+    var description: GCStringArray {
+        let displayArray = GCStringArray()
         var partialArray = [String]()
         var repetetiveNumber = 2
         
@@ -44,6 +44,37 @@ extension CalculatorBrain {
                 }
                 
                 displayArray.append(")" + String(element.last!))
+                
+            } else if element == "eˣ" {
+                var startIndex = 0
+                
+                if lastOperationType == "equals" {
+                    lastOperationIndex = displayArray.startIndex
+                    displayArray.insert("e", at: displayArray.startIndex)
+                    displayArray.insert("(", at: displayArray.startIndex + 1)
+                    startIndex = displayArray.startIndex + 1
+                    
+                } else if lastOperationType == "unaryOperation" {
+                    displayArray.insert("e", at: lastOperationIndex)
+                    displayArray.insert("(", at: lastOperationIndex + 1)
+                    startIndex = lastOperationIndex + 1
+                    repetetiveNumber += 2
+                    
+                } else {
+                    let index = displayArray.index(before: displayArray.endIndex)
+                    lastOperationIndex = index
+                    displayArray.insert("e", at: index)
+                    displayArray.insert("(", at: index + 1)
+                    startIndex = index + 1
+                }
+                
+                displayArray.append(")")
+                
+                let endIndex = displayArray.endIndex - 1
+                for index in startIndex...endIndex {
+                    let string = displayArray[index].string
+                    displayArray[index] = GCString(string, attributes: [.superscripted: NSRange(location: 0, length: string.count)])
+                }
                 
             } else if element == "sin-1" || element == "cos-1" || element == "tan-1" {
                 let prefix = String(element.prefix(3)) + "⁻¹"
@@ -88,6 +119,7 @@ extension CalculatorBrain {
                     if lastOperationType == "equals", displayArray.count > 1 {
                         displayArray.insert("-(", at: 0)
                         displayArray.append(")")
+                        lastOperationIndex = 0
                         
                     } else if lastOperationIndex != 0 && lastOperationType == "unaryOperation" {
                         displayArray.insert("(-", at: lastOperationIndex)
@@ -154,11 +186,7 @@ extension CalculatorBrain {
             
             lastOperationType = operationType(for: element) ?? ""
         }
-        
-        var entireString = ""
-        for element in displayArray where element != "=" {
-            entireString.append(element)
-        }
-        return entireString
+
+        return displayArray
     }
 }
