@@ -90,8 +90,6 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     private var previewViewController: PreviewViewController?
     
     private var isDarkMode: Bool {
-        return true
-
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {

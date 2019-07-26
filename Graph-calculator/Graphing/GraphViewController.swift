@@ -28,9 +28,7 @@ class GraphViewController: UIViewController {
         }
     }
     
-    private var isDarkMode: Bool {
-        return true
-        
+    private var isDarkMode: Bool {        
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {

@@ -15,8 +15,6 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     private let displayView: DisplayView
     
     private var isDarkMode: Bool {
-        return true
-
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
