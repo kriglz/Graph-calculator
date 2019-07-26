@@ -76,6 +76,33 @@ extension CalculatorBrain {
                     displayArray[index] = GCString(string, attributes: [.superscripted: NSRange(location: 0, length: string.count)])
                 }
                 
+            } else if element == "logY" {
+                var startIndex = 0
+                let prefix = String(element.prefix(3)).gcString
+                
+                if lastOperationType == "equals" {
+                    lastOperationIndex = displayArray.startIndex
+                    displayArray.insert(prefix, at: displayArray.startIndex)
+                    startIndex = displayArray.startIndex + 1
+                    
+                } else if lastOperationType == "unaryOperation" {
+                    displayArray.insert(prefix, at: lastOperationIndex)
+                    startIndex = lastOperationIndex + 1
+                    repetetiveNumber += 2
+                    
+                } else {
+                    let index = displayArray.index(before: displayArray.endIndex)
+                    lastOperationIndex = index
+                    displayArray.insert(prefix, at: index)
+                    startIndex = index + 1
+                }
+                
+                let endIndex = displayArray.endIndex - 1
+                for index in startIndex...endIndex {
+                    let string = displayArray[index].string
+                    displayArray[index] = GCString(string, attributes: [.subscripted: NSRange(location: 0, length: string.count)])
+                }
+                
             } else if element == "sin-1" || element == "cos-1" || element == "tan-1" {
                 let prefix = String(element.prefix(3)) + "⁻¹"
                 
@@ -169,8 +196,6 @@ extension CalculatorBrain {
                         
                     } else {
                         if lastOperationType == "unaryOperation" && newOperationName == "unaryOperation" {
-                            //                                let index = displayArray.index(before: displayArray.endIndex - repetetiveNumber)
-                            //                                lastOperationIndex = index
                             displayArray.insert(element + "(", at: lastOperationIndex)
                             repetetiveNumber += 2
                             
