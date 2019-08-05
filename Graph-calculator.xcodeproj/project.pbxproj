@@ -13,6 +13,7 @@
 		890FB42322E7CAB0004D8E4B /* GCString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890FB42222E7CAB0004D8E4B /* GCString.swift */; };
 		892181EA22C42B0100EEFCD8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892181E922C42B0100EEFCD8 /* Key.swift */; };
 		89246F1B2284A46B009416E5 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89246F1A2284A46B009416E5 /* KeypadView.swift */; };
+		8925317C22EFC18200058623 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8925317B22EFC18100058623 /* GoogleService-Info.plist */; };
 		892828DE22E135DC0010500B /* Brain+BinaryOperatioQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */; };
 		892828E022E136090010500B /* Brain+BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892828DF22E136090010500B /* Brain+BinaryOperation.swift */; };
 		892828E222E136620010500B /* CalculatorMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892828E122E136620010500B /* CalculatorMemory.swift */; };
@@ -52,15 +53,18 @@
 		89ECAB9422BDA8AC00FE4000 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECAB9322BDA8AC00FE4000 /* Calculator.swift */; };
 		89F9C7A6229469EB00C31BF6 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */; };
 		89F9C7A8229AEDE800C31BF6 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9C7A7229AEDE800C31BF6 /* DisplayView.swift */; };
+		D3BF72AF92AA82092F69F2C6 /* libPods-Graph-calculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBF3196560D7FB9EFAAC727 /* libPods-Graph-calculator.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		714335C28E9698018558C6AF /* Pods-Graph-calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graph-calculator.release.xcconfig"; path = "Pods/Target Support Files/Pods-Graph-calculator/Pods-Graph-calculator.release.xcconfig"; sourceTree = "<group>"; };
 		890FB41A22E79DF6004D8E4B /* Brain+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+Description.swift"; sourceTree = "<group>"; };
 		890FB41E22E7A762004D8E4B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		890FB42022E7CA5B004D8E4B /* GCStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCStringArray.swift; sourceTree = "<group>"; };
 		890FB42222E7CAB0004D8E4B /* GCString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCString.swift; sourceTree = "<group>"; };
 		892181E922C42B0100EEFCD8 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		89246F1A2284A46B009416E5 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
+		8925317B22EFC18100058623 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		892828DD22E135DC0010500B /* Brain+BinaryOperatioQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+BinaryOperatioQueue.swift"; sourceTree = "<group>"; };
 		892828DF22E136090010500B /* Brain+BinaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Brain+BinaryOperation.swift"; sourceTree = "<group>"; };
 		892828E122E136620010500B /* CalculatorMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorMemory.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 		89ECAB9322BDA8AC00FE4000 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		89F9C7A5229469EB00C31BF6 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
 		89F9C7A7229AEDE800C31BF6 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
+		C31BD9A67D7D84DE5DE113AD /* Pods-Graph-calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graph-calculator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Graph-calculator/Pods-Graph-calculator.debug.xcconfig"; sourceTree = "<group>"; };
+		ECBF3196560D7FB9EFAAC727 /* libPods-Graph-calculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Graph-calculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,12 +115,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3BF72AF92AA82092F69F2C6 /* libPods-Graph-calculator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78EDFE26ACD5DA1164EF65C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF3196560D7FB9EFAAC727 /* libPods-Graph-calculator.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		892181E722C42AB100EEFCD8 /* Keypad Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +296,8 @@
 			children = (
 				89998E1C1F4C238700B3A58D /* Graph-calculator */,
 				89998E1B1F4C238700B3A58D /* Products */,
+				9E339C2329CA11D92C20F3E0 /* Pods */,
+				78EDFE26ACD5DA1164EF65C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -305,6 +322,7 @@
 				896162D4229013E300C6B477 /* Helpers */,
 				896162D5229013F800C6B477 /* Supporting Files */,
 				89998E291F4C238700B3A58D /* Info.plist */,
+				8925317B22EFC18100058623 /* GoogleService-Info.plist */,
 				89998E1D1F4C238700B3A58D /* AppDelegate.swift */,
 			);
 			path = "Graph-calculator";
@@ -320,6 +338,15 @@
 			path = "Display View";
 			sourceTree = "<group>";
 		};
+		9E339C2329CA11D92C20F3E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C31BD9A67D7D84DE5DE113AD /* Pods-Graph-calculator.debug.xcconfig */,
+				714335C28E9698018558C6AF /* Pods-Graph-calculator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -327,6 +354,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89998E2C1F4C238700B3A58D /* Build configuration list for PBXNativeTarget "Graph-calculator" */;
 			buildPhases = (
+				90DD270CD45EBFF1EDB81C37 /* [CP] Check Pods Manifest.lock */,
 				89998E161F4C238700B3A58D /* Sources */,
 				89998E171F4C238700B3A58D /* Frameworks */,
 				89998E181F4C238700B3A58D /* Resources */,
@@ -381,12 +409,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				89E878EE1FCFE67000946F93 /* Launch Screen.storyboard in Resources */,
+				8925317C22EFC18200058623 /* GoogleService-Info.plist in Resources */,
 				89998E371F4C240700B3A58D /* Main.storyboard in Resources */,
 				89998E251F4C238700B3A58D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		90DD270CD45EBFF1EDB81C37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Graph-calculator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		89998E161F4C238700B3A58D /* Sources */ = {
@@ -556,6 +606,7 @@
 		};
 		89998E2D1F4C238700B3A58D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C31BD9A67D7D84DE5DE113AD /* Pods-Graph-calculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEPLOYMENT_LOCATION = NO;
@@ -571,6 +622,7 @@
 		};
 		89998E2E1F4C238700B3A58D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 714335C28E9698018558C6AF /* Pods-Graph-calculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEPLOYMENT_LOCATION = NO;
