@@ -9,6 +9,8 @@
 import UIKit
 
 extension CalculatorBrain {
+    private static let DescriptionSuffix = "..."
+    
     var description: GCStringArray {
         let displayArray = GCStringArray()
         var partialArray = [String]()
@@ -16,18 +18,31 @@ extension CalculatorBrain {
         
         var lastOperationType = ""
         var lastOperationIndex = 0
+        var lastOperationAttribute: GCString.Style? = nil
         
         for element in descriptionArray {
             partialArray.append(element)
             
-            if let value = Double(element) {
-                displayArray.append(value.roundedToIntIfNeededString)
+            if Double(element) != nil || operationType(for: element) == "constant" {
+                let roundedValue = Double(element) != nil ? Double(element)!.roundedToIntIfNeededString : element
+                
+                var attributes: GCString.Attributes?
+                if displayArray.elements.last?.string == CalculatorBrain.DescriptionSuffix {
+                    displayArray.remove(at: displayArray.endIndex - 1)
+                    attributes = [.superscripted: NSRange(location: 0, length: roundedValue.count)]
+                    lastOperationAttribute = .superscripted
+                } else {
+                    lastOperationAttribute = nil
+                }
+                
+                displayArray.append(GCString(roundedValue, attributes: attributes))
                 lastOperationIndex = displayArray.index(before: displayArray.endIndex)
                 
             } else if element == "M" || element == "𝒙" {
                 displayArray.append(element)
                 lastOperationIndex = displayArray.index(before: displayArray.endIndex)
-                
+                lastOperationAttribute = nil
+
             } else if element == "x²" || element == "x!" {
                 if lastOperationType == "equals" {
                     lastOperationIndex = displayArray.startIndex
@@ -45,6 +60,14 @@ extension CalculatorBrain {
                 
                 displayArray.append(")" + String(element.last!))
                 
+                if let attribute = lastOperationAttribute {
+                    for index in lastOperationIndex..<displayArray.count {
+                        let string = displayArray[index].string
+                        displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
+                    }
+                }
+                lastOperationAttribute = nil
+
             } else if element == "eˣ" {
                 var startIndex = 0
                 
@@ -75,6 +98,26 @@ extension CalculatorBrain {
                     let string = displayArray[index].string
                     displayArray[index] = GCString(string, attributes: [.superscripted: NSRange(location: 0, length: string.count)])
                 }
+                lastOperationAttribute = .superscripted
+                
+            } else if element == "xⁿ" {
+                if lastOperationType == "equals" {
+                    lastOperationIndex = displayArray.startIndex
+                    displayArray.insert("(", at: displayArray.startIndex)
+                    displayArray.append(")")
+                    
+                } else if lastOperationType == "unaryOperation" {
+                    displayArray.insert("(", at: lastOperationIndex)
+                    repetetiveNumber += 2
+                    displayArray.append(")")
+                    
+                } else {
+                    let index = displayArray.index(before: displayArray.endIndex)
+                    lastOperationIndex = index
+                }
+                
+                lastOperationAttribute = .superscripted
+                displayArray.append(GCString(CalculatorBrain.DescriptionSuffix, attributes: [.superscripted: NSRange(location: 0, length: CalculatorBrain.DescriptionSuffix.count)]))
                 
             } else if element == "logY" {
                 var startIndex = 0
@@ -102,7 +145,8 @@ extension CalculatorBrain {
                     let string = displayArray[index].string
                     displayArray[index] = GCString(string, attributes: [.subscripted: NSRange(location: 0, length: string.count)])
                 }
-                
+                lastOperationAttribute = .subscripted
+
             } else if element == "sin-1" || element == "cos-1" || element == "tan-1" {
                 let prefix = String(element.prefix(3)) + "⁻¹"
                 
@@ -121,6 +165,7 @@ extension CalculatorBrain {
                 }
                 
                 displayArray.append(")")
+                lastOperationAttribute = nil
                 
             } else if element == "sinh-1" || element == "cosh-1" || element == "tanh-1" {
                 let prefix = String(element.prefix(4)) + "⁻¹"
@@ -140,6 +185,7 @@ extension CalculatorBrain {
                 }
                 
                 displayArray.append(")")
+                lastOperationAttribute = nil
                 
             } else if element == "±" {
                 if performOperations(partialArray).result! < 0 {
@@ -179,6 +225,14 @@ extension CalculatorBrain {
                     }
                 }
                 
+                if let attribute = lastOperationAttribute {
+                    for index in lastOperationIndex..<displayArray.count {
+                        let string = displayArray[index].string
+                        displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
+                    }
+                }
+                lastOperationAttribute = nil
+                
             } else if let newOperationName = operationType(for: element), newOperationName != "equals" {
                 if (newOperationName == "binaryOperation" && lastOperationType != "equals") || newOperationName == "constant" {
                     displayArray.append(element)
@@ -207,6 +261,7 @@ extension CalculatorBrain {
                         displayArray.append(")")
                     }
                 }
+                lastOperationAttribute = nil
             }
             
             lastOperationType = operationType(for: element) ?? ""
