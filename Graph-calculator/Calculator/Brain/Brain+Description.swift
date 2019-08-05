@@ -98,6 +98,14 @@ extension CalculatorBrain {
                     let string = displayArray[index].string
                     displayArray[index] = GCString(string, attributes: [.superscripted: NSRange(location: 0, length: string.count)])
                 }
+                
+                if let attribute = lastOperationAttribute {
+                    for index in lastOperationIndex..<displayArray.count {
+                        let string = displayArray[index].string
+                        displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
+                    }
+                }
+                
                 lastOperationAttribute = .superscripted
                 
             } else if element == "xⁿ" {
@@ -119,7 +127,7 @@ extension CalculatorBrain {
                 lastOperationAttribute = .superscripted
                 displayArray.append(GCString(CalculatorBrain.DescriptionSuffix, attributes: [.superscripted: NSRange(location: 0, length: CalculatorBrain.DescriptionSuffix.count)]))
                 
-            } else if element == "logY" {
+            } else if element == "logy" {
                 var startIndex = 0
                 let prefix = String(element.prefix(3)).gcString
                 
