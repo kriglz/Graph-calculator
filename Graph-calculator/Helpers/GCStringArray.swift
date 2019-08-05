@@ -76,6 +76,10 @@ class GCStringArray {
         return self.array.index(before: i)
     }
     
+    func remove(at index: Int) {
+        self.array.remove(at: index)
+    }
+    
     func insert(_ newElement: GCString, at i: Int) {
         self.array.insert(newElement, at: i)
     }
@@ -93,12 +97,12 @@ class GCStringArray {
             if let attributes = element.attributes {
                 attributes.forEach { attribute in
                     if element.string == "𝒙" {
-                        string = NSMutableAttributedString(string: "x", attributes: [.font: UIFont(descriptor: font.fontDescriptor.withSymbolicTraits(.traitItalic)!, size: font.pointSize)])
+                        string = NSMutableAttributedString(string: "x", attributes: [.font: UIFont(descriptor: font.fontDescriptor.withSymbolicTraits(.traitItalic)!.withSymbolicTraits(.traitBold)!, size: font.pointSize)])
                     }
-                    let offset = attribute.key == .superscripted ? font.pointSize * 0.5 : 0
+                    let offset = attribute.key == .superscripted ? font.pointSize * 0.4 : 0
                     
-                    string.setAttributes([.font: UIFont(name: font.fontName, size: font.pointSize * 0.5)!,
-                                          .baselineOffset: offset], range: attribute.value)
+                    let font = UIFont(descriptor: font.fontDescriptor.withSymbolicTraits(.traitBold)!, size: font.pointSize * 0.5)
+                    string.setAttributes([.font: font, .baselineOffset: offset], range: attribute.value)
                 }
             }
             
