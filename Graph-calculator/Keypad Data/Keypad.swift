@@ -48,9 +48,9 @@ class Keypad {
             .acosh: Key(.acosh, description: "cosh-1"),
             .atanh: Key(.atanh, description: "tanh-1"),
             
-            .log10: Key(.log10, relatedKeyTypes: [.log10, .ln, .logY], description: "log₁₀"),
+            .log10: Key(.log10, relatedKeyTypes: [.log10, .ln, .logy], description: "log₁₀"),
             .ln: Key(.ln, description: "ln"),
-            .logY: Key(.logY, description: "logY"),
+            .logy: Key(.logy, description: "logy"),
 
             .signChange: Key(.signChange, description: "±"),
             .percentage: Key(.percentage, description: "％"),

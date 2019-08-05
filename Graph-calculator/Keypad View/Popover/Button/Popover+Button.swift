@@ -15,7 +15,17 @@ extension PopoverViewController {
         
         var operation: KeyType = .zero {
             didSet {
-                self.label.text = Keypad.keyList[self.operation]?.description
+                let operationDescription = Keypad.keyList[self.operation]?.description
+                if let description = operationDescription, description == "logy" {
+                    let font = UIFont(descriptor: self.label.font.fontDescriptor.withSymbolicTraits(.traitBold)!,
+                                      size: self.label.font.pointSize * 0.5)
+                    let attributedString = NSMutableAttributedString(string: description)
+                    attributedString.setAttributes([.font: font, .baselineOffset: 0], range: NSRange(location: 3, length: 1))
+                    
+                    self.label.attributedText = attributedString
+                } else {
+                    self.label.text = operationDescription
+                }                
             }
         }
         

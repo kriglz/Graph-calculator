@@ -50,7 +50,7 @@ enum KeyType: Int, Equatable {
     
     case log10
     case ln
-    case logY
+    case logy
     
     case pow
     case powN
