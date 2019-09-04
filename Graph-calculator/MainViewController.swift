@@ -49,10 +49,6 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if #available(iOS 13.0, *) {
-//            self.overrideUserInterfaceStyle = .dark
-//        }
-
         self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
 
         self.view.addSubview(self.keypadView)
