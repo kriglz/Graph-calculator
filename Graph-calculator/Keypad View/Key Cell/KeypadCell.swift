@@ -194,7 +194,8 @@ class KeypadCell: UICollectionViewCell {
                 feedback.impactOccurred()
 
                 self.operation = newKey
-                
+                AnalyticsManager.shared.switchToAlternativeKeyPressed(self.operation)
+
                 self.alternativeKeyLabel.textColor = self.alternativeKeyHighlightColor
                 self.titleLabel.textColor = self.alternativeKeyHighlightColor
                 
@@ -216,7 +217,8 @@ class KeypadCell: UICollectionViewCell {
             }
             
             self.delegate?.keypadCell(self, didSelectPresent: self.relatedSelectionPopoverViewController!)
-            
+            AnalyticsManager.shared.keyPressed(self.operation)
+
         case .changed:
             guard let keyView = self.relatedSelectionPopoverViewController?.view, !self.alternativeKeyLabel.isHighlighted else {
                 return
@@ -240,8 +242,10 @@ class KeypadCell: UICollectionViewCell {
 
             if let currentOperation = self.relatedSelectionPopoverViewController?.currentOperation {
                 self.delegate?.keypadCell(self, didSelect: currentOperation)
+                AnalyticsManager.shared.keySelected(currentOperation)
             } else {
                 self.delegate?.keypadCell(self, didSelect: self.operation)
+                AnalyticsManager.shared.keySelected(self.operation)
             }
 
             if let relatedSelectionPopoverViewController = self.relatedSelectionPopoverViewController {
