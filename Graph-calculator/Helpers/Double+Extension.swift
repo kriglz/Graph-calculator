@@ -26,6 +26,10 @@ extension Double {
             return Double.nan
         }
         
+        if self > Double(Int.max) {
+            return Double.nan
+        }
+        
         let value = Int(self)
         var result = NSDecimalNumber(value: 1)
         
