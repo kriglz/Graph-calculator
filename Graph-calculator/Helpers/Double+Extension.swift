@@ -37,6 +37,10 @@ extension Double {
         for i in range.reversed() {
             let behavior = NSDecimalNumberHandler.init(roundingMode: .plain, scale: 17, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
             result = result.multiplying(by: NSDecimalNumber(value: i), withBehavior: behavior)
+            
+            if result.doubleValue.isNaN {
+                return Double.nan
+            }
         }
         
         return result.doubleValue
