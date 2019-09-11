@@ -60,7 +60,7 @@ extension CalculatorBrain {
                 
                 displayArray.append(")" + String(element.last!))
                 
-                if let attribute = lastOperationAttribute {
+                if let attribute = lastOperationAttribute, lastOperationType != "equals", lastOperationType != "unaryOperation" {
                     for index in lastOperationIndex..<displayArray.count {
                         let string = displayArray[index].string
                         displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
@@ -99,7 +99,7 @@ extension CalculatorBrain {
                     displayArray[index] = GCString(string, attributes: [.superscripted: NSRange(location: 0, length: string.count)])
                 }
                 
-                if let attribute = lastOperationAttribute {
+                if let attribute = lastOperationAttribute, lastOperationType != "equals", lastOperationType != "unaryOperation" {
                     for index in lastOperationIndex..<displayArray.count {
                         let string = displayArray[index].string
                         displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
@@ -228,7 +228,7 @@ extension CalculatorBrain {
                     }
                 }
                 
-                if let attribute = lastOperationAttribute {
+                if let attribute = lastOperationAttribute, lastOperationType != "equals", lastOperationType != "unaryOperation" {
                     for index in lastOperationIndex..<displayArray.count {
                         let string = displayArray[index].string
                         displayArray[index] = GCString(string, attributes: [attribute: NSRange(location: 0, length: string.count)])
