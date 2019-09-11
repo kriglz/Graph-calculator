@@ -262,7 +262,7 @@
 			path = "Collection View";
 			sourceTree = "<group>";
 		};
-		896162DC2290165F00C6B477 /* Graphing */ = {
+		896162DC2290165F00C6B477 /* Graph View */ = {
 			isa = PBXGroup;
 			children = (
 				89516A5A1F4D671E0014CEF2 /* GraphViewController.swift */,
@@ -270,7 +270,7 @@
 				89A61F761F51A3CB0063FDE2 /* AxesDrawer.swift */,
 				89A61F781F51A3CB0063FDE2 /* GraphDrawer.swift */,
 			);
-			path = Graphing;
+			path = "Graph View";
 			sourceTree = "<group>";
 		};
 		896162DD2290166F00C6B477 /* Calculator */ = {
@@ -321,7 +321,7 @@
 				892181E722C42AB100EEFCD8 /* Keypad Data */,
 				89F9C7A9229AEE0200C31BF6 /* Display View */,
 				896162D12290136D00C6B477 /* Keypad View */,
-				896162DC2290165F00C6B477 /* Graphing */,
+				896162DC2290165F00C6B477 /* Graph View */,
 				896162D4229013E300C6B477 /* Helpers */,
 				896162D5229013F800C6B477 /* Supporting Files */,
 				89998E291F4C238700B3A58D /* Info.plist */,
