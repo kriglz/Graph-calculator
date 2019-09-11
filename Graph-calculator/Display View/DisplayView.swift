@@ -144,10 +144,9 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.memoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        centerBottomLayoutGuide.heightAnchor.constraint(greaterThanOrEqualToConstant: 1).isActive = true
+        centerBottomLayoutGuide.heightAnchor.constraint(equalToConstant: 18).isActive = true
         centerTopLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor).isActive = true
-        bottomLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 1.5).isActive = true
-        topLayoutGuide.heightAnchor.constraint(equalTo: centerBottomLayoutGuide.heightAnchor, multiplier: 0.1).isActive = true
+        topLayoutGuide.heightAnchor.constraint(equalTo: bottomLayoutGuide.heightAnchor, multiplier: 0.3).isActive = true
         
         topLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         topLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
