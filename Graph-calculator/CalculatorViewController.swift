@@ -8,30 +8,22 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController { //}, UISplitViewControllerDelegate {
+class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         graphButton.isEnabled = false
         graphButtonV.isEnabled = false
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(true, animated: false)
-
-//        CODE TO LOCK THE VIEW ORIENTATION
-//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
-
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-
-//        CODE TO LOCK THE VIEW ORIENTATION
-//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all, andRotateTo: UIInterfaceOrientation.unknown)
-
     }
     
     
@@ -139,7 +131,7 @@ class CalculatorViewController: UIViewController { //}, UISplitViewControllerDel
     }
     
     @IBAction func setVarX(_ sender: UIButton) {
-        brain.setOperand(variable: "x")
+        brain.setOperand(variable: "𝒙")
         displayValue = 0.0
         userIsInTheMiddleOfTyping = false
         displayDescription()
@@ -173,20 +165,20 @@ class CalculatorViewController: UIViewController { //}, UISplitViewControllerDel
     
     //adding elipses or equal sign to the description label
     func displayDescription() {
-        if brain.evaluate().isPending {
-            descriptionDisplay.text! = brain.description + "..."
-            changeGraphButtonStatusToNotReady()
-        } else {
-            if !brain.description.isEmpty {
-                descriptionDisplay.text! = brain.description + "="
-                changeGraphButtonStatusToReady()
-                
-            } else {
-                displayValue = 0
-                descriptionDisplay.text! = "0"
-                changeGraphButtonStatusToNotReady()
-            }
-        }
+//        if brain.evaluate().isPending {
+//            descriptionDisplay.text! = brain.description + "..."
+//            changeGraphButtonStatusToNotReady()
+//        } else {
+//            if !brain.description.isEmpty {
+//                descriptionDisplay.text! = brain.description + "="
+//                changeGraphButtonStatusToReady()
+//
+//            } else {
+//                displayValue = 0
+//                descriptionDisplay.text! = "0"
+//                changeGraphButtonStatusToNotReady()
+//            }
+//        }
     }
 
     
@@ -194,16 +186,16 @@ class CalculatorViewController: UIViewController { //}, UISplitViewControllerDel
         if !brain.evaluate().isPending {
             if let destinationViewController = (segue.destination.contents as? GraphViewController) {
                 if !brain.description.isEmpty {
-                    destinationViewController.navigationItem.title = "f(x) = " + brain.description
+//                    destinationViewController.navigationItem.title = "f(𝒙) = " + brain.description
                     
-                    destinationViewController.calculatorVC = self
+//                    destinationViewController.calculatorVC = self
                     
                     destinationViewController.yResult = { (xArgument: Double) -> Double in
                         
                         if self.memory.storage != nil {
-                            self.memory.storage!["x"] = xArgument
+                            self.memory.storage!["𝒙"] = xArgument
                         } else {
-                            self.memory.storage = ["x": xArgument]
+                            self.memory.storage = ["𝒙": xArgument]
                         }
                         
                         let yResult = self.brain.evaluate(using: self.memory.storage).result!
@@ -215,31 +207,33 @@ class CalculatorViewController: UIViewController { //}, UISplitViewControllerDel
             }
         }
     }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        self.splitViewController?.delegate = self
-//    }
-    
-//    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-//        if primaryViewController.contents == self {
-//            if let gvc = secondaryViewController.contents as? GraphViewController, gvc.graphView == nil {
-//                return true
-//            }
-//        }
-//        return false
-//    }
-    
-    
 }
 
-extension UIViewController
-{
+extension UIViewController {
     var contents: UIViewController {
         if let navcon = self as? UINavigationController {
             return navcon.visibleViewController ?? self
         } else {
             return self
+        }
+    }
+}
+
+extension UIButton {
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        UIView.animate(withDuration: 0.1) {
+            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }
+    }
+    
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+
+        UIView.animate(withDuration: 0.1) {
+            self.transform = CGAffineTransform.identity
         }
     }
 }
