@@ -114,11 +114,6 @@ extension CalculatorBrain {
                     displayArray.insert("(", at: displayArray.startIndex)
                     displayArray.append(")")
                     
-                } else if lastOperationType == "unaryOperation" {
-                    displayArray.insert("(", at: lastOperationIndex)
-                    repetetiveNumber += 2
-                    displayArray.append(")")
-                    
                 } else {
                     let index = displayArray.index(before: displayArray.endIndex)
                     lastOperationIndex = index
