@@ -32,7 +32,7 @@ class GraphViewController: UIViewController {
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
-            return true
+            return false
         }
     }
     
@@ -102,6 +102,14 @@ class GraphViewController: UIViewController {
             self.cancelButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: margin).isActive = true
             self.cancelButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: margin).isActive = true
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.graphView.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+        self.functionTitleLabel.textColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
+        self.cancelButton.tintColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
     }
     
     @objc func close(_ sender: UIButton) {

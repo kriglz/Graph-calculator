@@ -71,7 +71,12 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     var descriptionText: GCStringArray = GCStringArray() {
         didSet {
-            self.descriptionLabel.attributedText = self.descriptionText.attributedDescription(for: self.descriptionLabel.font)
+            let attributedText = self.descriptionText.attributedDescription(for: self.descriptionLabel.font)
+            self.descriptionLabel.attributedText = attributedText
+            
+            if attributedText.string.last == "=" {
+                AnalyticsManager.shared.operations(attributedText.string)
+            }
         }
     }
     
@@ -93,7 +98,7 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
-            return true
+            return false
         }
     }
     
@@ -111,10 +116,6 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         
         super.init(frame: frame)
         
-        self.currentOperationLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
-        self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
-        self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openPreview(_:)))
         self.addGestureRecognizer(tapGestureRecognizer)
         
@@ -123,6 +124,15 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.currentOperationLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
+        self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
+        self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
+        
     }
     
     private func makeConstrints() {

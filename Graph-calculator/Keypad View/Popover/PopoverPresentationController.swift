@@ -17,7 +17,7 @@ class PopoverPresentationController: UIPresentationController {
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
-            return true
+            return false
         }
     }
     

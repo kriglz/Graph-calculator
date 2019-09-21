@@ -16,14 +16,13 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     
     private var isDarkMode: Bool {
         if #available(iOS 12.0, *) {
-            return self.traitCollection.userInterfaceStyle == .dark
+            let darkMode = self.traitCollection.userInterfaceStyle == .dark
+            AnalyticsManager.shared.appearanceMode(darkMode)
+            return darkMode
         } else {
-            return true
+            AnalyticsManager.shared.appearanceMode(false)
+            return false
         }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.isDarkMode ? .lightContent : .default
     }
     
     private var graphViewController: GraphViewController?
@@ -49,12 +48,17 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
-
         self.view.addSubview(self.keypadView)
         self.view.addSubview(self.displayView)
         
         self.makeConstraints()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+
     }
 
     private func makeConstraints() {
@@ -101,6 +105,8 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
                         return
                     }
                     
+                    AnalyticsManager.shared.presentGraphSelected()
+                    
                     if self.graphViewController == nil {
                         self.graphViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as? GraphViewController
                     }
@@ -113,7 +119,6 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
                     graphViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
                     graphViewController.functionTitle = data.title
                     graphViewController.yResult = data.yFunction
-                    graphViewController.modalPresentationStyle = .overCurrentContext
                     
                     self.present(graphViewController, animated: true, completion: nil)
                 }

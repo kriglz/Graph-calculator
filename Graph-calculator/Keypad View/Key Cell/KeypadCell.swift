@@ -56,7 +56,7 @@ class KeypadCell: UICollectionViewCell {
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
-            return true
+            return false
         }
     }
     
@@ -150,6 +150,12 @@ class KeypadCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.setupAppearance()
     }
     
     // MARK: - Appearance
