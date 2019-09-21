@@ -104,6 +104,14 @@ class GraphViewController: UIViewController {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.graphView.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+        self.functionTitleLabel.textColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
+        self.cancelButton.tintColor = GCColor.subtitle(forDarkMode: self.isDarkMode)
+    }
+    
     @objc func close(_ sender: UIButton) {
         self.delegate?.graphViewControllerDidSelectClose(self)
     }

@@ -11,11 +11,8 @@ import UIKit
 struct GCColor {
     
     static func background(forDarkMode darkMode: Bool) -> UIColor {
-//        if #available(iOS 13.0, *) {
-//            return .systemBackground
-//        } else
-        if darkMode {
-            return .black
+        if #available(iOS 13.0, *) {
+            return .systemBackground
         } else {
             return .white
         }
@@ -107,7 +104,7 @@ struct GCColor {
     
     static func graph(forDarkMode darkMode: Bool) -> UIColor {
         if darkMode {
-            return UIColor(r: 214, g: 0, b: 25, alpha: 1)
+            return UIColor(r: 216, g: 140, b: 62, alpha: 1)
         }
         
         return UIColor(r: 255, g: 73, b: 94, alpha: 1)

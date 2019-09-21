@@ -152,6 +152,12 @@ class KeypadCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.setupAppearance()
+    }
+    
     // MARK: - Appearance
 
     private func setupAppearance() {

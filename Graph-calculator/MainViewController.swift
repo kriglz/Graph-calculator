@@ -18,12 +18,8 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
         if #available(iOS 12.0, *) {
             return self.traitCollection.userInterfaceStyle == .dark
         } else {
-            return true
+            return false
         }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.isDarkMode ? .lightContent : .default
     }
     
     private var graphViewController: GraphViewController?
@@ -49,12 +45,17 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
-
         self.view.addSubview(self.keypadView)
         self.view.addSubview(self.displayView)
         
         self.makeConstraints()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
+
     }
 
     private func makeConstraints() {

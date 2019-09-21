@@ -37,7 +37,6 @@
 		89998E1E1F4C238700B3A58D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E1D1F4C238700B3A58D /* AppDelegate.swift */; };
 		89998E251F4C238700B3A58D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89998E241F4C238700B3A58D /* Assets.xcassets */; };
 		89998E331F4C23BF00B3A58D /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */; };
-		89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89998E341F4C23F000B3A58D /* CalculatorViewController.swift */; };
 		89998E371F4C240700B3A58D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89998E361F4C240700B3A58D /* Main.storyboard */; };
 		899E3F61228DF519005265E7 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899E3F60228DF519005265E7 /* UIColor+Extension.swift */; };
 		899E3F63228F1D20005265E7 /* Keypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899E3F62228F1D20005265E7 /* Keypad.swift */; };
@@ -91,7 +90,6 @@
 		89998E241F4C238700B3A58D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89998E291F4C238700B3A58D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89998E321F4C23BF00B3A58D /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
-		89998E341F4C23F000B3A58D /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		89998E361F4C240700B3A58D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		899E3F60228DF519005265E7 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		899E3F62228F1D20005265E7 /* Keypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keypad.swift; sourceTree = "<group>"; };
@@ -314,7 +312,6 @@
 		89998E1C1F4C238700B3A58D /* Graph-calculator */ = {
 			isa = PBXGroup;
 			children = (
-				89998E341F4C23F000B3A58D /* CalculatorViewController.swift */,
 				89581F6F2284C547009D8469 /* MainViewController.swift */,
 				89C19CF6231F693300835CA5 /* AnalyticsManager.swift */,
 				896162DD2290166F00C6B477 /* Calculator */,
@@ -487,7 +484,6 @@
 				89581F6C2284A6D9009D8469 /* UIView+Extension.swift in Sources */,
 				892181EA22C42B0100EEFCD8 /* Key.swift in Sources */,
 				89D58A5E228B59F200438AAF /* KeyType.swift in Sources */,
-				89998E351F4C23F000B3A58D /* CalculatorViewController.swift in Sources */,
 				890FB41F22E7A762004D8E4B /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

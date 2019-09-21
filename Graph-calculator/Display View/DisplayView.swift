@@ -111,10 +111,6 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
         
         super.init(frame: frame)
         
-        self.currentOperationLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
-        self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
-        self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openPreview(_:)))
         self.addGestureRecognizer(tapGestureRecognizer)
         
@@ -123,6 +119,15 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.currentOperationLabel.color = GCColor.title(forDarkMode: self.isDarkMode)
+        self.descriptionLabel.color = GCColor.subtitle(forDarkMode: self.isDarkMode)
+        self.memoryLabel.color = GCColor.footnote(forDarkMode: self.isDarkMode)
+        
     }
     
     private func makeConstrints() {
