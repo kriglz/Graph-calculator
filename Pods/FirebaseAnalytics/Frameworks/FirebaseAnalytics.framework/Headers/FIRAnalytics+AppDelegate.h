@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * To handle Universal Links, you must return YES in
  * [UIApplicationDelegate application:didFinishLaunchingWithOptions:].
  */
-@interface FIRAnalytics (AppDelegate)
+@interface FIRAnalytics ()
 
 /**
  * Handles events related to a URL session that are waiting to be processed.

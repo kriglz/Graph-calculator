@@ -16,8 +16,11 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
     
     private var isDarkMode: Bool {
         if #available(iOS 12.0, *) {
-            return self.traitCollection.userInterfaceStyle == .dark
+            let darkMode = self.traitCollection.userInterfaceStyle == .dark
+            AnalyticsManager.shared.appearanceMode(darkMode)
+            return darkMode
         } else {
+            AnalyticsManager.shared.appearanceMode(false)
             return false
         }
     }
@@ -101,6 +104,8 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
                     guard let self = self else {
                         return
                     }
+                    
+                    AnalyticsManager.shared.presentGraphSelected()
                     
                     if self.graphViewController == nil {
                         self.graphViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GraphViewController") as? GraphViewController

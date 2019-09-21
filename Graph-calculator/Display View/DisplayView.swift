@@ -71,7 +71,12 @@ class DisplayView: UIView, PreviewViewControllerDelegate {
     
     var descriptionText: GCStringArray = GCStringArray() {
         didSet {
-            self.descriptionLabel.attributedText = self.descriptionText.attributedDescription(for: self.descriptionLabel.font)
+            let attributedText = self.descriptionText.attributedDescription(for: self.descriptionLabel.font)
+            self.descriptionLabel.attributedText = attributedText
+            
+            if attributedText.string.last == "=" {
+                AnalyticsManager.shared.operations(attributedText.string)
+            }
         }
     }
     

@@ -17,6 +17,11 @@ class AnalyticsManager {
         Analytics.setSessionTimeoutInterval(180)
     }
     
+    func appearanceMode(_ isDark: Bool) {
+        let parameters = ["appearance_isDark": isDark]
+        Analytics.logEvent("appearance_mode", parameters: parameters)
+    }
+    
     func keyPressed(_ keyType: KeyType) {
         guard let keyType = Keypad.keyList[keyType]?.description else {
             return
@@ -42,5 +47,14 @@ class AnalyticsManager {
         
         let parameters = ["key_type": keyType]
         Analytics.logEvent("selected_key", parameters: parameters)
+    }
+    
+    func presentGraphSelected() {
+        Analytics.logEvent("graph_presented", parameters: [:])
+    }
+    
+    func operations(_ operations: String) {
+        let parameters = ["operation_description": operations]
+        Analytics.logEvent("operations", parameters: parameters)
     }
 }
