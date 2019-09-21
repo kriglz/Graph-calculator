@@ -114,7 +114,6 @@ class MainViewController: UIViewController, KeypadViewDelegate, CalculatorDelega
                     graphViewController.view.backgroundColor = GCColor.background(forDarkMode: self.isDarkMode)
                     graphViewController.functionTitle = data.title
                     graphViewController.yResult = data.yFunction
-                    graphViewController.modalPresentationStyle = .overCurrentContext
                     
                     self.present(graphViewController, animated: true, completion: nil)
                 }
