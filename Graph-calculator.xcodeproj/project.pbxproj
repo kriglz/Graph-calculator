@@ -609,10 +609,12 @@
 			baseConfigurationReference = C31BD9A67D7D84DE5DE113AD /* Pods-Graph-calculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = PJ8U3CQ43A;
 				INFOPLIST_FILE = "Graph-calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kg.sweetiepicalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -625,10 +627,12 @@
 			baseConfigurationReference = 714335C28E9698018558C6AF /* Pods-Graph-calculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = PJ8U3CQ43A;
 				INFOPLIST_FILE = "Graph-calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = kg.sweetiepicalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
